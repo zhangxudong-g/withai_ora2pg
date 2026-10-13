@@ -1,6 +1,6 @@
 {
   "name": "oracle_poc",
-  "timestamp": "2026-10-13T16:50:19",
+  "timestamp": "2026-10-13T18:20:43",
   "summary": {
     "levels": [
       {
@@ -39,7 +39,7 @@
     ],
     "static_levels": {
       "L1": {
-        "score": 93.5,
+        "score": 98.5,
         "count": 12,
         "skipped_count": 0
       },
@@ -49,7 +49,7 @@
         "skipped_count": 0
       }
     },
-    "overall_score": 82.2,
+    "overall_score": 84.4,
     "grade": "C 中",
     "weight_covered": 0.35,
     "weight_covered_active": {
@@ -60,15 +60,13 @@
       "L4": false
     },
     "weight_covered_warning": false,
-    "gate_failures": [
-      "[PACKAGE_BODY/00_PACKAGE_BODY.sql] L1 存在 1 个 critical 逻辑错误"
-    ],
-    "gate_passed": false
+    "gate_failures": [],
+    "gate_passed": true
   },
   "reports": [
     {
       "target": "TABLE/001_STUDENT_MST.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -124,7 +122,7 @@
     },
     {
       "target": "TABLE/002_SUBJECT_MST.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 97.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -203,7 +201,7 @@
     },
     {
       "target": "SEQUENCE/00_SEQUENCE.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -259,7 +257,7 @@
     },
     {
       "target": "TYPE/001_TYPES.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 91.4,
       "grade": "B 良",
       "gate_passed": true,
@@ -343,7 +341,7 @@
     },
     {
       "target": "VIEW/00_VIEW.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -413,7 +411,7 @@
     },
     {
       "target": "TRIGGER/00_TRIGGER.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 53.3,
       "grade": "D 差",
       "gate_passed": true,
@@ -592,7 +590,7 @@
     },
     {
       "target": "FUNCTION/00_FUNCTION.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 42.8,
       "grade": "F 不合格",
       "gate_passed": true,
@@ -843,8 +841,8 @@
     },
     {
       "target": "PROCEDURE/00_PROCEDURE.sql",
-      "timestamp": "2026-10-13T16:50:19",
-      "overall_score": 88.9,
+      "timestamp": "2026-10-13T18:20:43",
+      "overall_score": 89.5,
       "grade": "B 良",
       "gate_passed": true,
       "gate_failures": [],
@@ -852,21 +850,21 @@
         {
           "level": "L1",
           "name": "静态分析",
-          "score": 94.2,
+          "score": 95.6,
           "weight": 0.15,
           "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
             "line_count": 361,
-            "issue_count": 7,
+            "issue_count": 6,
             "summary": {
               "by_category": {
                 "invalid_syntax": 1,
-                "oracle_residual": 6
+                "oracle_residual": 5
               },
               "by_severity": {
-                "major": 3,
+                "major": 2,
                 "minor": 4
               },
               "critical_count": 0
@@ -885,10 +883,9 @@
                 "code": "oracle_residual",
                 "name": "BULK COLLECT（PG 无此语法）",
                 "severity": "major",
-                "count": 2,
+                "count": 1,
                 "samples": [
-                  "BULK COLLECT",
-                  "BULK COLLECT"
+                  "bulk collect"
                 ]
               },
               {
@@ -904,7 +901,7 @@
               }
             ]
           },
-          "weighted": 14.13
+          "weighted": 14.34
         },
         {
           "level": "L2",
@@ -955,7 +952,7 @@
     },
     {
       "target": "PACKAGE/00_PACKAGE.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 97.1,
       "grade": "A 优",
       "gate_passed": true,
@@ -1021,56 +1018,35 @@
     },
     {
       "target": "PACKAGE_BODY/00_PACKAGE_BODY.sql",
-      "timestamp": "2026-10-13T16:50:19",
-      "overall_score": 17.1,
+      "timestamp": "2026-10-13T18:20:43",
+      "overall_score": 42.3,
       "grade": "F 不合格",
-      "gate_passed": false,
-      "gate_failures": [
-        "L1 存在 1 个 critical 逻辑错误"
-      ],
+      "gate_passed": true,
+      "gate_failures": [],
       "levels": [
         {
           "level": "L1",
           "name": "静态分析",
-          "score": 40.0,
+          "score": 98.6,
           "weight": 0.15,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
-            "line_count": 1512,
-            "issue_count": 16,
+            "line_count": 1499,
+            "issue_count": 5,
             "summary": {
               "by_category": {
-                "invalid_syntax": 3,
-                "oracle_residual": 13
+                "invalid_syntax": 1,
+                "oracle_residual": 4
               },
               "by_severity": {
-                "critical": 1,
-                "major": 14,
+                "major": 4,
                 "minor": 1
               },
-              "critical_count": 1
+              "critical_count": 0
             },
             "issues": [
-              {
-                "code": "invalid_syntax",
-                "name": "Oracle 的 RETURN <type> IS 写法",
-                "severity": "critical",
-                "count": 1,
-                "samples": [
-                  "RETURN NUMERIC\n            IS"
-                ]
-              },
-              {
-                "code": "invalid_syntax",
-                "name": "%TYPE（PG 无此语法）",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "%TYPE"
-                ]
-              },
               {
                 "code": "invalid_syntax",
                 "name": "Oracle 列级 IS [NOT] NULL 约束",
@@ -1078,27 +1054,6 @@
                 "count": 1,
                 "samples": [
                   "IS NOT NULL;"
-                ]
-              },
-              {
-                "code": "oracle_residual",
-                "name": "UTL_FILE",
-                "severity": "major",
-                "count": 7,
-                "samples": [
-                  "UTL_FILE",
-                  "UTL_FILE",
-                  "UTL_FILE"
-                ]
-              },
-              {
-                "code": "oracle_residual",
-                "name": "BULK COLLECT（PG 无此语法）",
-                "severity": "major",
-                "count": 2,
-                "samples": [
-                  "BULK COLLECT",
-                  "BULK COLLECT"
                 ]
               },
               {
@@ -1139,7 +1094,7 @@
               }
             ]
           },
-          "weighted": 6.0
+          "weighted": 14.79
         },
         {
           "level": "L2",
@@ -1150,12 +1105,12 @@
           "skipped": false,
           "skip_reason": "",
           "details": {
-            "statement_count": 87,
+            "statement_count": 88,
             "pglast": {
               "available": true,
               "version": "v8.4",
-              "total": 87,
-              "passed": 87,
+              "total": 88,
+              "passed": 88,
               "failed": 0,
               "unparsed": 0
             },
@@ -1302,7 +1257,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS parse_ymd(numeric, numeric)"
+                  "DROP FUNCTION IF EXISTS parse_ymd(numeric, numeric, numeric, numeric)"
                 ]
               },
               {
@@ -1352,7 +1307,7 @@
     },
     {
       "target": "SYNONYM/00_SYNONYM.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -1408,7 +1363,7 @@
     },
     {
       "target": "DATA/00_TEST_DATA.sql",
-      "timestamp": "2026-10-13T16:50:19",
+      "timestamp": "2026-10-13T18:20:43",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,

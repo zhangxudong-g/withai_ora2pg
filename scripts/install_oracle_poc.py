@@ -74,7 +74,15 @@ def ordered_sql_files(dst_dir: Path) -> list[Path]:
 def run_psql(args: argparse.Namespace, sql_file: Path) -> tuple[int, str]:
     """单文件跑 psql，返回 (exit_code, stderr)。"""
     # 子文件不含 SET search_path，需在每个调用前用 -c 设（避免装公私）
-    set_search_path = f"SET search_path TO {args.schema};"
+    # PACKAGE_BODY/PACKAGE 的 PL/pgSQL 体内有未加 schema 前缀的引用，
+    # 需要把已创建的包 schema 加入 search_path
+    extra_schemas: list[str] = []
+    fname = sql_file.name.upper()
+    sql_dir = sql_file.parent.name
+    if sql_dir in ("PACKAGE", "PACKAGE_BODY", "SYNONYM"):
+        extra_schemas = ["pkg_score_manage"]
+    search_path_items = [args.schema] + extra_schemas + ["public"]
+    set_search_path = f"SET search_path TO {', '.join(search_path_items)};"
     cmd = [
         args.psql,
         "-h", args.host,
