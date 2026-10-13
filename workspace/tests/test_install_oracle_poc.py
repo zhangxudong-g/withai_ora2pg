@@ -111,7 +111,7 @@ def test_uses_ON_ERROR_STOP():
     """Defect-2：每次 -f 调用必须 ON_ERROR_STOP=on（per-file 关键）"""
     args = MagicMock(
         psql="/bin/psql", host="h", port=5432, user="u", dbname="d",
-        password=None,
+        password=None, schema="test_schema",
     )
     with patch("subprocess.run") as mock_run:
         mock_run.return_value = MagicMock(returncode=0, stdout="", stderr="")
