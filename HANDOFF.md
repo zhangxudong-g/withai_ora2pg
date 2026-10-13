@@ -27,27 +27,28 @@
 
 | 指标 | 当前 | 目标 |
 |---|---|---|
-| 总分 | **84.4 / C** | ≥90 / A |
+| 总分 | **84.3 / C** | ≥90 / A |
 | L3 安装 | **12/12 文件全部通过**（0 失败）| 12/12 ✅ |
 | L3.5 冒烟 | **33/38 + 5 fail**（待复测）| 0 fail |
 | L4 业务等价 | **7/65 实际执行**（11%）| 100% |
-| 残留扫描 | **major 19**（critical 0）| 0 |
+| 残留扫描 | **major 22**（critical 0）| 0 |
 | 完整性 | dropped_objects = **0** | 0 ✅ |
 | 单测 | **385/385 passed** + 1 skipped | — |
-| Gate | **通过（84.4/C）** | ≥90 |
+| Gate | **通过（84.3/C）** | ≥90 |
 
-> ⚠️ **DoD-6 警告**：本轮 L3 修复是**直接修改产物文件**（非引擎修复）。
-> `convert_oracle_poc.py --clean` 重转会丢失所有变更。
-> **下一步必须把引擎层也修好，否则重转后 L3 会回退到 18 失败**。
+> ⚠️ **DoD-6 状态**：引擎层修复已提交（`43e1104`），但 PACKAGE_BODY 仍有产物层直接修复（`758bd7d`）。
+> 重转后 BULK COLLECT/FORALL/UTL_FILE/PERFORM 等由引擎自动修复（不回退），
+> 但 INOUT 缺参数/CUR_ALL_STUDENT/嵌套函数 stub 需引擎同步（会回退）。
 
-### 残留 19 处归因
+### 残留 22 处归因
 
 | 归属 | 数 | 说明 |
 |---|---|---|
 | P4-2 续 | 12 | `-- TODO:` ×12（PACKAGE SPEC 桩，已知）|
-| 列名误报 | 6 | SQLCODE/SQLERRM 是**真实列名**（非 Oracle 关键字引用）|
-| 字符串误报 | 1 | `bulk collect` 在 RAISE EXCEPTION 消息中 |
+| 列名误报 | 5 | SQLCODE/SQLERRM 是**真实列名**（非 Oracle 关键字引用）|
 | 动态 SQL | 1 | `(+)` 在动态字符串中，静态无法改写 |
+| Stub 注释误报 | 4 | BULK COLLECT / UTL_FILE 在 stub 注释/EXCEPTION 消息中 |
+| **有效残留** | **13** | 12 TODO + 1 动态 SQL |
 
 > **有效残留**（排除列名/字符串误报）= 13 处，全在 P4-2 续（PACKAGE 桩）范围内。
 
@@ -68,11 +69,11 @@
 | P4-2 a~h | TODO 桩回灌 | ✅ 完成 |
 | P4-2R | END ;; 回归修复 | ✅ 完成 |
 | **P4-2 续** | **PACKAGE batch（12 TODO 桩）** | **⬜ 待开始（1–2 天）** |
-| P4-3 | UTL_FILE/BULK COLLECT/自治事务 | 🟡 产物层修复完成，**引擎层待修** |
+| P4-3 | UTL_FILE/BULK COLLECT/自治事务 | 🟡 引擎层 ✅（`43e1104`），产物层 ✅ |
 | W0 | 验证口径收口 | ✅ 完成 |
-| **P4-4** | **TYPE 重设计** | 🟡 P4-4a+c 阶段1~7 ✅，**产物 L3-0 修复完成** |
-| **L3-0** | **L3 安装 0 失败（产物直接修复）** | ✅ **完成**（`41c58ca`）|
-| **⚠️ 引擎层** | **DoD-6：引擎层同步修复（否则重转回退）** | **⬜ 待开始（最高优先）** |
+| **P4-4** | **TYPE 重设计** | 🟡 P4-4a+c 阶段1~8 ✅ |
+| **L3-0** | **L3 安装 0 失败** | ✅ **完成**（引擎层 `43e1104` + 产物层 `758bd7d`）|
+| **⚠️ 引擎层缺口** | **INOUT 参数检测 / CUR_ALL_STUDENT / 嵌套函数 lift** | **⬜ 待修（P4-4 续）** |
 | P5-1 | L4 业务等价用例库 | ⬜ 待开始 |
 | P5-2 | 端到端重转 + 全门禁 | ⬜ 待开始 |
 | P5-3/P5-4 | 防复发/规则目录 | ⬜ 待开始 |
@@ -81,12 +82,12 @@
 ### 里程碑
 
 - M0 能看见 (D4)：✅ 已达成
-- M1 规则达标 (D14)：🟡 major 19（含 6 处列名误报 + 1 处字符串误报 + 1 处动态 SQL）
+- M1 规则达标 (D14)：🟡 有效残留 13（12 todo + 1 动态 SQL）
 - M2 结构可信 (D20)：⚠️ P3-2/P3-3 已建但未接生产调用
-- M3 复杂体接管 (D36)：🟡 L3 安装 0 失败，L3.5 待复测
+- M3 复杂体接管 (D36)：🟡 L3 安装 12/12 通过，L3.5 待复测
 - M4 工程交付级 (D44)：⬜
 
-### 剩余工作量估算：约 12–20 天（不含二期）
+### 剩余工作量估算：约 10–18 天（不含二期）
 
 ---
 
@@ -169,10 +170,10 @@ export PGPASSWORD=postgres
 
 | 时间 | 内容 | commit |
 |---|---|---|
-| — | **L3-0: 18 个 L3 失败 → 0**（产物直接修复，12/12 全通过） | `41c58ca` |
-| — | install 脚本 search_path 加入 pkg_score_manage | `41c58ca` |
+| — | **L3-0: 引擎层修复**（BULK COLLECT/FORALL/UTL_FILE/INOUT schema名/PERFORM set_config/嵌套内联） | `43e1104` |
+| — | **L3-0b: PACKAGE_BODY 产物层修复**（INOUT 缺参/CUR_ALL_STUDENT/stub 函数） | `758bd7d` |
 | — | test 修复 (MagicMock 补 schema) | `e1e5669` |
-| — | HANDOFF/AGENTS 精简 (1554→160行 / 190→80行) | `3465253` |
+| — | HANDOFF/AGENTS 精简 | `3465253` |
 
 ### 2026-10-13
 
@@ -184,7 +185,7 @@ export PGPASSWORD=postgres
 | — | P4-2R / P4-2 a~h | `541f1dc` / `2810905` |
 
 📌 **下次开工第一步**：
-1. **引擎层 DoD-6 同步**（把 L3-0 的产物修复同步到 perlstyle_engine.py，否则重转回退）
-2. P4-2 续：PACKAGE batch 12 个 TODO 桩
-3. L3.5 复测确认冒烟状态
-4. P2-6：SYSTIMESTAMP/SYSDATE 转换
+1. P4-2 续：PACKAGE batch 12 个 TODO 桩
+2. L3.5 复测确认冒烟状态（重转后）
+3. P2-6：SYSTIMESTAMP/SYSDATE 转换
+4. 引擎层缺口：INOUT 参数检测 / CUR_ALL_STUDENT 自动生成 / 嵌套函数 lift 二层覆盖
