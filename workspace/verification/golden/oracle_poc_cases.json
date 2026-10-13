@@ -1,0 +1,978 @@
+{
+  "version": "1.0",
+  "target": "oracle_poc",
+  "generated_by": "pipeline/verification/golden/build_oracle_poc_cases.py",
+  "source_data": "oracle_poc/01.SQL/DATA/00_TEST_DATA.sql",
+  "note": "期望值由 oracle_poc 的 DDL + 测试数据 + 函数源码语义推导，非 Oracle 实例实测。具备 Oracle 环境时应改用 differential 模式复核。",
+  "case_count": 65,
+  "cases": [
+    {
+      "id": "GRADE_100_00",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(100)",
+      "expect": 1,
+      "description": "F_GET_GRADE_LEVEL(100) = 1（满分 -> 优秀）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_90_01",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(90)",
+      "expect": 1,
+      "description": "F_GET_GRADE_LEVEL(90) = 1（优秀边界 90 含等号）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_89_02",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(89.99)",
+      "expect": 2,
+      "description": "F_GET_GRADE_LEVEL(89.99) = 2（优秀边界下方 -> 良好）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_85_03",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(85)",
+      "expect": 2,
+      "description": "F_GET_GRADE_LEVEL(85) = 2（典型良好）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_80_04",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(80)",
+      "expect": 2,
+      "description": "F_GET_GRADE_LEVEL(80) = 2（良好边界 80 含等号）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_79_05",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(79.99)",
+      "expect": 3,
+      "description": "F_GET_GRADE_LEVEL(79.99) = 3（良好边界下方 -> 及格）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_65_06",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(65)",
+      "expect": 3,
+      "description": "F_GET_GRADE_LEVEL(65) = 3（典型及格）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_60_07",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(60)",
+      "expect": 3,
+      "description": "F_GET_GRADE_LEVEL(60) = 3（及格边界 60 含等号）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_59_08",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(59.99)",
+      "expect": 4,
+      "description": "F_GET_GRADE_LEVEL(59.99) = 4（及格边界下方 -> 不及格）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_55_09",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(55)",
+      "expect": 4,
+      "description": "F_GET_GRADE_LEVEL(55) = 4（典型不及格）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_0_10",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(0)",
+      "expect": 4,
+      "description": "F_GET_GRADE_LEVEL(0) = 4（零分）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "GRADE_-10_11",
+      "object": "f_get_grade_level",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_grade_level(-10)",
+      "expect": 4,
+      "description": "F_GET_GRADE_LEVEL(-10) = 4（负分走异常/兜底分支）",
+      "tags": [
+        "pure_function",
+        "threshold_boundary",
+        "nested_4_level"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10001",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10001, NULL)",
+      "expect": 360,
+      "description": "学生 10001 全科目总分 = 360",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10002",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10002, NULL)",
+      "expect": 325,
+      "description": "学生 10002 全科目总分 = 325",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10003",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10003, NULL)",
+      "expect": 385,
+      "description": "学生 10003 全科目总分 = 385",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10004",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10004, NULL)",
+      "expect": 283,
+      "description": "学生 10004 全科目总分 = 283",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10005",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10005, NULL)",
+      "expect": 318,
+      "description": "学生 10005 全科目总分 = 318",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10006",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10006, NULL)",
+      "expect": 335,
+      "description": "学生 10006 全科目总分 = 335",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10007",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10007, NULL)",
+      "expect": 295,
+      "description": "学生 10007 全科目总分 = 295",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_10008",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10008, NULL)",
+      "expect": 361,
+      "description": "学生 10008 全科目总分 = 361",
+      "tags": [
+        "dynamic_sql",
+        "nested",
+        "aggregate"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_EXAM_10001_1",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10001, 1)",
+      "expect": 360,
+      "description": "学生 10001 考试类型 1 的总分 = 360",
+      "tags": [
+        "dynamic_sql",
+        "filter_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_EXAM_10002_1",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10002, 1)",
+      "expect": 325,
+      "description": "学生 10002 考试类型 1 的总分 = 325",
+      "tags": [
+        "dynamic_sql",
+        "filter_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_EXAM_10003_1",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(10003, 1)",
+      "expect": 385,
+      "description": "学生 10003 考试类型 1 的总分 = 385",
+      "tags": [
+        "dynamic_sql",
+        "filter_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_INVALID_99999",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(99999, NULL)",
+      "expect": 0,
+      "description": "F_GET_TOTAL_SCORE(99999) = 0（不存在的学生）",
+      "tags": [
+        "edge_case",
+        "validation_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_INVALID_0",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(0, NULL)",
+      "expect": 0,
+      "description": "F_GET_TOTAL_SCORE(0) = 0（编号为 0，CHECK_FORMAT 拒绝）",
+      "tags": [
+        "edge_case",
+        "validation_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "TOTAL_INVALID_1",
+      "object": "f_get_total_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_total_score(-1, NULL)",
+      "expect": 0,
+      "description": "F_GET_TOTAL_SCORE(-1) = 0（负数编号，CHECK_FORMAT 拒绝）",
+      "tags": [
+        "edge_case",
+        "validation_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10001",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10001, NULL)",
+      "expect": 121.36,
+      "tolerance": 0.005,
+      "description": "学生 10001 学分加权平均分 = 121.36",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10002",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10002, NULL)",
+      "expect": 109.55,
+      "tolerance": 0.005,
+      "description": "学生 10002 学分加权平均分 = 109.55",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10003",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10003, NULL)",
+      "expect": 130.0,
+      "tolerance": 0.005,
+      "description": "学生 10003 学分加权平均分 = 130.0",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10004",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10004, NULL)",
+      "expect": 94.91,
+      "tolerance": 0.005,
+      "description": "学生 10004 学分加权平均分 = 94.91",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10005",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10005, NULL)",
+      "expect": 106.73,
+      "tolerance": 0.005,
+      "description": "学生 10005 学分加权平均分 = 106.73",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10006",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10006, NULL)",
+      "expect": 112.73,
+      "tolerance": 0.005,
+      "description": "学生 10006 学分加权平均分 = 112.73",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10007",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10007, NULL)",
+      "expect": 98.91,
+      "tolerance": 0.005,
+      "description": "学生 10007 学分加权平均分 = 98.91",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGW_10008",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10008, NULL)",
+      "expect": 121.45,
+      "tolerance": 0.005,
+      "description": "学生 10008 学分加权平均分 = 121.45",
+      "tags": [
+        "weighted_avg",
+        "cursor_loop",
+        "nested"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10001_10001",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10001, 10001)",
+      "expect": 125.0,
+      "tolerance": 0.005,
+      "description": "学生 10001 科目 10001 平均分 = 125.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10001_10002",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10001, 10002)",
+      "expect": 130.0,
+      "tolerance": 0.005,
+      "description": "学生 10001 科目 10002 平均分 = 130.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10002_10001",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10002, 10001)",
+      "expect": 110.0,
+      "tolerance": 0.005,
+      "description": "学生 10002 科目 10001 平均分 = 110.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10002_10002",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10002, 10002)",
+      "expect": 120.0,
+      "tolerance": 0.005,
+      "description": "学生 10002 科目 10002 平均分 = 120.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10003_10001",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10003, 10001)",
+      "expect": 135.0,
+      "tolerance": 0.005,
+      "description": "学生 10003 科目 10001 平均分 = 135.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10003_10002",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10003, 10002)",
+      "expect": 140.0,
+      "tolerance": 0.005,
+      "description": "学生 10003 科目 10002 平均分 = 140.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10004_10001",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10004, 10001)",
+      "expect": 95.0,
+      "tolerance": 0.005,
+      "description": "学生 10004 科目 10001 平均分 = 95.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "AVGS_10004_10002",
+      "object": "f_get_avg_score",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_get_avg_score(10004, 10002)",
+      "expect": 100.0,
+      "tolerance": 0.005,
+      "description": "学生 10004 科目 10002 平均分 = 100.0",
+      "tags": [
+        "single_subject",
+        "dynamic_sql"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10001",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10001, 1, 1, 1)",
+      "expect": 2,
+      "description": "学生 10001 在 1 年 1 班的排名 = 2",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10001",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10001, 1, 1, 2)",
+      "expect": 3,
+      "description": "学生 10001 在 1 年级的排名 = 3",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10002",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10002, 1, 1, 1)",
+      "expect": 3,
+      "description": "学生 10002 在 1 年 1 班的排名 = 3",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10002",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10002, 1, 1, 2)",
+      "expect": 5,
+      "description": "学生 10002 在 1 年级的排名 = 5",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10003",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10003, 1, 1, 1)",
+      "expect": 1,
+      "description": "学生 10003 在 1 年 1 班的排名 = 1",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10003",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10003, 1, 1, 2)",
+      "expect": 1,
+      "description": "学生 10003 在 1 年级的排名 = 1",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10004",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10004, 1, 1, 1)",
+      "expect": 4,
+      "description": "学生 10004 在 1 年 1 班的排名 = 4",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10004",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10004, 1, 1, 2)",
+      "expect": 8,
+      "description": "学生 10004 在 1 年级的排名 = 8",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10005",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10005, 1, 2, 1)",
+      "expect": 3,
+      "description": "学生 10005 在 1 年 2 班的排名 = 3",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10005",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10005, 1, 1, 2)",
+      "expect": 6,
+      "description": "学生 10005 在 1 年级的排名 = 6",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10006",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10006, 1, 2, 1)",
+      "expect": 2,
+      "description": "学生 10006 在 1 年 2 班的排名 = 2",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10006",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10006, 1, 1, 2)",
+      "expect": 4,
+      "description": "学生 10006 在 1 年级的排名 = 4",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10007",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10007, 1, 2, 1)",
+      "expect": 4,
+      "description": "学生 10007 在 1 年 2 班的排名 = 4",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10007",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10007, 1, 1, 2)",
+      "expect": 7,
+      "description": "学生 10007 在 1 年级的排名 = 7",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_CLS_10008",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10008, 1, 2, 1)",
+      "expect": 1,
+      "description": "学生 10008 在 1 年 2 班的排名 = 1",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "outer_join"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "RANK_GRD_10008",
+      "object": "f_calc_rank",
+      "object_kind": "FUNCTION",
+      "type": "scalar",
+      "sql": "SELECT f_calc_rank(10008, 1, 1, 2)",
+      "expect": 2,
+      "description": "学生 10008 在 1 年级的排名 = 2",
+      "tags": [
+        "rank",
+        "dynamic_sql",
+        "group_branch"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "DATA_STUDENT_MST",
+      "object": "student_mst",
+      "object_kind": "TABLE",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM student_mst",
+      "expect": 8,
+      "description": "表 STUDENT_MST 应装载 8 行",
+      "tags": [
+        "data_load",
+        "integrity"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "DATA_SCORE_REC",
+      "object": "score_rec",
+      "object_kind": "TABLE",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM score_rec",
+      "expect": 24,
+      "description": "表 SCORE_REC 应装载 24 行",
+      "tags": [
+        "data_load",
+        "integrity"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "DATA_SUBJECT_MST",
+      "object": "subject_mst",
+      "object_kind": "TABLE",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM subject_mst",
+      "expect": 8,
+      "description": "表 SUBJECT_MST 应装载 8 行",
+      "tags": [
+        "data_load",
+        "integrity"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "DATA_TEACHER_MST",
+      "object": "teacher_mst",
+      "object_kind": "TABLE",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM teacher_mst",
+      "expect": 4,
+      "description": "表 TEACHER_MST 应装载 4 行",
+      "tags": [
+        "data_load",
+        "integrity"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "DATA_SYSTEM_CONFIG",
+      "object": "system_config",
+      "object_kind": "TABLE",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM system_config",
+      "expect": 5,
+      "description": "表 SYSTEM_CONFIG 应装载 5 行",
+      "tags": [
+        "data_load",
+        "integrity"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "VIEW_V_STUDENT_SCORE",
+      "object": "v_student_score",
+      "object_kind": "VIEW",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM v_student_score",
+      "expect": 8,
+      "description": "视图 V_STUDENT_SCORE 行数 = 8",
+      "tags": [
+        "view"
+      ],
+      "provenance": "derived_from_source+data"
+    },
+    {
+      "id": "VIEW_V_SCORE_RANK",
+      "object": "v_score_rank",
+      "object_kind": "VIEW",
+      "type": "scalar",
+      "sql": "SELECT count(*) FROM v_score_rank",
+      "expect": 8,
+      "description": "视图 V_SCORE_RANK 行数 = 8",
+      "tags": [
+        "view"
+      ],
+      "provenance": "derived_from_source+data"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# 生成的转换产物（每次运行都会重建）
+output/
+results/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 注意：input/ 中的示例源文件保留入库（作为冒烟测试语料）

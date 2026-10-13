@@ -1,0 +1,92 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+*.manifest
+*.spec
+
+# Virtual environments
+.venv/
+.venv-1/
+venv/
+env/
+ENV/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 输出产物
+out/*
+gkb/*
+source/*
+# Pipeline 输出产物 (重新生成的)
+pipeline/output/
+pipeline/tests/integration/pg_output/
+pipeline/tests/integration/package_output/
+pipeline/tests/integration/full_conversion_report.html
+pipeline/tests/integration/gkb_sample_report.txt
+# 保留空目录
+!out/.gitkeep
+!gkb/.gitkeep
+!source/.gitkeep
+
+# 临时抓取留档
+.gap_pages/
+
+# 临时/调试脚本
+tmp_*.py
+pg.py
+convert/plsql_converter_debug.py
+
+# 操作系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Git worktrees
+.worktrees/
+worktrees/
+ora2pg/
+test_reports/_tmp_check.py
+workspace/pipeline.log
+test_reports/ora2pg_py_gkb_test/outputs_perlstyle_fixed/
+test_reports/ora2pg_py_gkb_test/outputs_perlstyle_full/
+test_reports/ora2pg_py_gkb_test/results/latest/conversion_report.md
+test_reports/ora2pg_py_gkb_test/results/latest/summary.md
+test_reports/ora2pg_py_gkb_test/results/latest/verification_reports_flat.json
+test_reports/ora2pg_py_gkb_test/utf8_inputs/
+test_reports/ora2pg_py_gkb_test/utf8_inputs_1/oracle_poc/output/.agent_cache/
+oracle_poc/output/.quota_counter

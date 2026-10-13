@@ -1,0 +1,25 @@
+# Oracle 相关
+*.dmp
+*.exp
+*.log
+*.lst
+*.trc
+
+# 临时文件
+*.tmp
+*.bak
+*~
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# macOS
+.DS_Store
+
+# 日志
+*.log
+
+# 备份
+*.backup

@@ -1,0 +1,4 @@
+psycopg2-binary>=2.9
+strands-agents>=1.0.0
+ollama>=0.1.0
+pytest>=7.0.0

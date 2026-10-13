@@ -1,0 +1,135 @@
+{
+  "DATA/00_TEST_DATA.sql": {
+    "type": "UNKNOWN",
+    "count": 0,
+    "names": []
+  },
+  "FUNCTION/00_FUNCTION.sql": {
+    "type": "FUNCTION",
+    "count": 10,
+    "names": [
+      "F_GET_TOTAL_SCORE",
+      "F_GET_AVG_SCORE",
+      "F_GET_GRADE_LEVEL",
+      "F_CALC_RANK",
+      "F_GET_STUDENT_LIST_PIPELINE",
+      "F_GET_SCORE_LIST_PIPELINE",
+      "F_GET_STUDENT_CURSOR",
+      "F_GET_WEIGHTED_AVG",
+      "F_GET_CONFIG_VALUE",
+      "F_GET_JOBNUM"
+    ]
+  },
+  "PACKAGE/00_PACKAGE.sql": {
+    "type": "PACKAGE",
+    "count": 1,
+    "names": [
+      "PKG_SCORE_MANAGE"
+    ]
+  },
+  "PACKAGE_BODY/00_PACKAGE_BODY.sql": {
+    "type": "PACKAGE_BODY",
+    "count": 0,
+    "names": []
+  },
+  "PROCEDURE/00_PROCEDURE.sql": {
+    "type": "PROCEDURE",
+    "count": 5,
+    "names": [
+      "SP_PROCESS_SCORE",
+      "SP_GEN_SCORE_REPORT",
+      "SP_BATCH_IMPORT_SCORE",
+      "SP_CALC_RANK",
+      "SP_BATCH_DELETE_SCORE"
+    ]
+  },
+  "SEQUENCE/00_SEQUENCE.sql": {
+    "type": "SEQUENCE",
+    "count": 6,
+    "names": [
+      "SEQ_STUDENT_NO",
+      "SEQ_SUBJECT_CD",
+      "SEQ_TEACHER_CD",
+      "SEQ_JOBNUM",
+      "SEQ_LOG_ID",
+      "SEQ_ATTACHMENT_ROW"
+    ]
+  },
+  "SYNONYM/00_SYNONYM.sql": {
+    "type": "SYNONYM",
+    "count": 11,
+    "names": [
+      "SM_STUDENT_MST",
+      "SM_SUBJECT_MST",
+      "SM_TEACHER_MST",
+      "SM_SCORE_REC",
+      "SM_SYSTEM_CONFIG",
+      "SM_WK_SCORE_REPORT",
+      "SM_ATTACHMENT_STORAGE",
+      "SM_PROCESS_LOG",
+      "SM_SEQ_STUDENT",
+      "SM_SEQ_JOBNUM",
+      "SM_SEQ_LOG"
+    ]
+  },
+  "TABLE/001_STUDENT_MST.sql": {
+    "type": "TABLE",
+    "count": 1,
+    "names": [
+      "STUDENT_MST"
+    ]
+  },
+  "TABLE/002_SUBJECT_MST.sql": {
+    "type": "TABLE",
+    "count": 8,
+    "names": [
+      "SUBJECT_MST",
+      "TEACHER_MST",
+      "SCORE_REC",
+      "WK_SCORE_REPORT",
+      "SYSTEM_CONFIG",
+      "ATTACHMENT_STORAGE",
+      "PROCESS_LOG",
+      "TEMP_SCORE_BATCH"
+    ]
+  },
+  "TRIGGER/00_TRIGGER.sql": {
+    "type": "TRIGGER",
+    "count": 6,
+    "names": [
+      "TRG_STUDENT_BI",
+      "TRG_STUDENT_AU",
+      "TRG_SCORE_BIU",
+      "TRG_SYSTEM_CONFIG_BD",
+      "TRG_SCORE_COMPOUND",
+      "TRG_V_STUDENT_IO"
+    ]
+  },
+  "TYPE/001_TYPES.sql": {
+    "type": "TYPE",
+    "count": 8,
+    "names": [
+      "A_CONS_PRM",
+      "SCORE_RECORD",
+      "SCORE_LIST",
+      "STUDENT_RECORD",
+      "STUDENT_LIST",
+      "REF_CURSOR_T",
+      "CONFIG_RECORD",
+      "CONFIG_LIST"
+    ]
+  },
+  "VIEW/00_VIEW.sql": {
+    "type": "VIEW",
+    "count": 7,
+    "names": [
+      "V_STUDENT_SCORE",
+      "V_STUDENT_STATS",
+      "V_SCORE_RANK",
+      "V_SUBJECT_STATS",
+      "V_TEACHER_STATS",
+      "V_DEPENDENCY_GRAPH",
+      "V_STUDENT_WITH_SCORE"
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+-- Perl-style Ora2Py Warnings:
+-- MAXVALUE 99999999999999999999 exceeds PG bigint max (9223372036854775807); capped
+
+-- ============================================================================
+-- 序列表 (Oracle特有 - PostgreSQL需要用GENERATED ALWAYS AS IDENTITY或序列)
+-- ============================================================================
+
+-- 学生编号序列
+CREATE SEQUENCE SEQ_STUDENT_NO
+    START 10001
+    INCREMENT 1
+    MAXVALUE 9999999999
+    MINVALUE 1
+    CYCLE
+    CACHE 20;
+
+-- 科目代码序列
+CREATE SEQUENCE SEQ_SUBJECT_CD
+    START 10001
+    INCREMENT 1
+    MAXVALUE 99999
+    MINVALUE 1
+    NO CYCLE
+    CACHE 20;
+
+-- 教师编号序列
+CREATE SEQUENCE SEQ_TEACHER_CD
+    START 1000000001
+    INCREMENT 1
+    MAXVALUE 9999999999
+    MINVALUE 1
+    NO CYCLE
+    CACHE 20;
+
+-- 批次号序列
+CREATE SEQUENCE SEQ_JOBNUM
+    START 1
+    INCREMENT 1
+    MAXVALUE 9999999999
+    MINVALUE 1
+    NO CYCLE
+    CACHE 100;
+
+-- 日志ID序列
+CREATE SEQUENCE SEQ_LOG_ID
+    START 1
+    INCREMENT 1
+    MAXVALUE 9223372036854775807
+    MINVALUE 1
+    NO CYCLE
+    CACHE 1000;
+
+-- 附件行号序列
+CREATE SEQUENCE SEQ_ATTACHMENT_ROW
+    START 1
+    INCREMENT 1
+    MAXVALUE 999999999
+    MINVALUE 1
+    NO CYCLE
+    CACHE 50;

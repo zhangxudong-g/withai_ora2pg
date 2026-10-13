@@ -1,0 +1,63 @@
+-- ============================================================================
+-- 序列表 (Oracle特有 - PostgreSQL需要用GENERATED ALWAYS AS IDENTITY或序列)
+-- ============================================================================
+
+-- 学生编号序列
+CREATE SEQUENCE SEQ_STUDENT_NO
+    START WITH 10001
+    INCREMENT BY 1
+    MAXVALUE 9999999999
+    MINVALUE 1
+    CYCLE
+    CACHE 20
+    ORDER;
+
+-- 科目代码序列
+CREATE SEQUENCE SEQ_SUBJECT_CD
+    START WITH 10001
+    INCREMENT BY 1
+    MAXVALUE 99999
+    MINVALUE 1
+    NOCYCLE
+    CACHE 20
+    ORDER;
+
+-- 教师编号序列
+CREATE SEQUENCE SEQ_TEACHER_CD
+    START WITH 1000000001
+    INCREMENT BY 1
+    MAXVALUE 9999999999
+    MINVALUE 1
+    NOCYCLE
+    CACHE 20
+    ORDER;
+
+-- 批次号序列
+CREATE SEQUENCE SEQ_JOBNUM
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 9999999999
+    MINVALUE 1
+    NOCYCLE
+    CACHE 100
+    ORDER;
+
+-- 日志ID序列
+CREATE SEQUENCE SEQ_LOG_ID
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 99999999999999999999
+    MINVALUE 1
+    NOCYCLE
+    CACHE 1000
+    ORDER;
+
+-- 附件行号序列
+CREATE SEQUENCE SEQ_ATTACHMENT_ROW
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 999999999
+    MINVALUE 1
+    NOCYCLE
+    CACHE 50
+    ORDER;
