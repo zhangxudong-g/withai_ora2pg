@@ -1,6 +1,6 @@
 -- ============================================================================
 -- PostgreSQL 一键安装脚本 (由 scripts/convert_oracle_poc.py 自动生成)
--- 生成时间: 2026-10-13 16:50:13
+-- 生成时间: 2026-10-13 19:22:58
 -- 用法: psql -d <db> -f 00_CREATE_ALL_PG.sql
 --       可指定 schema:  psql -v schema=my_schema -f 00_CREATE_ALL_PG.sql
 --       默认 schema:    oracle_poc_verify

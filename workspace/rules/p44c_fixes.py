@@ -88,7 +88,26 @@ def fix_for_rec_select(sql: str) -> str:
 
 
 def apply_p44c_fixes(sql: str) -> str:
-    """P4-4c 第一阶段：set_config + FOR rec record。"""
+    """P4-4c 第一阶段：set_config + FOR rec record + PERFORM set_config。"""
     sql = fix_begin_set_config(sql)
     sql = fix_for_rec_select(sql)
+    sql = _fix_perform_set_config(sql)
     return sql
+
+
+def _fix_perform_set_config(sql: str) -> str:
+    """裸 set_config(...) 语句加 PERFORM 前缀。
+
+    PG 的 set_config() 返回 TEXT，在 PL/pgSQL 中作为语句必须 PERFORM。
+    模式：THEN set_config(...)  →  THEN PERFORM set_config(...)
+    或独立行 set_config(...)  →  PERFORM set_config(...)
+    排除：:= set_config(...) / INTO ... set_config(...) — 赋值形式不需要
+    """
+    stripped, restore = _strip_strings_and_comments(sql)
+    # 匹配 set_config 前不是 :=/INTO/PERFORM 的情况
+    new = re.sub(
+        r"(?<!PERFORM\s)(?<!:=\s)(?<!INTO\s)\bset_config\s*\(",
+        "PERFORM set_config(",
+        stripped,
+    )
+    return _restore_placeholders(new, restore)

@@ -198,64 +198,63 @@ BEGIN
     END;
 
 
-    -- 批量获取3变量: PG 不支持，请改用复合类型数组或拆为多条单标量 SELECT
-    RAISE EXCEPTION 'not implemented: bulk collect into 3 variables, please use composite type array';
+    -- BULK COLLECT: 获取工作表数据
+    -- BULK COLLECT into 3 variables: PG 不支持
+    RAISE EXCEPTION 'not implemented: BULK COLLECT into 3 variables, please use composite type array';
 
-    -- 批量MERGE (FORALL转FOR循环，需包BEGIN块)
-    BEGIN
-        BEGIN
-            FOR i IN 1..array_length(v_student_list, 1) LOOP
-                MERGE INTO SCORE_REC SC
-                USING(SELECT 1 AS DUMMY) D
-                ON (SC.STUDENT_NO = v_student_list[i]
-                    AND SC.SUBJECT_CD = v_subject_list[i]
-                    AND SC.EXAM_DATE = i_nEXAM_DATE
-                    AND SC.EXAM_TYPE = i_nEXAM_TYPE)
-                WHEN MATCHED THEN
-                    UPDATE SET
-                        SC.SCORE = v_score_list[i],
-                        SC.GRADE_LEVEL = CASE
-                            WHEN v_score_list[i] >= 90 THEN 1
-                            WHEN v_score_list[i] >= 80 THEN 2
-                            WHEN v_score_list[i] >= 70 THEN 3
-                            WHEN v_score_list[i] >= 60 THEN 4
-                            ELSE 5 END,
-                        SC.IS_PASS = CASE WHEN v_score_list[i] >= V_PASS_SCORE THEN 1 ELSE 0 END,
-                        SC.REC_UPDATE_TANTO_CD = i_vTANTO_CD,
-                        SC.REC_UPDATE_DATE = TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'),
-                        SC.REC_UPDATE_KBN = '02'
-                WHEN NOT MATCHED THEN
-                    INSERT(
-                        STUDENT_NO, SUBJECT_CD, EXAM_DATE, EXAM_TYPE,
-                        SCORE, GRADE_LEVEL, IS_PASS,
-                        REC_CREATE_TANTO_CD, REC_CREATE_DATE, REC_CREATE_WS,
-                        REC_UPDATE_TANTO_CD, REC_UPDATE_DATE, REC_UPDATE_KBN
-                    ) VALUES (
-                        v_student_list[i], v_subject_list[i], i_nEXAM_DATE, i_nEXAM_TYPE,
-                        v_score_list[i],
-                        CASE
-                            WHEN v_score_list[i] >= 90 THEN 1
-                            WHEN v_score_list[i] >= 80 THEN 2
-                            WHEN v_score_list[i] >= 70 THEN 3
-                            WHEN v_score_list[i] >= 60 THEN 4
-                            ELSE 5 END,
-                        CASE WHEN v_score_list[i] >= V_PASS_SCORE THEN 1 ELSE 0 END,
-                        i_vTANTO_CD, TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'), i_vWSNUM,
-                        i_vTANTO_CD, TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'), '01'
-                    );
-            END LOOP;
-            GET DIAGNOSTICS VCOUNT := ROW_COUNT;
-            COMMIT;
-            RAISE NOTICE '%', '处理件数: ' || VCOUNT;
-        EXCEPTION
-            WHEN OTHERS THEN
-                GET STACKED DIAGNOSTICS _p25_sqlstate = RETURNED_SQLSTATE,
-                                    _p25_msg = MESSAGE_TEXT;
-                o_nRTN := c_ERR;
-                ROLLBACK;
-                RAISE NOTICE '%', 'ERROR: ' || _p25_msg;
-        END;
-    END;
+    -- FORALL: 批量MERGE
+    FOR i IN 1..array_length(v_student_list, 1) LOOP
+        MERGE INTO SCORE_REC SC
+        USING(SELECT 1 AS DUMMY) D
+        ON (SC.STUDENT_NO = v_student_list[i]
+            AND SC.SUBJECT_CD = v_subject_list[i]
+            AND SC.EXAM_DATE = i_nEXAM_DATE
+            AND SC.EXAM_TYPE = i_nEXAM_TYPE)
+        WHEN MATCHED THEN
+            UPDATE SET
+                SC.SCORE = v_score_list[i],
+                SC.GRADE_LEVEL = CASE
+                    WHEN v_score_list[i] >= 90 THEN 1
+                    WHEN v_score_list[i] >= 80 THEN 2
+                    WHEN v_score_list[i] >= 70 THEN 3
+                    WHEN v_score_list[i] >= 60 THEN 4
+                    ELSE 5 END,
+                SC.IS_PASS = CASE WHEN v_score_list[i] >= V_PASS_SCORE THEN 1 ELSE 0 END,
+                SC.REC_UPDATE_TANTO_CD = i_vTANTO_CD,
+                SC.REC_UPDATE_DATE = TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'),
+                SC.REC_UPDATE_KBN = '02'
+        WHEN NOT MATCHED THEN
+            INSERT(
+                STUDENT_NO, SUBJECT_CD, EXAM_DATE, EXAM_TYPE,
+                SCORE, GRADE_LEVEL, IS_PASS,
+                REC_CREATE_TANTO_CD, REC_CREATE_DATE, REC_CREATE_WS,
+                REC_UPDATE_TANTO_CD, REC_UPDATE_DATE, REC_UPDATE_KBN
+            ) VALUES (
+                v_student_list[i], v_subject_list[i], i_nEXAM_DATE, i_nEXAM_TYPE,
+                v_score_list[i],
+                CASE
+                    WHEN v_score_list[i] >= 90 THEN 1
+                    WHEN v_score_list[i] >= 80 THEN 2
+                    WHEN v_score_list[i] >= 70 THEN 3
+                    WHEN v_score_list[i] >= 60 THEN 4
+                    ELSE 5 END,
+                CASE WHEN v_score_list[i] >= V_PASS_SCORE THEN 1 ELSE 0 END,
+                i_vTANTO_CD, TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'), i_vWSNUM,
+                i_vTANTO_CD, TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'), '01'
+            );
+    END LOOP;
+
+    GET DIAGNOSTICS VCOUNT := ROW_COUNT;
+    COMMIT;
+    RAISE NOTICE '%', '处理件数: ' || VCOUNT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        GET STACKED DIAGNOSTICS _p25_sqlstate = RETURNED_SQLSTATE,
+                            _p25_msg = MESSAGE_TEXT;
+o_nRTN := c_ERR;
+        ROLLBACK;
+        RAISE NOTICE '%', 'ERROR: ' || _p25_msg;
 END;
 -- ============================================================================
 -- 4. 计算排名存储过程
@@ -284,35 +283,34 @@ c_OK               CONSTANT INTEGER := 0;
 BEGIN
     o_nRTN := c_OK;
 
-    BEGIN
-        FOR R IN CUR_STUDENT LOOP
-            nCNT := nCNT + 1;
+    FOR R IN CUR_STUDENT LOOP
+        nCNT := nCNT + 1;
 
-            SELECT COALESCE(SUM(SCORE), 0) INTO nTOTAL
-            FROM SCORE_REC WHERE STUDENT_NO = R.STUDENT_NO;
+        SELECT COALESCE(SUM(SCORE), 0) INTO nTOTAL
+        FROM SCORE_REC WHERE STUDENT_NO = R.STUDENT_NO;
 
-            IF i_nCLASS_NO IS NOT NULL THEN
-                SELECT COUNT(*) + 1 INTO nRANK
-                FROM (SELECT S.STUDENT_NO, SUM(NVL(SC.SCORE, 0)) AS T
-                    FROM STUDENT_MST S LEFT JOIN SCORE_REC SC ON S.STUDENT_NO = SC.STUDENT_NO WHERE S.GRADE = i_nGRADE AND S.CLASS_NO = i_nCLASS_NO AND S.DELETE_FLG = 0 GROUP BY S.STUDENT_NO
-                    HAVING SUM(NVL(SC.SCORE, 0)) > nTOTAL) alias0;
-            ELSE
-                SELECT COUNT(*) + 1 INTO nRANK
-                FROM (SELECT S.STUDENT_NO, SUM(NVL(SC.SCORE, 0)) AS T
-                    FROM STUDENT_MST S LEFT JOIN SCORE_REC SC ON S.STUDENT_NO = SC.STUDENT_NO WHERE S.GRADE = i_nGRADE AND S.DELETE_FLG = 0 GROUP BY S.STUDENT_NO
-                    HAVING SUM(NVL(SC.SCORE, 0)) > nTOTAL) alias1;
-            END IF;
+        IF i_nCLASS_NO IS NOT NULL THEN
+            SELECT COUNT(*) + 1 INTO nRANK
+            FROM (SELECT S.STUDENT_NO, SUM(NVL(SC.SCORE, 0)) AS T
+                FROM STUDENT_MST S LEFT JOIN SCORE_REC SC ON S.STUDENT_NO = SC.STUDENT_NO WHERE S.GRADE = i_nGRADE AND S.CLASS_NO = i_nCLASS_NO AND S.DELETE_FLG = 0 GROUP BY S.STUDENT_NO
+                HAVING SUM(NVL(SC.SCORE, 0)) > nTOTAL) alias0;
+        ELSE
+            SELECT COUNT(*) + 1 INTO nRANK
+            FROM (SELECT S.STUDENT_NO, SUM(NVL(SC.SCORE, 0)) AS T
+                FROM STUDENT_MST S LEFT JOIN SCORE_REC SC ON S.STUDENT_NO = SC.STUDENT_NO WHERE S.GRADE = i_nGRADE AND S.DELETE_FLG = 0 GROUP BY S.STUDENT_NO
+                HAVING SUM(NVL(SC.SCORE, 0)) > nTOTAL) alias1;
+        END IF;
 
-            UPDATE SCORE_REC SET SCORE_RANK = nRANK WHERE STUDENT_NO = R.STUDENT_NO;
-        END LOOP;
+        UPDATE SCORE_REC SET SCORE_RANK = nRANK WHERE STUDENT_NO = R.STUDENT_NO;
+    END LOOP;
 
-        COMMIT;
-        RAISE NOTICE '%', '处理件数: ' || nCNT;
-    EXCEPTION
-        WHEN OTHERS THEN
-            GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-            RAISE EXCEPTION 'ORA: %', _p25_msg;
-    END;
+    COMMIT;
+    RAISE NOTICE '%', '处理件数: ' || nCNT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
+        RAISE EXCEPTION 'ORA: %', _p25_msg;
 END;
 
 -- ============================================================================
@@ -335,25 +333,24 @@ c_OK               CONSTANT INTEGER := 0;
 BEGIN
     o_nRTN := c_OK;
 
-    -- 批量获取
-    SELECT ARRAY_AGG(STUDENT_NO)::NUMERIC[]
-    INTO v_student_list
+    -- BULK COLLECT
+    SELECT ARRAY_AGG((STUDENT_NO)::NUMERIC) INTO v_student_list
     FROM WK_SCORE_REPORT
     WHERE WSNUM = i_vWSNUM AND STUDENT_NO IS NOT NULL;
 
-    -- 批量DELETE (转FOR循环，需包BEGIN块)
-    BEGIN
-        FOR i IN 1..array_length(v_student_list, 1) LOOP
-            DELETE FROM SCORE_REC WHERE STUDENT_NO = v_student_list[i];
-        END LOOP;
-        GET DIAGNOSTICS nCNT := ROW_COUNT;
-        COMMIT;
-        RAISE NOTICE '%', '删除件数: ' || nCNT;
-    EXCEPTION
-        WHEN OTHERS THEN
-            GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-            RAISE EXCEPTION 'ORA: %', _p25_msg;
-    END;
+    -- FORALL DELETE
+    FOR i IN 1..array_length(v_student_list, 1) LOOP
+        DELETE FROM SCORE_REC WHERE STUDENT_NO = v_student_list[i];
+    END LOOP;
+
+    GET DIAGNOSTICS nCNT := ROW_COUNT;
+    COMMIT;
+    RAISE NOTICE '%', '删除件数: ' || nCNT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
+        RAISE EXCEPTION 'ORA: %', _p25_msg;
 END;
 
 $$;

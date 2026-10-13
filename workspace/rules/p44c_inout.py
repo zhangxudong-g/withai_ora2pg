@@ -39,7 +39,7 @@ _OUT_PARAM = re.compile(
     r"|(\w+)\s+(INOUT|OUT)\s+([\w.]+(?:\s*\(\s*[\d,\s]+\s*\))?))\s*$",
     re.IGNORECASE,
 )
-_FN_START = re.compile(r"CREATE\s+OR\s+REPLACE\s+FUNCTION\s+(\w+)\s*\(", re.IGNORECASE)
+_FN_START = re.compile(r"CREATE\s+OR\s+REPLACE\s+FUNCTION\s+([\w.]+)\s*\(", re.IGNORECASE)
 _RETURNS_RE = re.compile(r"RETURNS\s+([\w.]+)", re.IGNORECASE)
 _DOLLAR = re.compile(r"\$\$")
 # 集合返回 / 触发器函数：无输出参数，不在本规则范围

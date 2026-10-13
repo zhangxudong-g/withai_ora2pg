@@ -67,6 +67,7 @@ from rules.p44c_cursor_decl import (  # noqa: E402  P4-4c 阶段7 游标声明
     apply_p44c_cursor_decl,
     scan_cursor_decls,
 )
+from rules.nested_inline import apply_nested_inline  # noqa: E402  P4-4c 嵌套函数内联
 
 POC_DIR = REPO_ROOT / "oracle_poc"
 SRC_DIR = POC_DIR / "01.SQL"
@@ -754,6 +755,32 @@ def post_pass_p44c_cursor_decl(dst_dir: Path) -> dict:
             "files_touched": files_touched, "warnings": warnings}
 
 
+def _post_pass_nested_inline(dst_dir: Path) -> dict:
+    """P4-4c 阶段 8：嵌套函数内联（单 RETURN）。"""
+    files_touched: List[str] = []
+    total = 0
+    warnings: List[str] = []
+    for sub in _P44C_TARGET_SUBDIRS:
+        sub_dir = dst_dir / sub
+        if not sub_dir.exists():
+            continue
+        for f in sorted(sub_dir.glob("*.sql")):
+            try:
+                text = f.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            try:
+                new = apply_nested_inline(text)
+            except Exception as exc:  # noqa: BLE001
+                warnings.append(f"{f.name}: 嵌套内联失败 {type(exc).__name__}: {exc}")
+                continue
+            if new != text:
+                f.write_text(new, encoding="utf-8")
+                files_touched.append(f.name)
+                total += 1
+    return {"substituted": total, "files_touched": files_touched, "warnings": warnings}
+
+
 def convert_one(src: Path, dst: Path) -> dict:
     started = time.perf_counter()
     record = {
@@ -1034,6 +1061,11 @@ def main() -> int:
     if post_p44c7["substituted"] or post_p44c7.get("warnings"):
         print(f"  [P4-4c 阶段7] 游标声明: 词序 {post_p44c7['order_fixed']} 处 "
               f"+ RECORD {post_p44c7['record_fixed']} 处")
+
+    # P4-4c 阶段 8: 嵌套函数内联（单 RETURN 的嵌套函数）
+    post_nested = _post_pass_nested_inline(dst_dir)
+    if post_nested["substituted"]:
+        print(f"  [P4-4c 阶段8] 嵌套内联: {post_nested['substituted']} 处")
 
     # W0-4: 完整性 diff 在所有 post-pass 之后跑（产物稳定后）
     _postpass_diff(dst_dir, results)
