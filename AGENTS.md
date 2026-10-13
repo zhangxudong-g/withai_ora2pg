@@ -30,7 +30,6 @@ oracle_poc Oracle→PG 转换，让产物达到"一键安装 + 首调可用 + �
 
 - 所有 PG 语义结论必须 **live PG 15.19 实测**
 - 嵌套子程序必须 lift 为独立函数，禁止文本内联
-- `pipeline/` 冻结只读，任何情况不得修改
 
 ### 落点纪律
 
@@ -40,7 +39,6 @@ oracle_poc Oracle→PG 转换，让产物达到"一键安装 + 首调可用 + �
 | 验证层 | `workspace/verification/`（唯一真源）|
 | 新规则/Agent/单测 | `workspace/` |
 | AST grammar | `workspace/parsers/grammar/` |
-| ⛔ `pipeline/` | **冻结只读** |
 
 ## 实施纪律
 
@@ -64,5 +62,4 @@ P* 实施后:
 ## 不在范围
 
 - 转换器整体重写
-- 修改 `pipeline/`（冻结）
 - 范围外的重构、新增独立功能
