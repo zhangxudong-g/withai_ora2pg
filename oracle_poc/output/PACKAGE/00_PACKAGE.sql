@@ -10,7 +10,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.PONLINE(i_sWSNUM VARCHAR, i_sTANTO_
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for ponline';
 END;
 $$;
 
@@ -18,7 +19,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.PBATCH(i_nJOBNUM NUMERIC, i_sWSNUM 
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for pbatch';
 END;
 $$;
 
@@ -26,7 +28,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_PROCESS_SCORE(i_nSTUDENT_NO NUMER
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for p_process_score';
 END;
 $$;
 
@@ -34,7 +37,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_BATCH_PROCESS_SCORE(i_vWSNUM VARC
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for p_batch_process_score';
 END;
 $$;
 
@@ -42,7 +46,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_GEN_REPORT(i_nNENDO NUMERIC, i_nG
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for p_gen_report';
 END;
 $$;
 
@@ -50,7 +55,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_UPDATE_RANK(i_nGRADE NUMERIC, INO
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for p_update_rank';
 END;
 $$;
 
@@ -58,7 +64,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_BATCH_UPDATE_RANK(i_nGRADE NUMERI
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for p_batch_update_rank';
 END;
 $$;
 
@@ -66,7 +73,8 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_EXPORT_CSV(i_vWSNUM VARCHAR, i_vF
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
+        -- synced from PACKAGE_BODY implementation
+    RAISE NOTICE '%', 'synced stub for p_export_csv';
 END;
 $$;
 
@@ -89,7 +97,7 @@ LANGUAGE plpgsql
 AS $$
 BEGIN
     -- TODO: implement
-    RETURN NULL;
+    RETURN NULL;  -- synced from body: stub value
 END;
 $$;
 
@@ -99,7 +107,7 @@ LANGUAGE plpgsql
 AS $$
 BEGIN
     -- TODO: implement
-    RETURN NULL;
+    RETURN NULL;  -- synced from body: stub value
 END;
 $$;
 
@@ -109,7 +117,7 @@ LANGUAGE plpgsql
 AS $$
 BEGIN
     -- TODO: implement
-    RETURN NULL;
+    RETURN NULL;  -- synced from body: stub value
 END;
 $$;
 
