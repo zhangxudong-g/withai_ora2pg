@@ -216,6 +216,9 @@ def _fix_perform_set_config(sql: str) -> str:
     或独立行 set_config(...)  →  PERFORM set_config(...)
     排除：:= set_config(...) / INTO ... set_config(...) — 赋值形式不需要
     """
+    # 修复 SELECT ... INTO current_setting(...) FROM ... → PERFORM set_config(...)
+    # 必须在 _strip_strings_and_comments 之前做，否则字符串被替换为占位符
+    sql = _fix_into_current_setting(sql)
     stripped, restore = _strip_strings_and_comments(sql)
     # 匹配 set_config 前不是 :=/INTO/PERFORM 的情况
     new = re.sub(
@@ -223,4 +226,76 @@ def _fix_perform_set_config(sql: str) -> str:
         "PERFORM set_config(",
         stripped,
     )
+    new = '\n'.join(new.split('\n'))
     return _restore_placeholders(new, restore)
+
+
+def _fix_into_current_setting(sql: str) -> str:
+    """修复 SELECT ... INTO current_setting('key') FROM <table> → PERFORM set_config(...)
+
+    根因：Oracle 嵌套函数体被 stub 时，其内 SELECT INTO :var 被错翻为 INTO current_setting(...)。
+    PG: current_setting() 是读配置函数，不能作为 INTO 目标；应内联为 PERFORM set_config(...)。
+    """
+    # 兼容跨行格式：FROM <table>; 可能被 line-wrap 切断
+    lines = sql.split('\n')
+    out_lines = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if re.search(r'\bINTO\s+current_setting\s*\(', line, re.IGNORECASE):
+            # 提取 current_setting('namespace.key') 中的 key
+            m_key = re.search(r"current_setting\s*\(\s*'([^']+)'\s*\)", line, re.IGNORECASE)
+            if not m_key:
+                out_lines.append(line)
+                i += 1
+                continue
+            key = m_key.group(1)
+            # 向上找 SELECT 行
+            j = i
+            while j >= 0 and 'SELECT' not in lines[j].upper():
+                j -= 1
+            if j < 0:
+                out_lines.append(line)
+                i += 1
+                continue
+            select_line = lines[j]
+            m_expr = re.search(r'\bSELECT\s+(.+?)\s+INTO\s+current_setting\s*\(', select_line, re.IGNORECASE | re.DOTALL)
+            if not m_expr:
+                out_lines.append(line)
+                i += 1
+                continue
+            expr = m_expr.group(1).strip()
+            # 向下找 FROM <table>;
+            table = None
+            for k in range(i, min(i + 3, len(lines))):
+                lk = lines[k]
+                m_from = re.search(r'\bFROM\s+([\w.]+)\s*;', lk, re.IGNORECASE)
+                if m_from:
+                    table = m_from.group(1)
+                    replaced_line = f"PERFORM set_config('{key}', (SELECT {expr} FROM {table})::text, false);"
+                    for q in range(j, k):
+                        out_lines.append(lines[q])
+                    out_lines.append(replaced_line)
+                    i = k + 1
+                    break
+                if re.search(r'\bFROM\s*$', lk, re.IGNORECASE) and k + 1 < len(lines):
+                    nxt = lines[k + 1]
+                    m_cont = re.search(r'^([\w.]+)\s*;', nxt, re.IGNORECASE)
+                    if m_cont:
+                        table = m_cont.group(1)
+                        replaced_line = f"PERFORM set_config('{key}', (SELECT {expr} FROM {table})::text, false);"
+                        for q in range(j, k):
+                            out_lines.append(lines[q])
+                        out_lines.append(replaced_line)
+                        i = k + 2
+                        break
+            else:
+                out_lines.append(line)
+                i += 1
+            continue
+        out_lines.append(line)
+        i += 1
+    return '\n'.join(out_lines)
+
+
+

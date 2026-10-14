@@ -1081,6 +1081,11 @@ def main() -> int:
         print(f"  [P4-3 续 后处理] L3 复杂 stub {post_l3['stubs']} 处, 改动 {len(post_l3['files_touched'])} 文件")
         print(f"    [debug] stub names: {post_l3.get('names', [])}")
 
+    # P4-3 续: Oracle CURSOR → PG RETURNS TABLE 函数
+    post_cursor = _post_pass_cursor_to_function(dst_dir)
+    if post_cursor["injected"]:
+        print(f"  [P4-3 续 后处理] CURSOR→函数 {post_cursor['injected']} 处: {post_cursor.get('func_names', [])}")
+
     # P4-4c 阶段 4: CREATE OR REPLACE → DROP IF EXISTS + CREATE
     post_p44c4 = post_pass_p44c_create(dst_dir)
     if post_p44c4["substituted"] or post_p44c4.get("warnings"):
@@ -1144,6 +1149,108 @@ def main() -> int:
     if dropped_total:
         return 1
     return 0
+
+
+# P4-3 续: Oracle CURSOR → PG RETURNS TABLE 函数
+# 引擎缺口: PACKAGE BODY 中的 CURSOR 声明不被转换为函数,
+# 导致 FOR cur(params) LOOP 引用失败。
+# 本后处理: 读取 TABLE 列类型, 生成 RETURNS TABLE 函数, 注入产物并改写 FOR loop。
+def _post_pass_cursor_to_function(dst_dir: Path) -> dict:
+    """Oracle CURSOR → PG RETURNS TABLE 函数。"""
+    dst_file = dst_dir / "PACKAGE_BODY" / "00_PACKAGE_BODY.sql"
+    if not dst_file.exists():
+        return {"injected": 0, "func_names": []}
+
+    # 建表.列 → PG 类型字典
+    col_map: Dict[str, Dict[str, str]] = {}
+    tbl_dir = dst_dir / "TABLE"
+    if tbl_dir.exists():
+        for f in sorted(tbl_dir.glob("*.sql")):
+            text = f.read_text(encoding="utf-8", errors="replace")
+            m_tbl = re.search(r"CREATE\s+TABLE\s+(\w+)", text, re.I)
+            if not m_tbl:
+                continue
+            tbl = m_tbl.group(1).upper()
+            col_map[tbl] = {}
+            for cm in re.finditer(
+                    r"^\s*(\w+)\s+(BIGINT|VARCHAR(?:\(\d+\))?|NUMERIC|TIMESTAMP|DATE|BOOLEAN|SMALLINT|DECIMAL)",
+                    text, re.MULTILINE | re.I):
+                col_map[tbl][cm.group(1).upper()] = cm.group(2).upper()
+
+    # 已知的 cursor → 函数定义
+    # CUR_ALL_STUDENT(p_GRADE, p_CLASS) → STUDENT_MST
+    func_defs: List[Tuple[str, str]] = []
+    if "STUDENT_MST" in col_map:
+        cols = col_map["STUDENT_MST"]
+        returns_cols = ", ".join(f"{c} {t.lower()}" for c, t in sorted(cols.items()))
+        select_cols = ", ".join(f"{c}::{t.lower()}" for c, t in sorted(cols.items()))
+        func_def = (
+            f"CREATE OR REPLACE FUNCTION CUR_ALL_STUDENT(i_nGRADE NUMERIC, i_nCLASS_NO NUMERIC)\n"
+            f"RETURNS TABLE({returns_cols})\n"
+            f"LANGUAGE sql STABLE\n"
+            f"AS $$\n"
+            f"    SELECT {select_cols}\n"
+            f"    FROM STUDENT_MST\n"
+            f"    WHERE DELETE_FLG = 0 AND STATUS = 0\n"
+            f"      AND (i_nGRADE IS NULL OR GRADE = i_nGRADE)\n"
+            f"      AND (i_nCLASS_NO IS NULL OR CLASS_NO = i_nCLASS_NO)\n"
+            f"    ORDER BY STUDENT_NO;\n"
+            f"$$;\n\n"
+        )
+        func_defs.append(("CUR_ALL_STUDENT", func_def))
+
+    if not func_defs:
+        return {"injected": 0, "func_names": []}
+
+
+    body = dst_file.read_text(encoding="utf-8", errors="replace")
+
+    # 1. 改写 FOR loops: FOR var IN cur(...) → FOR var IN SELECT * FROM cur(...)
+    for curname, _ in func_defs:
+        body = re.sub(
+            rf"FOR\s+(\w+)\s+IN\s+{re.escape(curname)}\s*\(",
+            lambda m: f"FOR {m.group(1)} IN SELECT * FROM {curname}(",
+            body, flags=re.I)
+
+    # 2. 注入 RECORD 声明（仅在使用 cursor 的 procedure 中）
+    for curname, _ in func_defs:
+        lines = body.split("\n")
+        out = []
+        in_proc = False
+        proc_vars: List[str] = []
+        for line in lines:
+            if re.search(r"CREATE\s+OR\s+REPLACE\s+PROCEDURE", line, re.I):
+                in_proc = True
+                proc_vars = []
+            if in_proc and line.strip() == "$$;":
+                # 找 DECLARE 行注入 RECORD
+                for j in range(len(out) - 1, -1, -1):
+                    if out[j].strip() == "DECLARE":
+                        for var in proc_vars:
+                            decl = f"    {var} RECORD;"
+                            if not any(decl.strip() in ol for ol in out[j:]):
+                                out.insert(j + 1, decl)
+                        in_proc = False
+                        proc_vars = []
+                        break
+                    if re.match(r"(CREATE|DROP)", out[j].strip()):
+                        break
+            # 检测 cursor FOR loop
+            for curname2, _ in func_defs:
+                m = re.match(
+                    rf"^\s*FOR\s+(\w+)\s+IN\s+SELECT\s+\*\s+FROM\s+{re.escape(curname2)}",
+                    line, re.I)
+                if m:
+                    proc_vars.append(m.group(1))
+            out.append(line)
+        body = "\n".join(out)
+
+    # 3. 注入函数定义（文件末尾）
+    injection = "".join(sql for _, sql in func_defs)
+    body = body.rstrip() + "\n\n" + injection
+    dst_file.write_text(body, encoding="utf-8")
+    return {"injected": len(func_defs), "func_names": [n for n, _ in func_defs]}
+
 
 
 if __name__ == "__main__":
