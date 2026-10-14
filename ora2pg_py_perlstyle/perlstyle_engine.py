@@ -3524,6 +3524,95 @@ def convert_function(sql: str, same_pkg_procedure_names: Optional[set] = None,
             # nested_lifted: None = no headers found (inline may run);
             # non-None = headers found (skip inline per AGENTS.md: "禁用文本内联")
             block, lifted = _lift_nested_subprograms(block, block_warnings)
+
+            # P4-4d: Disambiguate lifted nested function names by prefixing
+            # with the parent function name to avoid collisions when multiple
+            # parent functions have nested functions with the same name (e.g.
+            # three different BUILD_SQL nested functions in F_GET_TOTAL_SCORE,
+            # F_GET_AVG_SCORE, and F_GET_STUDENT_CURSOR).
+            lift_renames: Dict[str, str] = {}  # orig -> new
+            if lifted:
+                # Extract parent function name from the block header
+                parent_m = re.search(
+                    r"CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+(\w+)",
+                    block, re.IGNORECASE,
+                )
+                parent_name = parent_m.group(1).upper() if parent_m else "PARENT"
+                new_lifted: List[str] = []
+                for lift_sql in lifted:
+                    if not isinstance(lift_sql, str):
+                        new_lifted.append(lift_sql)
+                        continue
+                    # Extract the lifted function name from CREATE OR REPLACE FUNCTION <name>(
+                    lift_name_m = re.search(
+                        r"CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+(\w+)\s*\(",
+                        lift_sql, re.IGNORECASE,
+                    )
+                    if lift_name_m:
+                        orig_name = lift_name_m.group(1).upper()
+                        new_name = f"{parent_name}_{orig_name}"
+                        if orig_name != new_name:
+                            # Record rename for call sites (parent + sibling bodies)
+                            lift_renames[orig_name] = new_name
+                    new_lifted.append(lift_sql)
+                lifted = new_lifted
+                # Now apply all renames: function definitions + ALL call sites
+                # in parent block AND in every lifted function body.
+                # Sort by length descending to avoid partial matches (e.g.
+                # BUILD_SQL before BUILD_SQL_X)
+                sorted_renames = sorted(lift_renames.items(), key=lambda x: -len(x[0]))
+                for orig, new in sorted_renames:
+                    # Rewrite function definition (CREATE OR REPLACE FUNCTION orig(
+                    for i, lift_sql in enumerate(lifted):
+                        if not isinstance(lift_sql, str):
+                            continue
+                        if re.search(
+                            r"CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+" + re.escape(orig) + r"\s*\(",
+                            lift_sql, re.IGNORECASE,
+                        ):
+                            # Rename the definition itself
+                            lift_sql = re.sub(
+                                r"(CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+)"
+                                + re.escape(orig) + r"\s*\(",
+                                r"\g<1>" + new + r"(",
+                                lift_sql, count=1, flags=re.IGNORECASE,
+                            )
+                            # Rename DROP IF EXISTS
+                            lift_sql = re.sub(
+                                r"(DROP\s+(?:FUNCTION|PROCEDURE)\s+IF\s+EXISTS\s+)"
+                                + re.escape(orig) + r"\b",
+                                r"\g<1>" + new,
+                                lift_sql, count=1, flags=re.IGNORECASE,
+                            )
+                            lifted[i] = lift_sql
+                    # Rename call sites in the parent block
+                    block = re.sub(
+                        r"\b" + re.escape(orig) + r"\s*\(",
+                        new + r"(",
+                        block, flags=re.IGNORECASE,
+                    )
+                    # Rename call sites inside ALL lifted function bodies
+                    for i, lift_sql in enumerate(lifted):
+                        if not isinstance(lift_sql, str):
+                            continue
+                        # Skip the definition we already renamed
+                        if re.search(
+                            r"CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+" + re.escape(new) + r"\s*\(",
+                            lift_sql, re.IGNORECASE,
+                        ) and not re.search(
+                            r"\b" + re.escape(orig) + r"\s*\(",
+                            lift_sql, re.IGNORECASE,
+                        ):
+                            continue  # no more old-name calls left
+                        lift_sql = re.sub(
+                            r"\b" + re.escape(orig) + r"\s*\(",
+                            new + r"(",
+                            lift_sql, flags=re.IGNORECASE,
+                        )
+                        lifted[i] = lift_sql
+            else:
+                lifted = None
+
             out, w = _convert_single_function(
                 block, same_pkg_procedure_names, same_pkg_function_names,
                 shared_state, block_warnings,
@@ -3531,7 +3620,7 @@ def convert_function(sql: str, same_pkg_procedure_names: Optional[set] = None,
             )
             # If we lifted nested functions, prefix their converted forms.
             if lifted:
-                out = out + "\n" + "\n".join(lifted)
+                out = out + "\n" + "\n".join(x for x in lifted if isinstance(x, str))
             converted.append(out)
             warnings.extend(w)
         except Exception as e:

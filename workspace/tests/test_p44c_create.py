@@ -63,14 +63,13 @@ RETURNS NUMERIC LANGUAGE plpgsql AS $$ BEGIN RETURN 1; END$$;"""
 )
 class TestOraclePocOutput:
     def test_repeat_signatures_have_drop(self):
-        """同名同参函数（BUILD_SQL/ADD_COND/BUILD_QUERY）的每个 CREATE 前都有 DROP"""
+        """P4-4d 后：嵌套函数名已加父级前缀，不再有同名同参冲突"""
         text = (REPO_ROOT / "oracle_poc/output/FUNCTION/00_FUNCTION.sql").read_text(
             encoding="utf-8", errors="ignore"
         )
         new = apply_p44c_create(text)
-        # BUILD_SQL(NUMERIC, NUMERIC) 出现 3 次，应有 3 个 DROP
-        for _ in range(3):
-            assert "DROP FUNCTION IF EXISTS build_sql(numeric, numeric);" in new
-        # ADD_COND 出现 2 次
-        for _ in range(2):
-            assert "DROP FUNCTION IF EXISTS add_cond(varchar, numeric, numeric);" in new
+        # 确认每个 CREATE 前都有对应的 DROP（无同名冲突）
+        create_count = len(re.findall(r"^CREATE OR REPLACE (?:FUNCTION|PROCEDURE) ", new, re.MULTILINE))
+        drop_count = len(re.findall(r"^DROP (?:FUNCTION|PROCEDURE) IF EXISTS ", new, re.MULTILINE))
+        # 每个 CREATE 都应有对应的 DROP IF EXISTS
+        assert drop_count >= create_count, f"DROP count {drop_count} < CREATE count {create_count}"

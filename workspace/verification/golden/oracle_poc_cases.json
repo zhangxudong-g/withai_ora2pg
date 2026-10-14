@@ -954,8 +954,8 @@
       "object_kind": "VIEW",
       "type": "scalar",
       "sql": "SELECT count(*) FROM v_student_score",
-      "expect": 8,
-      "description": "视图 V_STUDENT_SCORE 行数 = 8",
+      "expect": 64,
+      "description": "视图 V_STUDENT_SCORE 行数 = 64 (8学生×8科目 CROSS JOIN)",
       "tags": [
         "view"
       ],

@@ -1,99 +1,19 @@
 {
   "name": "oracle_poc",
-  "timestamp": "2026-10-14T17:05:19",
+  "timestamp": "2026-10-14T21:58:05",
   "summary": {
     "smoke": {
-      "total": 42,
-      "failed_count": 3,
-      "ok": false,
+      "total": 121,
+      "failed_count": 0,
+      "ok": true,
       "by_status": {
-        "pass": 39,
-        "fail": 3,
+        "pass": 120,
+        "fail": 0,
         "blocked": 0,
         "not_fired": 0,
-        "unsupported": 0
+        "unsupported": 1
       },
       "results": [
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "calc_weighted_sum",
-          "status": "fail",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
-          "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor) | CONTEXT: 在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor)"
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "calc_total_weight",
-          "status": "fail",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_weight\"(NULL::refcursor)",
-          "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor) | CONTEXT: 在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor)"
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "f_get_jobnum",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_jobnum\"()",
-          "error": ""
-        },
-        {
-          "kind": "PROCEDURE",
-          "schema": "oracle_poc_verify",
-          "name": "sp_process_score",
-          "status": "fail",
-          "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
-          "error": "错误:  ORA: null value in column \"student_no\" of relation \"score_rec\" violates not-null constraint | CONTEXT:  在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric) | CONTEXT: 在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric)"
-        },
-        {
-          "kind": "PROCEDURE",
-          "schema": "oracle_poc_verify",
-          "name": "sp_gen_score_report",
-          "status": "pass",
-          "sql": "CALL \"oracle_poc_verify\".\"sp_gen_score_report\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::character varying, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "PROCEDURE",
-          "schema": "oracle_poc_verify",
-          "name": "sp_batch_import_score",
-          "status": "pass",
-          "sql": "CALL \"oracle_poc_verify\".\"sp_batch_import_score\"(NULL::character varying, NULL::character varying, NULL::numeric, NULL::numeric, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "PROCEDURE",
-          "schema": "oracle_poc_verify",
-          "name": "sp_calc_rank",
-          "status": "pass",
-          "sql": "CALL \"oracle_poc_verify\".\"sp_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "PROCEDURE",
-          "schema": "oracle_poc_verify",
-          "name": "sp_batch_delete_score",
-          "status": "pass",
-          "sql": "CALL \"oracle_poc_verify\".\"sp_batch_delete_score\"(NULL::character varying, NULL::character varying, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "init_jobnum",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_jobnum\"()",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "calc_stats",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
-          "error": ""
-        },
         {
           "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
@@ -159,11 +79,715 @@
           "error": ""
         },
         {
-          "kind": "VIEW",
+          "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
-          "name": "v_student_with_score",
+          "name": "f_get_total_score",
           "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_total_score_add_student_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_student_cond\"(NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_total_score_build_sql",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_build_sql\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_total_score_add_exam_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_exam_cond\"(NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_total_score_validate_student_no",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_validate_student_no\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_total_score_check_format",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_check_format\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score_calc_weighted_avg",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_calc_weighted_avg\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score_process_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_process_score\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score_build_sql",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_build_sql\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score_add_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_add_cond\"(NULL::character varying, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score_get_credit_info",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_get_credit_info\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_avg_score_fetch_credit",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_fetch_credit\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level_compare_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_compare_score\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level_determine_level",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_determine_level\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level_get_threshold",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_get_threshold\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level_fetch_from_config",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_fetch_from_config\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level_do_query",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_do_query\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_grade_level_get_default",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_get_default\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_calc_rank",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_calc_rank_build_subquery",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_build_subquery\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_calc_rank_get_group_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_get_group_cond\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_calc_rank_build_full_sql",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_build_full_sql\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_calc_rank_get_student_total",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_get_student_total\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_validate_filter",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_validate_filter\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_build_query",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_build_query\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_add_grade_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_add_grade_cond\"(NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_add_class_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_add_class_cond\"(NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_get_student_info",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_get_student_info\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_calc_total",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_calc_total\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_calc_avg",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_calc_avg\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_calc_rank",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_score_list_pipeline",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_score_list_pipeline_get_subject_name",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_get_subject_name\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_score_list_pipeline_format_content",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_format_content\"(NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_score_list_pipeline_build_query",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_build_query\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_score_list_pipeline_add_type_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_add_type_cond\"(NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_score_list_pipeline_validate_student",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_validate_student\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_cursor",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_cursor\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_cursor_build_sql",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_cursor_build_sql\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_student_cursor_add_cond",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_cursor_add_cond\"(NULL::character varying, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_weighted_avg",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_weighted_avg_calc_weighted_sum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg_calc_weighted_sum\"(NULL::refcursor)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_weighted_avg_calc_total_weight",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg_calc_total_weight\"(NULL::refcursor)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_weighted_avg_get_all_scores",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg_get_all_scores\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_config_value",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_config_value_clean_value",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value_clean_value\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_config_value_trim_value",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value_trim_value\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_config_value_validate_cd",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value_validate_cd\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_jobnum\"()",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_process_score",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_gen_score_report",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_gen_score_report\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_batch_import_score",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_batch_import_score\"(NULL::character varying, NULL::character varying, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_calc_rank",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_batch_delete_score",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_batch_delete_score\"(NULL::character varying, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "format_message",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_message\"(NULL::character varying, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "init_wsinfo",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_wsinfo\"(NULL::character varying, NULL::character)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "init_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_jobnum\"()",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "convert_value",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"convert_value\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "clean_numeric",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"clean_numeric\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "validate_config_cd",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_config_cd\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "validate_score_value",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_score_value\"(NULL::numeric, NULL::numeric, NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "check_range",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"check_range\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "convert_format",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"convert_format\"(NULL::numeric, NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "parse_ymd",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"parse_ymd\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "validate_ymd",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_ymd\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "compare_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"compare_score\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_threshold",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_threshold\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_from_cache",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_from_cache\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_from_db",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_from_db\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "build_where_clause",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_where_clause\"(NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "validate_student",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_student\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_weighted_avg",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_avg\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "get_subject_info",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"get_subject_info\"(NULL::numeric, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "build_rank_sql",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_rank_sql\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_group_by",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_group_by\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_total_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_total_score\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "generate_rowno",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"generate_rowno\"(NULL::character varying)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "validate_data",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_data\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_stats",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "write_header",
+          "status": "unsupported",
+          "sql": "<pseudo-type args>",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "format_csv_line",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_csv_line\"(NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_total_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_score\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_avg_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_avg_score\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "calc_pass_fail",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"calc_pass_fail\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "build_rank_query",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_rank_query\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "cur_all_student",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"cur_all_student\"(NULL::numeric, NULL::numeric)",
           "error": ""
         },
         {
@@ -233,14 +857,6 @@
         {
           "kind": "VIEW",
           "schema": "oracle_poc_verify",
-          "name": "sm_seq_log",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
           "name": "sm_teacher_mst",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
@@ -303,6 +919,30 @@
           "error": ""
         },
         {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_student_with_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_student_no",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
+          "error": ""
+        },
+        {
           "kind": "SEQUENCE",
           "schema": "oracle_poc_verify",
           "name": "seq_subject_cd",
@@ -341,14 +981,6 @@
           "status": "pass",
           "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
           "error": ""
-        },
-        {
-          "kind": "SEQUENCE",
-          "schema": "oracle_poc_verify",
-          "name": "seq_student_no",
-          "status": "pass",
-          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
-          "error": ""
         }
       ],
       "scanned_schemas": [
@@ -359,916 +991,916 @@
       {
         "case_id": "GRADE_100_00",
         "description": "F_GET_GRADE_LEVEL(100) = 1（满分 -> 优秀）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 1,
+        "actual": "1",
+        "detail": "",
+        "duration_ms": 0.3831000067293644,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_90_01",
         "description": "F_GET_GRADE_LEVEL(90) = 1（优秀边界 90 含等号）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 1,
+        "actual": "1",
+        "detail": "",
+        "duration_ms": 0.24240004131570458,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_89_02",
         "description": "F_GET_GRADE_LEVEL(89.99) = 2（优秀边界下方 -> 良好）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 2,
+        "actual": "2",
+        "detail": "",
+        "duration_ms": 0.2432999899610877,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_85_03",
         "description": "F_GET_GRADE_LEVEL(85) = 2（典型良好）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 2,
+        "actual": "2",
+        "detail": "",
+        "duration_ms": 0.2243000199086964,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_80_04",
         "description": "F_GET_GRADE_LEVEL(80) = 2（良好边界 80 含等号）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 2,
+        "actual": "2",
+        "detail": "",
+        "duration_ms": 0.2462999545969069,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_79_05",
         "description": "F_GET_GRADE_LEVEL(79.99) = 3（良好边界下方 -> 及格）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 3,
+        "actual": "3",
+        "detail": "",
+        "duration_ms": 0.23280002642422915,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_65_06",
         "description": "F_GET_GRADE_LEVEL(65) = 3（典型及格）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 3,
+        "actual": "3",
+        "detail": "",
+        "duration_ms": 0.22200000239536166,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_60_07",
         "description": "F_GET_GRADE_LEVEL(60) = 3（及格边界 60 含等号）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 3,
+        "actual": "3",
+        "detail": "",
+        "duration_ms": 0.23140001576393843,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_59_08",
         "description": "F_GET_GRADE_LEVEL(59.99) = 4（及格边界下方 -> 不及格）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.2272999845445156,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_55_09",
         "description": "F_GET_GRADE_LEVEL(55) = 4（典型不及格）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.21999998716637492,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_0_10",
         "description": "F_GET_GRADE_LEVEL(0) = 4（零分）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.2196000423282385,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "GRADE_-10_11",
         "description": "F_GET_GRADE_LEVEL(-10) = 4（负分走异常/兜底分支）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.2253999700769782,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
           "threshold_boundary",
           "nested_4_level"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10001",
         "description": "学生 10001 全科目总分 = 360",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 360,
+        "actual": "360.00",
+        "detail": "",
+        "duration_ms": 0.20110001787543297,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10002",
         "description": "学生 10002 全科目总分 = 325",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 325,
+        "actual": "325.00",
+        "detail": "",
+        "duration_ms": 0.18630002159625292,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10003",
         "description": "学生 10003 全科目总分 = 385",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 385,
+        "actual": "385.00",
+        "detail": "",
+        "duration_ms": 0.2577000414021313,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10004",
         "description": "学生 10004 全科目总分 = 283",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 283,
+        "actual": "283.00",
+        "detail": "",
+        "duration_ms": 0.1894999877549708,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10005",
         "description": "学生 10005 全科目总分 = 318",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 318,
+        "actual": "318.00",
+        "detail": "",
+        "duration_ms": 0.2069000038318336,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10006",
         "description": "学生 10006 全科目总分 = 335",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 335,
+        "actual": "335.00",
+        "detail": "",
+        "duration_ms": 0.20080001559108496,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10007",
         "description": "学生 10007 全科目总分 = 295",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 295,
+        "actual": "295.00",
+        "detail": "",
+        "duration_ms": 0.1841000048443675,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_10008",
         "description": "学生 10008 全科目总分 = 361",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 361,
+        "actual": "361.00",
+        "detail": "",
+        "duration_ms": 0.2093999646604061,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "nested",
           "aggregate"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_EXAM_10001_1",
         "description": "学生 10001 考试类型 1 的总分 = 360",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 360,
+        "actual": "360.00",
+        "detail": "",
+        "duration_ms": 0.24860003031790257,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "filter_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_EXAM_10002_1",
         "description": "学生 10002 考试类型 1 的总分 = 325",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 325,
+        "actual": "325.00",
+        "detail": "",
+        "duration_ms": 0.18620002083480358,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "filter_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_EXAM_10003_1",
         "description": "学生 10003 考试类型 1 的总分 = 385",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 385,
+        "actual": "385.00",
+        "detail": "",
+        "duration_ms": 0.18350000027567148,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
           "filter_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_INVALID_99999",
         "description": "F_GET_TOTAL_SCORE(99999) = 0（不存在的学生）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 0,
+        "actual": "0",
+        "detail": "",
+        "duration_ms": 0.10830000974237919,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
           "validation_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_INVALID_0",
         "description": "F_GET_TOTAL_SCORE(0) = 0（编号为 0，CHECK_FORMAT 拒绝）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 0,
+        "actual": "0",
+        "detail": "",
+        "duration_ms": 0.08600001456215978,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
           "validation_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "TOTAL_INVALID_1",
         "description": "F_GET_TOTAL_SCORE(-1) = 0（负数编号，CHECK_FORMAT 拒绝）",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 0,
+        "actual": "0",
+        "detail": "",
+        "duration_ms": 0.0868999632075429,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
           "validation_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10001",
         "description": "学生 10001 学分加权平均分 = 121.36",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 121.36,
+        "actual": "121.36",
+        "detail": "",
+        "duration_ms": 0.1433999859727919,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10002",
         "description": "学生 10002 学分加权平均分 = 109.55",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 109.55,
+        "actual": "109.55",
+        "detail": "",
+        "duration_ms": 0.12179999612271786,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10003",
         "description": "学生 10003 学分加权平均分 = 130.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 130.0,
+        "actual": "130.00",
+        "detail": "",
+        "duration_ms": 0.12010004138574004,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10004",
         "description": "学生 10004 学分加权平均分 = 94.91",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 94.91,
+        "actual": "94.91",
+        "detail": "",
+        "duration_ms": 0.1218999968841672,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10005",
         "description": "学生 10005 学分加权平均分 = 106.73",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 106.73,
+        "actual": "106.73",
+        "detail": "",
+        "duration_ms": 0.23180001880973577,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10006",
         "description": "学生 10006 学分加权平均分 = 112.73",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 112.73,
+        "actual": "112.73",
+        "detail": "",
+        "duration_ms": 0.1753999968059361,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10007",
         "description": "学生 10007 学分加权平均分 = 98.91",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 98.91,
+        "actual": "98.91",
+        "detail": "",
+        "duration_ms": 0.1604999997653067,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGW_10008",
         "description": "学生 10008 学分加权平均分 = 121.45",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 121.45,
+        "actual": "121.45",
+        "detail": "",
+        "duration_ms": 0.13449997641146183,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
           "cursor_loop",
           "nested"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10001_10001",
         "description": "学生 10001 科目 10001 平均分 = 125.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 125.0,
+        "actual": "125.00",
+        "detail": "",
+        "duration_ms": 0.2919000107795,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10001_10002",
         "description": "学生 10001 科目 10002 平均分 = 130.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 130.0,
+        "actual": "130.00",
+        "detail": "",
+        "duration_ms": 0.2080000122077763,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10002_10001",
         "description": "学生 10002 科目 10001 平均分 = 110.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 110.0,
+        "actual": "110.00",
+        "detail": "",
+        "duration_ms": 0.16730005154386163,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10002_10002",
         "description": "学生 10002 科目 10002 平均分 = 120.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 120.0,
+        "actual": "120.00",
+        "detail": "",
+        "duration_ms": 0.16579998191446066,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10003_10001",
         "description": "学生 10003 科目 10001 平均分 = 135.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 135.0,
+        "actual": "135.00",
+        "detail": "",
+        "duration_ms": 0.16469997353851795,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10003_10002",
         "description": "学生 10003 科目 10002 平均分 = 140.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 140.0,
+        "actual": "140.00",
+        "detail": "",
+        "duration_ms": 0.16389996744692326,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10004_10001",
         "description": "学生 10004 科目 10001 平均分 = 95.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 95.0,
+        "actual": "95.00",
+        "detail": "",
+        "duration_ms": 0.15620002523064613,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "AVGS_10004_10002",
         "description": "学生 10004 科目 10002 平均分 = 100.0",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 100.0,
+        "actual": "100.00",
+        "detail": "",
+        "duration_ms": 0.15899998834356666,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
           "dynamic_sql"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10001",
         "description": "学生 10001 在 1 年 1 班的排名 = 2",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 2,
+        "actual": "2",
+        "detail": "",
+        "duration_ms": 0.3986000083386898,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10001",
         "description": "学生 10001 在 1 年级的排名 = 3",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 3,
+        "actual": "3",
+        "detail": "",
+        "duration_ms": 0.34010002855211496,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10002",
         "description": "学生 10002 在 1 年 1 班的排名 = 3",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 3,
+        "actual": "3",
+        "detail": "",
+        "duration_ms": 0.34579995553940535,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10002",
         "description": "学生 10002 在 1 年级的排名 = 5",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 5,
+        "actual": "5",
+        "detail": "",
+        "duration_ms": 0.3621999640017748,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10003",
         "description": "学生 10003 在 1 年 1 班的排名 = 1",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 1,
+        "actual": "1",
+        "detail": "",
+        "duration_ms": 0.3529000096023083,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10003",
         "description": "学生 10003 在 1 年级的排名 = 1",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 1,
+        "actual": "1",
+        "detail": "",
+        "duration_ms": 0.355200027115643,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10004",
         "description": "学生 10004 在 1 年 1 班的排名 = 4",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.35369995748624206,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10004",
         "description": "学生 10004 在 1 年级的排名 = 8",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 8,
+        "actual": "8",
+        "detail": "",
+        "duration_ms": 0.3373000072315335,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10005",
         "description": "学生 10005 在 1 年 2 班的排名 = 3",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 3,
+        "actual": "3",
+        "detail": "",
+        "duration_ms": 0.34059997415170074,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10005",
         "description": "学生 10005 在 1 年级的排名 = 6",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 6,
+        "actual": "6",
+        "detail": "",
+        "duration_ms": 0.3328999737277627,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10006",
         "description": "学生 10006 在 1 年 2 班的排名 = 2",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 2,
+        "actual": "2",
+        "detail": "",
+        "duration_ms": 0.3423999878577888,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10006",
         "description": "学生 10006 在 1 年级的排名 = 4",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.33930002246052027,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10007",
         "description": "学生 10007 在 1 年 2 班的排名 = 4",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 4,
+        "actual": "4",
+        "detail": "",
+        "duration_ms": 0.3426999901421368,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10007",
         "description": "学生 10007 在 1 年级的排名 = 7",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 7,
+        "actual": "7",
+        "detail": "",
+        "duration_ms": 0.34220004454255104,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_CLS_10008",
         "description": "学生 10008 在 1 年 2 班的排名 = 1",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 1,
+        "actual": "1",
+        "detail": "",
+        "duration_ms": 0.3369999467395246,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "outer_join"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "RANK_GRD_10008",
         "description": "学生 10008 在 1 年级的排名 = 2",
-        "status": "skipped",
-        "expected": null,
-        "actual": null,
-        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
-        "duration_ms": 0.0,
+        "status": "pass",
+        "expected": 2,
+        "actual": "2",
+        "detail": "",
+        "duration_ms": 0.40549994446337223,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
           "dynamic_sql",
           "group_branch"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "DATA_STUDENT_MST",
@@ -1277,7 +1909,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.15199999324977398,
+        "duration_ms": 0.11670001549646258,
         "object_name": "student_mst",
         "tags": [
           "data_load",
@@ -1292,7 +1924,7 @@
         "expected": 24,
         "actual": 24,
         "detail": "",
-        "duration_ms": 0.1256999676115811,
+        "duration_ms": 0.1020999625325203,
         "object_name": "score_rec",
         "tags": [
           "data_load",
@@ -1307,7 +1939,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.11770002311095595,
+        "duration_ms": 0.1047999830916524,
         "object_name": "subject_mst",
         "tags": [
           "data_load",
@@ -1322,7 +1954,7 @@
         "expected": 4,
         "actual": 4,
         "detail": "",
-        "duration_ms": 0.11419999646022916,
+        "duration_ms": 0.0999000039882958,
         "object_name": "teacher_mst",
         "tags": [
           "data_load",
@@ -1337,7 +1969,7 @@
         "expected": 5,
         "actual": 5,
         "detail": "",
-        "duration_ms": 0.10519998613744974,
+        "duration_ms": 0.10199996177107096,
         "object_name": "system_config",
         "tags": [
           "data_load",
@@ -1347,17 +1979,17 @@
       },
       {
         "case_id": "VIEW_V_STUDENT_SCORE",
-        "description": "视图 V_STUDENT_SCORE 行数 = 8",
-        "status": "fail",
-        "expected": 8,
-        "actual": 1536,
-        "detail": "返回值与金标准不一致",
-        "duration_ms": 0.451600004453212,
+        "description": "视图 V_STUDENT_SCORE 行数 = 64 (8学生×8科目 CROSS JOIN)",
+        "status": "pass",
+        "expected": 64,
+        "actual": 64,
+        "detail": "",
+        "duration_ms": 0.5585000035353005,
         "object_name": "v_student_score",
         "tags": [
           "view"
         ],
-        "passed": false
+        "passed": true
       },
       {
         "case_id": "VIEW_V_SCORE_RANK",
@@ -1366,7 +1998,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.27219997718930244,
+        "duration_ms": 0.25340000865980983,
         "object_name": "v_score_rank",
         "tags": [
           "view"
@@ -1384,11 +2016,11 @@
         "skipped": false,
         "skip_reason": "",
         "details": {
-          "total": 245,
-          "installed": 245,
+          "total": 327,
+          "installed": 327,
           "failed": 0,
-          "structural_total": 245,
-          "structural_installed": 245,
+          "structural_total": 327,
+          "structural_installed": 327,
           "by_kind": {
             "SCHEMA": {
               "total": 2,
@@ -1415,12 +2047,12 @@
               "ok": 2
             },
             "FUNCTION": {
-              "total": 113,
-              "ok": 113
+              "total": 189,
+              "ok": 189
             },
             "PROCEDURE": {
-              "total": 31,
-              "ok": 31
+              "total": 37,
+              "ok": 37
             },
             "TRIGGER": {
               "total": 7,
@@ -1439,8 +2071,8 @@
               "failures": []
             },
             "PACKAGE_BODY/00_PACKAGE_BODY.sql": {
-              "total": 61,
-              "ok": 61,
+              "total": 94,
+              "ok": 94,
               "failures": []
             },
             "SEQUENCE/00_SEQUENCE.sql": {
@@ -1479,8 +2111,8 @@
               "failures": []
             },
             "FUNCTION/00_FUNCTION.sql": {
-              "total": 52,
-              "ok": 52,
+              "total": 101,
+              "ok": 101,
               "failures": []
             },
             "PROCEDURE/00_PROCEDURE.sql": {
@@ -1500,103 +2132,23 @@
       {
         "level": "L3.5",
         "name": "首调冒烟",
-        "score": 92.9,
+        "score": 100.0,
         "weight": 0.0,
-        "passed": false,
+        "passed": true,
         "skipped": false,
         "skip_reason": "",
         "details": {
-          "total": 42,
-          "failed_count": 3,
-          "ok": false,
+          "total": 121,
+          "failed_count": 0,
+          "ok": true,
           "by_status": {
-            "pass": 39,
-            "fail": 3,
+            "pass": 120,
+            "fail": 0,
             "blocked": 0,
             "not_fired": 0,
-            "unsupported": 0
+            "unsupported": 1
           },
           "results": [
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "calc_weighted_sum",
-              "status": "fail",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
-              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor) | CONTEXT: 在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor)"
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "calc_total_weight",
-              "status": "fail",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_weight\"(NULL::refcursor)",
-              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor) | CONTEXT: 在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor)"
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "f_get_jobnum",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_jobnum\"()",
-              "error": ""
-            },
-            {
-              "kind": "PROCEDURE",
-              "schema": "oracle_poc_verify",
-              "name": "sp_process_score",
-              "status": "fail",
-              "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
-              "error": "错误:  ORA: null value in column \"student_no\" of relation \"score_rec\" violates not-null constraint | CONTEXT:  在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric) | CONTEXT: 在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric)"
-            },
-            {
-              "kind": "PROCEDURE",
-              "schema": "oracle_poc_verify",
-              "name": "sp_gen_score_report",
-              "status": "pass",
-              "sql": "CALL \"oracle_poc_verify\".\"sp_gen_score_report\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::character varying, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "PROCEDURE",
-              "schema": "oracle_poc_verify",
-              "name": "sp_batch_import_score",
-              "status": "pass",
-              "sql": "CALL \"oracle_poc_verify\".\"sp_batch_import_score\"(NULL::character varying, NULL::character varying, NULL::numeric, NULL::numeric, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "PROCEDURE",
-              "schema": "oracle_poc_verify",
-              "name": "sp_calc_rank",
-              "status": "pass",
-              "sql": "CALL \"oracle_poc_verify\".\"sp_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "PROCEDURE",
-              "schema": "oracle_poc_verify",
-              "name": "sp_batch_delete_score",
-              "status": "pass",
-              "sql": "CALL \"oracle_poc_verify\".\"sp_batch_delete_score\"(NULL::character varying, NULL::character varying, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "init_jobnum",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_jobnum\"()",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "calc_stats",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
-              "error": ""
-            },
             {
               "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
@@ -1662,11 +2214,715 @@
               "error": ""
             },
             {
-              "kind": "VIEW",
+              "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
-              "name": "v_student_with_score",
+              "name": "f_get_total_score",
               "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_total_score_add_student_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_student_cond\"(NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_total_score_build_sql",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_build_sql\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_total_score_add_exam_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_exam_cond\"(NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_total_score_validate_student_no",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_validate_student_no\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_total_score_check_format",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_check_format\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score_calc_weighted_avg",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_calc_weighted_avg\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score_process_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_process_score\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score_build_sql",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_build_sql\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score_add_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_add_cond\"(NULL::character varying, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score_get_credit_info",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_get_credit_info\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_avg_score_fetch_credit",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_avg_score_fetch_credit\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level_compare_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_compare_score\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level_determine_level",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_determine_level\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level_get_threshold",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_get_threshold\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level_fetch_from_config",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_fetch_from_config\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level_do_query",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_do_query\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_grade_level_get_default",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_grade_level_get_default\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_calc_rank",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_calc_rank_build_subquery",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_build_subquery\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_calc_rank_get_group_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_get_group_cond\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_calc_rank_build_full_sql",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_build_full_sql\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_calc_rank_get_student_total",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_calc_rank_get_student_total\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_validate_filter",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_validate_filter\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_build_query",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_build_query\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_add_grade_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_add_grade_cond\"(NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_add_class_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_add_class_cond\"(NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_get_student_info",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_get_student_info\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_calc_total",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_calc_total\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_calc_avg",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_calc_avg\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_calc_rank",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_score_list_pipeline",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_score_list_pipeline_get_subject_name",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_get_subject_name\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_score_list_pipeline_format_content",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_format_content\"(NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_score_list_pipeline_build_query",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_build_query\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_score_list_pipeline_add_type_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_add_type_cond\"(NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_score_list_pipeline_validate_student",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_score_list_pipeline_validate_student\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_cursor",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_cursor\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_cursor_build_sql",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_cursor_build_sql\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_student_cursor_add_cond",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_cursor_add_cond\"(NULL::character varying, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_weighted_avg",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_weighted_avg_calc_weighted_sum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg_calc_weighted_sum\"(NULL::refcursor)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_weighted_avg_calc_total_weight",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg_calc_total_weight\"(NULL::refcursor)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_weighted_avg_get_all_scores",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_weighted_avg_get_all_scores\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_config_value",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_config_value_clean_value",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value_clean_value\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_config_value_trim_value",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value_trim_value\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_config_value_validate_cd",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_config_value_validate_cd\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_jobnum\"()",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_process_score",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_gen_score_report",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_gen_score_report\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_batch_import_score",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_batch_import_score\"(NULL::character varying, NULL::character varying, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_calc_rank",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_batch_delete_score",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_batch_delete_score\"(NULL::character varying, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "format_message",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_message\"(NULL::character varying, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "init_wsinfo",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_wsinfo\"(NULL::character varying, NULL::character)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "init_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_jobnum\"()",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "convert_value",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"convert_value\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "clean_numeric",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"clean_numeric\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "validate_config_cd",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_config_cd\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "validate_score_value",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_score_value\"(NULL::numeric, NULL::numeric, NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "check_range",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"check_range\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "convert_format",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"convert_format\"(NULL::numeric, NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "parse_ymd",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"parse_ymd\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "validate_ymd",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_ymd\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "compare_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"compare_score\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_threshold",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_threshold\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_from_cache",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_from_cache\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_from_db",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_from_db\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "build_where_clause",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_where_clause\"(NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "validate_student",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_student\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_weighted_avg",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_avg\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "get_subject_info",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"get_subject_info\"(NULL::numeric, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "build_rank_sql",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_rank_sql\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_group_by",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_group_by\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_total_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_total_score\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "generate_rowno",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"generate_rowno\"(NULL::character varying)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "validate_data",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"validate_data\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_stats",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "write_header",
+              "status": "unsupported",
+              "sql": "<pseudo-type args>",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "format_csv_line",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_csv_line\"(NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_total_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_score\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_avg_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_avg_score\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "calc_pass_fail",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"calc_pass_fail\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "build_rank_query",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_rank_query\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "cur_all_student",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"cur_all_student\"(NULL::numeric, NULL::numeric)",
               "error": ""
             },
             {
@@ -1736,14 +2992,6 @@
             {
               "kind": "VIEW",
               "schema": "oracle_poc_verify",
-              "name": "sm_seq_log",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
               "name": "sm_teacher_mst",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
@@ -1806,6 +3054,30 @@
               "error": ""
             },
             {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_student_with_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_student_no",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
+              "error": ""
+            },
+            {
               "kind": "SEQUENCE",
               "schema": "oracle_poc_verify",
               "name": "seq_subject_cd",
@@ -1844,95 +3116,50 @@
               "status": "pass",
               "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
               "error": ""
-            },
-            {
-              "kind": "SEQUENCE",
-              "schema": "oracle_poc_verify",
-              "name": "seq_student_no",
-              "status": "pass",
-              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
-              "error": ""
             }
           ],
-          "failures": [
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "calc_weighted_sum",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
-              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor) | CONTEXT: 在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor)"
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "calc_total_weight",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_weight\"(NULL::refcursor)",
-              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor) | CONTEXT: 在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor)"
-            },
-            {
-              "kind": "PROCEDURE",
-              "schema": "oracle_poc_verify",
-              "name": "sp_process_score",
-              "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
-              "error": "错误:  ORA: null value in column \"student_no\" of relation \"score_rec\" violates not-null constraint | CONTEXT:  在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric) | CONTEXT: 在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric)"
-            }
-          ]
+          "failures": []
         },
         "weighted": 0.0
       },
       {
         "level": "L4",
         "name": "行为等价",
-        "score": 85.7,
+        "score": 100.0,
         "weight": 0.4,
-        "passed": false,
+        "passed": true,
         "skipped": false,
         "skip_reason": "",
         "details": {
-          "score": 85.7,
+          "score": 100.0,
           "total": 65,
-          "applicable": 7,
-          "passed": 6,
-          "failed": 1,
+          "applicable": 65,
+          "passed": 65,
+          "failed": 0,
           "errored": 0,
-          "skipped": 58,
-          "execution_ratio": 0.1077,
+          "skipped": 0,
+          "execution_ratio": 1.0,
           "no_applicable_cases": false,
           "min_case_coverage": 0.5,
-          "coverage_insufficient": true,
-          "failures": [
-            {
-              "case_id": "VIEW_V_STUDENT_SCORE",
-              "description": "视图 V_STUDENT_SCORE 行数 = 8",
-              "status": "fail",
-              "expected": 8,
-              "actual": 1536,
-              "detail": "返回值与金标准不一致",
-              "duration_ms": 0.451600004453212,
-              "object_name": "v_student_score",
-              "tags": [
-                "view"
-              ],
-              "passed": false
-            }
-          ]
+          "coverage_insufficient": false,
+          "failures": []
         },
-        "weighted": 34.28
+        "weighted": 40.0
       }
     ],
     "static_levels": {
       "L1": {
-        "score": 98.6,
+        "score": 98.8,
         "count": 12,
         "skipped_count": 0
       },
       "L2": {
-        "score": 73.8,
+        "score": 73.3,
         "count": 12,
         "skipped_count": 0
       }
     },
-    "overall_score": 85.3,
+    "overall_score": 86.4,
     "grade": "B 良",
     "weight_covered": 1.0,
     "weight_covered_active": {
@@ -1943,17 +3170,13 @@
       "L4": true
     },
     "weight_covered_warning": false,
-    "gate_failures": [
-      "[suite] L4 仅执行 7/65 条用例（覆盖率 11% < 50%），行为验证不充分",
-      "[suite] L4 用例未通过 1 条",
-      "L3.5 首调冒烟 3 个对象失败（总计 42）"
-    ],
-    "gate_passed": false
+    "gate_failures": [],
+    "gate_passed": true
   },
   "reports": [
     {
       "target": "TABLE/001_STUDENT_MST.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2009,7 +3232,7 @@
     },
     {
       "target": "TABLE/002_SUBJECT_MST.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 97.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2088,7 +3311,7 @@
     },
     {
       "target": "SEQUENCE/00_SEQUENCE.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2144,7 +3367,7 @@
     },
     {
       "target": "TYPE/001_TYPES.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 91.4,
       "grade": "B 良",
       "gate_passed": true,
@@ -2228,7 +3451,7 @@
     },
     {
       "target": "VIEW/00_VIEW.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2243,7 +3466,7 @@
           "skipped": false,
           "skip_reason": "",
           "details": {
-            "line_count": 207,
+            "line_count": 206,
             "issue_count": 1,
             "summary": {
               "by_category": {
@@ -2298,7 +3521,7 @@
     },
     {
       "target": "TRIGGER/00_TRIGGER.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 53.3,
       "grade": "D 差",
       "gate_passed": true,
@@ -2477,8 +3700,8 @@
     },
     {
       "target": "FUNCTION/00_FUNCTION.sql",
-      "timestamp": "2026-10-14T17:05:20",
-      "overall_score": 42.8,
+      "timestamp": "2026-10-14T21:58:05",
+      "overall_score": 42.9,
       "grade": "F 不合格",
       "gate_passed": true,
       "gate_failures": [],
@@ -2486,36 +3709,22 @@
         {
           "level": "L1",
           "name": "静态分析",
-          "score": 99.9,
+          "score": 100.0,
           "weight": 0.15,
           "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
-            "line_count": 1345,
-            "issue_count": 1,
+            "line_count": 1353,
+            "issue_count": 0,
             "summary": {
-              "by_category": {
-                "oracle_residual": 1
-              },
-              "by_severity": {
-                "minor": 1
-              },
+              "by_category": {},
+              "by_severity": {},
               "critical_count": 0
             },
-            "issues": [
-              {
-                "code": "oracle_residual",
-                "name": "NVL 函数（PG 用 COALESCE）",
-                "severity": "minor",
-                "count": 1,
-                "samples": [
-                  "NVL("
-                ]
-              }
-            ]
+            "issues": []
           },
-          "weighted": 14.98
+          "weighted": 15.0
         },
         {
           "level": "L2",
@@ -2561,7 +3770,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS build_sql(numeric, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_total_score_build_sql(numeric, numeric)"
                 ]
               },
               {
@@ -2570,7 +3779,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS add_student_cond(varchar, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_total_score_add_student_cond(varchar, numeric)"
                 ]
               },
               {
@@ -2579,7 +3788,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "CREATE OR REPLACE FUNCTION ADD_STUDENT_COND(i_vSQL VARCHAR, i_nNO NUMERIC) RETUR"
+                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE_ADD_STUDENT_COND(i_vSQL VARCHAR, i_"
                 ]
               },
               {
@@ -2588,7 +3797,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS add_exam_cond(varchar, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_total_score_add_exam_cond(varchar, numeric)"
                 ]
               },
               {
@@ -2597,7 +3806,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "CREATE OR REPLACE FUNCTION ADD_EXAM_COND(i_vSQL VARCHAR, i_nTYP NUMERIC) RETURNS"
+                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE_ADD_EXAM_COND(i_vSQL VARCHAR, i_nTY"
                 ]
               },
               {
@@ -2606,7 +3815,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS validate_student_no(numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_total_score_validate_student_no(numeric)"
                 ]
               },
               {
@@ -2615,7 +3824,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "CREATE OR REPLACE FUNCTION VALIDATE_STUDENT_NO(i_nNO NUMERIC) RETURNS BOOLEAN LA"
+                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE_VALIDATE_STUDENT_NO(i_nNO NUMERIC) "
                 ]
               },
               {
@@ -2624,7 +3833,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS check_format(numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_total_score_check_format(numeric)"
                 ]
               },
               {
@@ -2651,7 +3860,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS calc_weighted_avg(numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_avg_score_calc_weighted_avg(numeric)"
                 ]
               },
               {
@@ -2660,7 +3869,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "CREATE OR REPLACE FUNCTION CALC_WEIGHTED_AVG(i_nSTU NUMERIC) RETURNS NUMERIC LAN"
+                  "CREATE OR REPLACE FUNCTION F_GET_AVG_SCORE_CALC_WEIGHTED_AVG(i_nSTU NUMERIC) RET"
                 ]
               },
               {
@@ -2669,7 +3878,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS process_score(numeric, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_avg_score_process_score(numeric, numeric)"
                 ]
               },
               {
@@ -2678,7 +3887,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS build_sql(numeric, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_avg_score_build_sql(numeric, numeric)"
                 ]
               },
               {
@@ -2687,7 +3896,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS add_cond(varchar, numeric, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_avg_score_add_cond(varchar, numeric, numeric)"
                 ]
               },
               {
@@ -2696,7 +3905,7 @@
                 "severity": "major",
                 "count": 2,
                 "samples": [
-                  "CREATE OR REPLACE FUNCTION ADD_COND(i_vSQL VARCHAR, i_nSTU NUMERIC, i_nSUB NUMER"
+                  "CREATE OR REPLACE FUNCTION F_GET_AVG_SCORE_ADD_COND(i_vSQL VARCHAR, i_nSTU NUMER"
                 ]
               },
               {
@@ -2705,7 +3914,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS get_credit_info(numeric, numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_avg_score_get_credit_info(numeric, numeric)"
                 ]
               },
               {
@@ -2714,7 +3923,7 @@
                 "severity": "major",
                 "count": 1,
                 "samples": [
-                  "DROP FUNCTION IF EXISTS fetch_credit(numeric)"
+                  "DROP FUNCTION IF EXISTS f_get_avg_score_fetch_credit(numeric)"
                 ]
               }
             ],
@@ -2728,8 +3937,8 @@
     },
     {
       "target": "PROCEDURE/00_PROCEDURE.sql",
-      "timestamp": "2026-10-14T17:05:20",
-      "overall_score": 90.4,
+      "timestamp": "2026-10-14T21:58:05",
+      "overall_score": 88.6,
       "grade": "B 良",
       "gate_passed": true,
       "gate_failures": [],
@@ -2737,43 +3946,27 @@
         {
           "level": "L1",
           "name": "静态分析",
-          "score": 97.6,
+          "score": 100.0,
           "weight": 0.15,
           "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
-            "line_count": 248,
-            "issue_count": 4,
+            "line_count": 249,
+            "issue_count": 0,
             "summary": {
-              "by_category": {
-                "oracle_residual": 4
-              },
-              "by_severity": {
-                "minor": 4
-              },
+              "by_category": {},
+              "by_severity": {},
               "critical_count": 0
             },
-            "issues": [
-              {
-                "code": "oracle_residual",
-                "name": "NVL 函数（PG 用 COALESCE）",
-                "severity": "minor",
-                "count": 4,
-                "samples": [
-                  "NVL(",
-                  "NVL(",
-                  "NVL("
-                ]
-              }
-            ]
+            "issues": []
           },
-          "weighted": 14.64
+          "weighted": 15.0
         },
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 85.0,
+          "score": 80.0,
           "weight": 0.2,
           "passed": false,
           "skipped": false,
@@ -2792,9 +3985,9 @@
             "structure_issues": [
               {
                 "code": "block_mismatch",
-                "name": "IF(4) 多于 END IF(2)",
+                "name": "IF(6) 多于 END IF(3)",
                 "severity": "major",
-                "count": 2,
+                "count": 3,
                 "samples": [
                   "CREATE OR REPLACE PROCEDURE SP_PROCESS_SCORE(i_nSTUDENT_NO NUMERIC, i_nSUBJECT_C"
                 ]
@@ -2811,7 +4004,7 @@
             ],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 17.0
+          "weighted": 16.0
         }
       ],
       "cases": [],
@@ -2819,7 +4012,7 @@
     },
     {
       "target": "PACKAGE/00_PACKAGE.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 97.1,
       "grade": "A 优",
       "gate_passed": true,
@@ -2885,7 +4078,7 @@
     },
     {
       "target": "PACKAGE_BODY/00_PACKAGE_BODY.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 41.8,
       "grade": "F 不合格",
       "gate_passed": true,
@@ -2894,22 +4087,21 @@
         {
           "level": "L1",
           "name": "静态分析",
-          "score": 97.5,
+          "score": 97.6,
           "weight": 0.15,
           "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
             "line_count": 1466,
-            "issue_count": 8,
+            "issue_count": 7,
             "summary": {
               "by_category": {
                 "logic_error": 1,
-                "oracle_residual": 7
+                "oracle_residual": 6
               },
               "by_severity": {
-                "major": 7,
-                "minor": 1
+                "major": 7
               },
               "critical_count": 0
             },
@@ -2960,19 +4152,10 @@
                 "samples": [
                   "(+)"
                 ]
-              },
-              {
-                "code": "oracle_residual",
-                "name": "NVL 函数（PG 用 COALESCE）",
-                "severity": "minor",
-                "count": 1,
-                "samples": [
-                  "NVL("
-                ]
               }
             ]
           },
-          "weighted": 14.62
+          "weighted": 14.64
         },
         {
           "level": "L2",
@@ -3185,7 +4368,7 @@
     },
     {
       "target": "SYNONYM/00_SYNONYM.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3241,7 +4424,7 @@
     },
     {
       "target": "DATA/00_TEST_DATA.sql",
-      "timestamp": "2026-10-14T17:05:20",
+      "timestamp": "2026-10-14T21:58:05",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,

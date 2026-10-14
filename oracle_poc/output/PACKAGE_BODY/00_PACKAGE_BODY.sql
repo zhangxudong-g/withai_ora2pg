@@ -370,7 +370,7 @@ DECLARE
 
             v_Y NUMERIC; v_M NUMERIC; v_D NUMERIC;
 BEGIN
-            IF PARSE_YMD(i_nYMD, v_Y, v_M, v_D) THEN
+            CALL PARSE_YMD(i_nYMD, v_Y, v_M, v_D); IF v_Y IS NOT NULL THEN
                 RETURN TO_CHAR(TO_TIMESTAMP(i_nYMD, 'YYYYMMDD')::date, 'i_sFMT');
             END IF;
             RETURN ' ';
@@ -517,9 +517,9 @@ DECLARE
     _p25_sqlstate TEXT;
 
 BEGIN
-                IF i_sKEY = 'EXCELLENT' THEN RETURN current_setting('PKG_SCORE_MANAGE.g_nEXCELLENT_SCORE');
-                ELSIF i_sKEY = 'GOOD' THEN RETURN current_setting('PKG_SCORE_MANAGE.g_nGOOD_SCORE');
-                ELSIF i_sKEY = 'PASS' THEN RETURN current_setting('PKG_SCORE_MANAGE.g_nMEDIUM_SCORE');
+                IF i_sKEY = 'EXCELLENT' THEN RETURN COALESCE(current_setting('PKG_SCORE_MANAGE.g_nEXCELLENT_SCORE', true)::numeric, 90);
+                ELSIF i_sKEY = 'GOOD' THEN RETURN COALESCE(current_setting('PKG_SCORE_MANAGE.g_nGOOD_SCORE', true)::numeric, 80);
+                ELSIF i_sKEY = 'PASS' THEN RETURN COALESCE(current_setting('PKG_SCORE_MANAGE.g_nMEDIUM_SCORE', true)::numeric, 70);
                 ELSE RETURN 60;
                 END IF;
             EXCEPTION
@@ -775,11 +775,11 @@ BEGIN
                 v_SQL := 'SELECT COUNT(*) + 1 FROM ( ' ||
                          'SELECT S.STUDENT_NO, SUM(COALESCE(SC.SCORE, 0)) AS TOTAL ' ||
                          'FROM STUDENT_MST S, SCORE_REC SC ' ||
-                         'WHERE S.STUDENT_NO = SC.STUDENT_NO%OUTERJOIN0% ' ||
+                         'WHERE S.STUDENT_NO = SC.STUDENT_NO ' ||
                          'AND S.GRADE = ' || i_nGRD || ' ' ||
                          'AND ' || GET_GROUP_BY(1) || ' ' ||
                          'AND S.DELETE_FLG = 0 GROUP BY S.STUDENT_NO ' ||
-                         'HAVING SUM(COALESCE(SC.SCORE, 0)) > ' || i_nTOT || ') ';
+                         'HAVING SUM(COALESCE(SC.SCORE, 0)) > ' || i_nTOT || ') T';
             ELSE
                 v_SQL := 'SELECT COUNT(*) + 1 FROM ( ' ||
                          'SELECT S.STUDENT_NO, SUM(COALESCE(SC.SCORE, 0)) AS TOTAL ' ||
@@ -788,7 +788,7 @@ BEGIN
                          'AND S.GRADE = ' || i_nGRD || ' ' ||
                          'AND ' || GET_GROUP_BY(2) || ' ' ||
                          'AND S.DELETE_FLG = 0 GROUP BY S.STUDENT_NO ' ||
-                         'HAVING SUM(COALESCE(SC.SCORE, 0)) > ' || i_nTOT || ') ';
+                         'HAVING SUM(COALESCE(SC.SCORE, 0)) > ' || i_nTOT || ') T';
             END IF;
             RETURN v_SQL;
         EXCEPTION
@@ -1080,7 +1080,7 @@ BEGIN
                      ' RANK() OVER (PARTITION BY CLASS_NO ORDER BY TOTAL_SCORE DESC) AS CLASS_RANK, ' ||
                      ' RANK() OVER (PARTITION BY GRADE ORDER BY TOTAL_SCORE DESC) AS GRADE_RANK ' ||
                      ' FROM (SELECT S.STUDENT_NO, S.GRADE, S.CLASS_NO, ' ||
-                     ' (SELECT SUM(NVL(SC.SCORE, 0)) FROM SCORE_REC SC WHERE SC.STUDENT_NO = S.STUDENT_NO) AS TOTAL_SCORE ' ||
+                     ' (SELECT SUM(COALESCE(SC.SCORE, 0)) FROM SCORE_REC SC WHERE SC.STUDENT_NO = S.STUDENT_NO) AS TOTAL_SCORE ' ||
                      ' FROM STUDENT_MST S WHERE S.DELETE_FLG = 0 AND S.GRADE = ' || i_nGRD || ') alias0 ';
             RETURN v_sql;
         EXCEPTION

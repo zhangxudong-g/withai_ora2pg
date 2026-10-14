@@ -194,6 +194,18 @@ def classify(stmt: str) -> str:
     if up.startswith("SET ") or up.startswith("SELECT SETVAL"):
         return "OTHER"
 
+    # DROP FUNCTION/PROCEDURE 归类到对应类型，确保排序时排在 CREATE 之前
+    if up.startswith("DROP FUNCTION"):
+        return "FUNCTION"
+    if up.startswith("DROP PROCEDURE"):
+        return "PROCEDURE"
+    if up.startswith("DROP TYPE"):
+        return "TYPE"
+    if up.startswith("DROP TABLE"):
+        return "TABLE"
+    if up.startswith("DROP VIEW"):
+        return "VIEW"
+
     m = _CREATE_RE.match(head)
     if m:
         return re.sub(r"\s+", " ", m.group("kind").upper())

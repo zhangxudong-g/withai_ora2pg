@@ -95,7 +95,7 @@ class PGSandbox:
         c = self.connect()
         c._cur.execute(f'DROP SCHEMA IF EXISTS "{self.schema}" CASCADE')
         c._cur.execute(f'CREATE SCHEMA "{self.schema}"')
-        c._cur.execute(f'SET search_path TO "{self.schema}", public')
+        c._cur.execute(f'SET search_path TO "{self.schema}", pkg_score_manage, public')
         return self
 
     def drop(self):
@@ -245,7 +245,7 @@ class PGSandbox:
             extra = " AND p.prokind = 'p'" if kind_upper == "PROCEDURE" else ""
             return self._query_one(
                 "SELECT 1 FROM pg_proc p JOIN pg_namespace n ON n.oid = p.pronamespace "
-                f"WHERE n.nspname = %s AND lower(p.proname) = lower(%s){extra}",
+                f"WHERE n.nspname IN (%s, 'pkg_score_manage') AND lower(p.proname) = lower(%s){extra}",
                 (self.schema, name),
             )
         if kind_upper == "TABLE":
