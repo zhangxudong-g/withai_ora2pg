@@ -100,16 +100,23 @@ _COMMENT_BLOCK = re.compile(r'/\*.*?\*/', re.DOTALL)
 
 
 def _strip_comments_keep_structure(sql: str) -> str:
-    """剥离注释但保留行结构（用等长空白替换，行号仍对得上）。
+    """剥离注释和字符串字面量但保留行结构（用等长空白替换，行号仍对得上）。
 
     注意：本函数会把 ``/* TODO: ... */`` 和 ``-- TODO: ...`` 也剥掉，
     所以 TODO 规则必须在原始代码上匹配（raw=True）。
+
+    同时剥离单引号字符串字面量（包括 PL/pgSQL 函数体内），防止 RAISE
+    消息文本或动态 SQL 字符串中出现的关键字误报。
+    保留 dollar-quoted 块标记 $$ 本身（不影响匹配结构）。
     """
     def blank(m: re.Match) -> str:
         return re.sub(r'[^\n]', ' ', m.group(0))
     out = sql
     out = _COMMENT_BLOCK.sub(blank, out)
     out = _COMMENT_LINE.sub(blank, out)
+    # 剥离全部单引号字符串字面量（在 dollar-quoted 和外部都适用）
+    # 用等长空格替换保留长度/行数，只留两端的引号
+    out = re.sub(r"'[^']*'", lambda m: "'" + " " * (len(m.group(0)) - 2) + "'", out)
     return out
 
 
@@ -118,8 +125,40 @@ def _line_no_of(sql: str, pos: int) -> int:
 
 
 # ---------------------------------------------------------------------------
+# 列名误报过滤：SQLCODE/SQLERRM 在 PROCESS_LOG 表中是合法列名
+# ---------------------------------------------------------------------------
+_TYPE_KW = re.compile(
+    r'\b(BIGINT|INT|INTEGER|SMALLINT|VARCHAR|TEXT|NUMERIC|DECIMAL|DATE|'
+    r'TIMESTAMP|BOOLEAN|CHAR|REAL|DOUBLE|SERIAL|UUID|JSON|JSONB)\b',
+    re.IGNORECASE,
+)
+
+
+def _is_column_name_context(text: str, start: int, end: int) -> bool:
+    """判断 SQLCODE/SQLERRM 匹配是否处于列名上下文（DDL 定义或列列表）。
+    
+    判据：
+    1. 后面紧跟类型关键字 → DDL 列定义
+    2. 前面是逗号/左括号/表名括号 → 列列表
+    """
+    # Check DDL context: SQLCODE BIGINT/VARCHAR/etc
+    after = text[end:end+30]
+    if _TYPE_KW.match(after.strip()):
+        return True
+    # Check column list context: preceded by comma/space/open-paren
+    before = text[max(0, start-5):start]
+    if before.strip().endswith(',') or before.strip().endswith('('):
+        return True
+    return False
+
+
+# ---------------------------------------------------------------------------
 # 扫描入口
 # ---------------------------------------------------------------------------
+# SQLCODE/SQLERRM 误报过滤规则（列名上下文）
+_COLUMN_NAME_RULES = {'SQLCODE 异常码', 'SQLERRM 异常信息'}
+
+
 def scan_sql(sql: str, filename: str = "<memory>") -> List[ResidualMatch]:
     """对单段 SQL 文本扫描，返回命中列表（按行号排序）。"""
     clean = _strip_comments_keep_structure(sql)
@@ -127,6 +166,10 @@ def scan_sql(sql: str, filename: str = "<memory>") -> List[ResidualMatch]:
     for pat, name, sev, raw in DOD2_RULES:
         target = sql if raw else clean
         for m in pat.finditer(target):
+            # 列名误报过滤：SQLCODE/SQLERRM 在 PROCESS_LOG 表中是合法列名
+            if name in _COLUMN_NAME_RULES:
+                if _is_column_name_context(target, m.start(), m.end()):
+                    continue
             snippet = m.group(0).strip().replace('\n', ' ')[:120]
             hits.append(ResidualMatch(
                 filename=filename,

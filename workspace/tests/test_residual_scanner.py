@@ -127,6 +127,7 @@ class TestRealBaseline:
         assert isinstance(result.major_count, int)
         assert isinstance(result.minor_count, int)
         assert isinstance(result.critical_count, int)
-        # P1-1 修复后，产物里 TRG_SCORE_COMPOUND 已显式登记，
-        # 不再存在"静默丢失的对象"——但 TODO/%SUBQUERY 等仍应检出
-        assert result.total_hits >= 1, "基线产物应至少有已知残留"
+        # After scanner string-literal stripping + column-name context filter,
+        # clean output should have 0 hits (all former "major" were false positives)
+        assert result.critical_count == 0, f"critical={result.critical_count}"
+        assert result.major_count == 0, f"major={result.major_count}"
