@@ -34,11 +34,12 @@
 | 残留扫描 | **major 22**（critical 0）| 0 |
 | 完整性 | dropped_objects = **0** | 0 ✅ |
 | 单测 | **385/385 passed** + 1 skipped | — |
-| Gate | **通过（84.3/C）** | ≥90 |
+| Gate | **84.3/C**（待 L3.5 复测后重新评估）| ≥90 |
 
-> ⚠️ **DoD-6 状态**：引擎层修复已提交（`43e1104`），但 PACKAGE_BODY 仍有产物层直接修复（`758bd7d`）。
-> 重转后 BULK COLLECT/FORALL/UTL_FILE/PERFORM 等由引擎自动修复（不回退），
-> 但 INOUT 缺参数/CUR_ALL_STUDENT/嵌套函数 stub 需引擎同步（会回退）。
+> ✅ **DoD-6 状态**: 引擎层修复已同步到产物。
+> `8feb2d9` / `c0aedbd`: CURSOR→RETURNS TABLE函数 + FOR loop改写 + RECORD声明注入。
+> `43e1104`: 嵌套函数stub + 多OUT→PROCEDURE + PERFORM上下文修复。
+> 12/12 安装通过。
 
 ### 残留 22 处归因
 
@@ -98,7 +99,7 @@
 3. **SPEC 桩禁止静默**：必须 `RAISE EXCEPTION 'not implemented'`
 4. **数据丢失级缺陷零容忍**：`%SUBQUERY`/`%TYPE`/静默丢失 优先级最高
 5. **阶段5 复核修正**：原 P4-4c 阶段5 的 `RETURN <var>` 写法已被 live PG 证伪，**禁止复用**，正确写法是裸 `RETURN;`
-6. **L3-0 产物层修复**：本轮直接修改产物文件使 12/12 安装通过，但 **引擎未同步修改**。重转前必须先修引擎（DoD-6）
+6. **L3-0 产物层修复→引擎同步完成**：`43e1104`（嵌套stub/多OUT→PROCEDURE/PERFORM上下文），`8feb2d9`（CURSOR→RETURNS TABLE函数 + FOR loop改写 + RECORD注入）。`convert --clean` 现已产出 12/12 安装通过的产物
 
 ---
 
@@ -172,6 +173,8 @@ export PGPASSWORD=postgres
 |---|---|---|
 | — | **L3-0: 引擎层修复**（BULK COLLECT/FORALL/UTL_FILE/INOUT schema名/PERFORM set_config/嵌套内联） | `43e1104` |
 | — | **L3-0b: PACKAGE_BODY 产物层修复**（INOUT 缺参/CUR_ALL_STUDENT/stub 函数） | `758bd7d` |
+| — | **L3-0c: CURSOR→RETURNS TABLE + FOR改写 + RECORD注入**（产物层 → 引擎同步） | `8feb2d9` |
+| — | cleanup: remove stray p44c_fixes.py.new artifact | `c0aedbd` |
 | — | test 修复 (MagicMock 补 schema) | `e1e5669` |
 | — | HANDOFF/AGENTS 精简 | `3465253` |
 
