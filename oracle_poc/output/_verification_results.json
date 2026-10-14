@@ -1,6 +1,6 @@
 {
   "name": "oracle_poc",
-  "timestamp": "2026-10-14T22:45:32",
+  "timestamp": "2026-10-14T22:49:52",
   "summary": {
     "smoke": {
       "total": 121,
@@ -793,6 +793,102 @@
         {
           "kind": "VIEW",
           "schema": "oracle_poc_verify",
+          "name": "sm_score_rec",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_score_rec\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_system_config",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_system_config\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_wk_score_report",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_wk_score_report\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_attachment_storage",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_attachment_storage\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_process_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_process_log\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_student_mst",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_subject_mst",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_teacher_mst",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_student",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_student_with_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
           "name": "v_student_score",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_score\" LIMIT 1",
@@ -839,110 +935,6 @@
           "error": ""
         },
         {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_student_mst",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_subject_mst",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_teacher_mst",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_score_rec",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_score_rec\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_system_config",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_system_config\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_wk_score_report",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_wk_score_report\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_attachment_storage",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_attachment_storage\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_process_log",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_process_log\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_seq_student",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_seq_jobnum",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_seq_log",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "v_student_with_score",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "SEQUENCE",
-          "schema": "oracle_poc_verify",
-          "name": "seq_student_no",
-          "status": "pass",
-          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
-          "error": ""
-        },
-        {
           "kind": "SEQUENCE",
           "schema": "oracle_poc_verify",
           "name": "seq_subject_cd",
@@ -981,6 +973,14 @@
           "status": "pass",
           "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
           "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_student_no",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
+          "error": ""
         }
       ],
       "scanned_schemas": [
@@ -995,7 +995,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.3857999690808356,
+        "duration_ms": 0.338599958922714,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1011,7 +1011,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.2384000108577311,
+        "duration_ms": 0.24719996144995093,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1027,7 +1027,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.23770000552758574,
+        "duration_ms": 0.255799968726933,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1043,7 +1043,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.2578999847173691,
+        "duration_ms": 0.2582999877631664,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1059,7 +1059,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.24159997701644897,
+        "duration_ms": 0.23750000400468707,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1075,7 +1075,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.35340001340955496,
+        "duration_ms": 0.2929999609477818,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1091,7 +1091,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.29659998835995793,
+        "duration_ms": 0.23560004774481058,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1107,7 +1107,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.2626000205054879,
+        "duration_ms": 0.22580003133043647,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1123,7 +1123,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.23999996483325958,
+        "duration_ms": 0.22270000772550702,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1139,7 +1139,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.2814999897964299,
+        "duration_ms": 0.2269999822601676,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1155,7 +1155,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.24189997930079699,
+        "duration_ms": 0.22819999139755964,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1171,7 +1171,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.2242999617010355,
+        "duration_ms": 0.22749998606741428,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1187,7 +1187,7 @@
         "expected": 360,
         "actual": "360.00",
         "detail": "",
-        "duration_ms": 0.21890003699809313,
+        "duration_ms": 0.2049999893642962,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1203,7 +1203,7 @@
         "expected": 325,
         "actual": "325.00",
         "detail": "",
-        "duration_ms": 0.2066000015474856,
+        "duration_ms": 0.18010003259405494,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1219,7 +1219,7 @@
         "expected": 385,
         "actual": "385.00",
         "detail": "",
-        "duration_ms": 0.1962999813258648,
+        "duration_ms": 0.1803000341169536,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1235,7 +1235,7 @@
         "expected": 283,
         "actual": "283.00",
         "detail": "",
-        "duration_ms": 0.19759999122470617,
+        "duration_ms": 0.17019995721057057,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1251,7 +1251,7 @@
         "expected": 318,
         "actual": "318.00",
         "detail": "",
-        "duration_ms": 0.23319997126236558,
+        "duration_ms": 0.17030001617968082,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1267,7 +1267,7 @@
         "expected": 335,
         "actual": "335.00",
         "detail": "",
-        "duration_ms": 0.21959998412057757,
+        "duration_ms": 0.16719999257475138,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1283,7 +1283,7 @@
         "expected": 295,
         "actual": "295.00",
         "detail": "",
-        "duration_ms": 0.1947000273503363,
+        "duration_ms": 0.16960001084953547,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1299,7 +1299,7 @@
         "expected": 361,
         "actual": "361.00",
         "detail": "",
-        "duration_ms": 0.1925000105984509,
+        "duration_ms": 0.16910000704228878,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1315,7 +1315,7 @@
         "expected": 360,
         "actual": "360.00",
         "detail": "",
-        "duration_ms": 0.2364999963901937,
+        "duration_ms": 0.20589999621734023,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1330,7 +1330,7 @@
         "expected": 325,
         "actual": "325.00",
         "detail": "",
-        "duration_ms": 0.26210001669824123,
+        "duration_ms": 0.1669999910518527,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1345,7 +1345,7 @@
         "expected": 385,
         "actual": "385.00",
         "detail": "",
-        "duration_ms": 0.1922000083141029,
+        "duration_ms": 0.17249997472390532,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1360,7 +1360,7 @@
         "expected": 0,
         "actual": "0",
         "detail": "",
-        "duration_ms": 0.11590000940486789,
+        "duration_ms": 0.10419997852295637,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
@@ -1375,7 +1375,7 @@
         "expected": 0,
         "actual": "0",
         "detail": "",
-        "duration_ms": 0.09240000508725643,
+        "duration_ms": 0.1466000103391707,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
@@ -1390,7 +1390,7 @@
         "expected": 0,
         "actual": "0",
         "detail": "",
-        "duration_ms": 0.11110003106296062,
+        "duration_ms": 0.09869999485090375,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
@@ -1405,7 +1405,7 @@
         "expected": 121.36,
         "actual": "121.36",
         "detail": "",
-        "duration_ms": 0.1818999880924821,
+        "duration_ms": 0.1621000119484961,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1421,7 +1421,7 @@
         "expected": 109.55,
         "actual": "109.55",
         "detail": "",
-        "duration_ms": 0.15219999477267265,
+        "duration_ms": 0.17750001279637218,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1437,7 +1437,7 @@
         "expected": 130.0,
         "actual": "130.00",
         "detail": "",
-        "duration_ms": 0.14160003047436476,
+        "duration_ms": 0.12280000373721123,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1453,7 +1453,7 @@
         "expected": 94.91,
         "actual": "94.91",
         "detail": "",
-        "duration_ms": 0.145500001963228,
+        "duration_ms": 0.1446999958716333,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1469,7 +1469,7 @@
         "expected": 106.73,
         "actual": "106.73",
         "detail": "",
-        "duration_ms": 0.13780000153928995,
+        "duration_ms": 0.14710001414641738,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1485,7 +1485,7 @@
         "expected": 112.73,
         "actual": "112.73",
         "detail": "",
-        "duration_ms": 0.13489997945725918,
+        "duration_ms": 0.1314000110141933,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1501,7 +1501,7 @@
         "expected": 98.91,
         "actual": "98.91",
         "detail": "",
-        "duration_ms": 0.15129998791962862,
+        "duration_ms": 0.12199999764561653,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1517,7 +1517,7 @@
         "expected": 121.45,
         "actual": "121.45",
         "detail": "",
-        "duration_ms": 0.12729997979477048,
+        "duration_ms": 0.14570000348612666,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1533,7 +1533,7 @@
         "expected": 125.0,
         "actual": "125.00",
         "detail": "",
-        "duration_ms": 0.2661000471562147,
+        "duration_ms": 0.261999957729131,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1548,7 +1548,7 @@
         "expected": 130.0,
         "actual": "130.00",
         "detail": "",
-        "duration_ms": 0.16910000704228878,
+        "duration_ms": 0.16270001651719213,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1563,7 +1563,7 @@
         "expected": 110.0,
         "actual": "110.00",
         "detail": "",
-        "duration_ms": 0.1922000083141029,
+        "duration_ms": 0.16589998267591,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1578,7 +1578,7 @@
         "expected": 120.0,
         "actual": "120.00",
         "detail": "",
-        "duration_ms": 0.20240002777427435,
+        "duration_ms": 0.16639998648315668,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1593,7 +1593,7 @@
         "expected": 135.0,
         "actual": "135.00",
         "detail": "",
-        "duration_ms": 0.1900999923236668,
+        "duration_ms": 0.1770999515429139,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1608,7 +1608,7 @@
         "expected": 140.0,
         "actual": "140.00",
         "detail": "",
-        "duration_ms": 0.17820001812651753,
+        "duration_ms": 0.16120000509545207,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1623,7 +1623,7 @@
         "expected": 95.0,
         "actual": "95.00",
         "detail": "",
-        "duration_ms": 0.20740000763908029,
+        "duration_ms": 0.1607999438419938,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1638,7 +1638,7 @@
         "expected": 100.0,
         "actual": "100.00",
         "detail": "",
-        "duration_ms": 0.18239999189972878,
+        "duration_ms": 0.16009999671950936,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1653,7 +1653,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.41770003736019135,
+        "duration_ms": 0.4132000030949712,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1669,7 +1669,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.38790004327893257,
+        "duration_ms": 0.3597000031732023,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1685,7 +1685,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.3655000473372638,
+        "duration_ms": 0.39389997255057096,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1701,7 +1701,7 @@
         "expected": 5,
         "actual": "5",
         "detail": "",
-        "duration_ms": 0.3550999681465328,
+        "duration_ms": 0.37189997965469956,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1717,7 +1717,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.34329999471083283,
+        "duration_ms": 0.34739996772259474,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1733,7 +1733,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.3483000327832997,
+        "duration_ms": 0.37189997965469956,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1749,7 +1749,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.3420999855734408,
+        "duration_ms": 0.3451000084169209,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1765,7 +1765,7 @@
         "expected": 8,
         "actual": "8",
         "detail": "",
-        "duration_ms": 0.3494999837130308,
+        "duration_ms": 0.37560000782832503,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1781,7 +1781,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.3910000086762011,
+        "duration_ms": 0.3535000141710043,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1797,7 +1797,7 @@
         "expected": 6,
         "actual": "6",
         "detail": "",
-        "duration_ms": 0.3502999898046255,
+        "duration_ms": 0.34959998447448015,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1813,7 +1813,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.33329997677356005,
+        "duration_ms": 0.34929998219013214,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1829,7 +1829,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.34829997457563877,
+        "duration_ms": 0.34339999547228217,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1845,7 +1845,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.3353999927639961,
+        "duration_ms": 0.35340001340955496,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1861,7 +1861,7 @@
         "expected": 7,
         "actual": "7",
         "detail": "",
-        "duration_ms": 0.3342999843880534,
+        "duration_ms": 0.34610001603141427,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1877,7 +1877,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.34550001146271825,
+        "duration_ms": 0.3421999863348901,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1893,7 +1893,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.3486999776214361,
+        "duration_ms": 0.3538000164553523,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1909,7 +1909,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.10859995381906629,
+        "duration_ms": 0.1303000026382506,
         "object_name": "student_mst",
         "tags": [
           "data_load",
@@ -1924,7 +1924,7 @@
         "expected": 24,
         "actual": 24,
         "detail": "",
-        "duration_ms": 0.17959997057914734,
+        "duration_ms": 0.11659995652735233,
         "object_name": "score_rec",
         "tags": [
           "data_load",
@@ -1939,7 +1939,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.12320000678300858,
+        "duration_ms": 0.13429997488856316,
         "object_name": "subject_mst",
         "tags": [
           "data_load",
@@ -1954,7 +1954,7 @@
         "expected": 4,
         "actual": 4,
         "detail": "",
-        "duration_ms": 0.10919995838776231,
+        "duration_ms": 0.10850001126527786,
         "object_name": "teacher_mst",
         "tags": [
           "data_load",
@@ -1969,7 +1969,7 @@
         "expected": 5,
         "actual": 5,
         "detail": "",
-        "duration_ms": 0.10379997547715902,
+        "duration_ms": 0.10810000821948051,
         "object_name": "system_config",
         "tags": [
           "data_load",
@@ -1984,7 +1984,7 @@
         "expected": 64,
         "actual": 64,
         "detail": "",
-        "duration_ms": 0.47009997069835663,
+        "duration_ms": 0.5219999584369361,
         "object_name": "v_student_score",
         "tags": [
           "view"
@@ -1998,7 +1998,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.26080000679939985,
+        "duration_ms": 0.27949997456744313,
         "object_name": "v_score_rank",
         "tags": [
           "view"
@@ -2928,6 +2928,102 @@
             {
               "kind": "VIEW",
               "schema": "oracle_poc_verify",
+              "name": "sm_score_rec",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_score_rec\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_system_config",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_system_config\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_wk_score_report",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_wk_score_report\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_attachment_storage",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_attachment_storage\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_process_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_process_log\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_student_mst",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_subject_mst",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_teacher_mst",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_student",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_student_with_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
               "name": "v_student_score",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_score\" LIMIT 1",
@@ -2974,110 +3070,6 @@
               "error": ""
             },
             {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_student_mst",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_subject_mst",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_teacher_mst",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_score_rec",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_score_rec\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_system_config",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_system_config\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_wk_score_report",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_wk_score_report\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_attachment_storage",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_attachment_storage\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_process_log",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_process_log\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_seq_student",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_seq_jobnum",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_seq_log",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "v_student_with_score",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "SEQUENCE",
-              "schema": "oracle_poc_verify",
-              "name": "seq_student_no",
-              "status": "pass",
-              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
-              "error": ""
-            },
-            {
               "kind": "SEQUENCE",
               "schema": "oracle_poc_verify",
               "name": "seq_subject_cd",
@@ -3115,6 +3107,14 @@
               "name": "seq_attachment_row",
               "status": "pass",
               "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_student_no",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
               "error": ""
             }
           ],
@@ -3176,7 +3176,7 @@
   "reports": [
     {
       "target": "TABLE/001_STUDENT_MST.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3232,7 +3232,7 @@
     },
     {
       "target": "TABLE/002_SUBJECT_MST.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 97.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3311,7 +3311,7 @@
     },
     {
       "target": "SEQUENCE/00_SEQUENCE.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3367,7 +3367,7 @@
     },
     {
       "target": "TYPE/001_TYPES.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3423,7 +3423,7 @@
     },
     {
       "target": "VIEW/00_VIEW.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3493,7 +3493,7 @@
     },
     {
       "target": "TRIGGER/00_TRIGGER.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3563,7 +3563,7 @@
     },
     {
       "target": "FUNCTION/00_FUNCTION.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3619,7 +3619,7 @@
     },
     {
       "target": "PROCEDURE/00_PROCEDURE.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3675,7 +3675,7 @@
     },
     {
       "target": "PACKAGE/00_PACKAGE.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3731,7 +3731,7 @@
     },
     {
       "target": "PACKAGE_BODY/00_PACKAGE_BODY.sql",
-      "timestamp": "2026-10-14T22:45:32",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3840,7 +3840,7 @@
     },
     {
       "target": "SYNONYM/00_SYNONYM.sql",
-      "timestamp": "2026-10-14T22:45:33",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3896,7 +3896,7 @@
     },
     {
       "target": "DATA/00_TEST_DATA.sql",
-      "timestamp": "2026-10-14T22:45:33",
+      "timestamp": "2026-10-14T22:49:53",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
