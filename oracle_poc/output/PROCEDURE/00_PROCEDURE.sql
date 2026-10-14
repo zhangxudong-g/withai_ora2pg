@@ -148,8 +148,7 @@ BEGIN
         );
     END LOOP;
     CLOSE CUR_STUDENT;
-    COMMIT;
-
+    -- COMMIT removed (PG 15 CALL manages txn)
     RAISE NOTICE '%', '处理件数: ' || nROWNO;
 
 EXCEPTION
@@ -219,7 +218,7 @@ BEGIN
         UPDATE SCORE_REC SET SCORE_RANK = nRANK WHERE STUDENT_NO = R.STUDENT_NO;
     END LOOP;
 
-    COMMIT;
+    -- COMMIT removed (PG 15 CALL manages txn)
     RAISE NOTICE '%', '处理件数: ' || nCNT;
 
 EXCEPTION

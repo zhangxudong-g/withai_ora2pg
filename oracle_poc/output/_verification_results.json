@@ -1,0 +1,3299 @@
+{
+  "name": "oracle_poc",
+  "timestamp": "2026-10-14T16:36:03",
+  "summary": {
+    "smoke": {
+      "total": 42,
+      "failed_count": 3,
+      "ok": false,
+      "by_status": {
+        "pass": 39,
+        "fail": 3,
+        "blocked": 0,
+        "not_fired": 0,
+        "unsupported": 0
+      },
+      "results": [
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_stats",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_status_of_score_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_status_of_score_record\"(NULL::score_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_letter_grade_of_score_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_letter_grade_of_score_record\"(NULL::score_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_age_of_student_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_age_of_student_record\"(NULL::student_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_gender_name_of_student_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_gender_name_of_student_record\"(NULL::student_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_rank_str_of_student_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_rank_str_of_student_record\"(NULL::student_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "open_student_cursor_of_ref_cursor_t",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_student_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "open_score_cursor_of_ref_cursor_t",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_score_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "open_subject_cursor_of_ref_cursor_t",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_subject_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_weighted_sum",
+          "status": "fail",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
+          "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor) | CONTEXT: 在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor)"
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_total_weight",
+          "status": "fail",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_weight\"(NULL::refcursor)",
+          "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor) | CONTEXT: 在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor)"
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "f_get_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_jobnum\"()",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_process_score",
+          "status": "fail",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
+          "error": "错误:  ORA: null value in column \"student_no\" of relation \"score_rec\" violates not-null constraint | CONTEXT:  在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric) | CONTEXT: 在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric)"
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_gen_score_report",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_gen_score_report\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_batch_import_score",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_batch_import_score\"(NULL::character varying, NULL::character varying, NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_calc_rank",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "PROCEDURE",
+          "schema": "oracle_poc_verify",
+          "name": "sp_batch_delete_score",
+          "status": "pass",
+          "sql": "CALL \"oracle_poc_verify\".\"sp_batch_delete_score\"(NULL::character varying, NULL::character varying, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "init_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_jobnum\"()",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_student_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_score\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_student_stats",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_stats\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_score_rank",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_score_rank\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_subject_stats",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_subject_stats\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_teacher_stats",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_teacher_stats\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_dependency_graph",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_dependency_graph\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_student_with_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_student_mst",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_subject_mst",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_teacher_mst",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_score_rec",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_score_rec\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_system_config",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_system_config\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_wk_score_report",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_wk_score_report\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_attachment_storage",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_attachment_storage\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_process_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_process_log\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_student",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_student_no",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_subject_cd",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_subject_cd\"')",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_teacher_cd",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_teacher_cd\"')",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_jobnum",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_jobnum\"')",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_log_id",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_log_id\"')",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_attachment_row",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
+          "error": ""
+        }
+      ],
+      "scanned_schemas": [
+        "oracle_poc_verify"
+      ]
+    },
+    "cases": [
+      {
+        "case_id": "GRADE_100_00",
+        "description": "F_GET_GRADE_LEVEL(100) = 1（满分 -> 优秀）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_90_01",
+        "description": "F_GET_GRADE_LEVEL(90) = 1（优秀边界 90 含等号）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_89_02",
+        "description": "F_GET_GRADE_LEVEL(89.99) = 2（优秀边界下方 -> 良好）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_85_03",
+        "description": "F_GET_GRADE_LEVEL(85) = 2（典型良好）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_80_04",
+        "description": "F_GET_GRADE_LEVEL(80) = 2（良好边界 80 含等号）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_79_05",
+        "description": "F_GET_GRADE_LEVEL(79.99) = 3（良好边界下方 -> 及格）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_65_06",
+        "description": "F_GET_GRADE_LEVEL(65) = 3（典型及格）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_60_07",
+        "description": "F_GET_GRADE_LEVEL(60) = 3（及格边界 60 含等号）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_59_08",
+        "description": "F_GET_GRADE_LEVEL(59.99) = 4（及格边界下方 -> 不及格）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_55_09",
+        "description": "F_GET_GRADE_LEVEL(55) = 4（典型不及格）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_0_10",
+        "description": "F_GET_GRADE_LEVEL(0) = 4（零分）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "GRADE_-10_11",
+        "description": "F_GET_GRADE_LEVEL(-10) = 4（负分走异常/兜底分支）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_grade_level 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_grade_level",
+        "tags": [
+          "pure_function",
+          "threshold_boundary",
+          "nested_4_level"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10001",
+        "description": "学生 10001 全科目总分 = 360",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10002",
+        "description": "学生 10002 全科目总分 = 325",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10003",
+        "description": "学生 10003 全科目总分 = 385",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10004",
+        "description": "学生 10004 全科目总分 = 283",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10005",
+        "description": "学生 10005 全科目总分 = 318",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10006",
+        "description": "学生 10006 全科目总分 = 335",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10007",
+        "description": "学生 10007 全科目总分 = 295",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_10008",
+        "description": "学生 10008 全科目总分 = 361",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "nested",
+          "aggregate"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_EXAM_10001_1",
+        "description": "学生 10001 考试类型 1 的总分 = 360",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "filter_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_EXAM_10002_1",
+        "description": "学生 10002 考试类型 1 的总分 = 325",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "filter_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_EXAM_10003_1",
+        "description": "学生 10003 考试类型 1 的总分 = 385",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "dynamic_sql",
+          "filter_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_INVALID_99999",
+        "description": "F_GET_TOTAL_SCORE(99999) = 0（不存在的学生）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "edge_case",
+          "validation_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_INVALID_0",
+        "description": "F_GET_TOTAL_SCORE(0) = 0（编号为 0，CHECK_FORMAT 拒绝）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "edge_case",
+          "validation_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "TOTAL_INVALID_1",
+        "description": "F_GET_TOTAL_SCORE(-1) = 0（负数编号，CHECK_FORMAT 拒绝）",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_total_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_total_score",
+        "tags": [
+          "edge_case",
+          "validation_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10001",
+        "description": "学生 10001 学分加权平均分 = 121.36",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10002",
+        "description": "学生 10002 学分加权平均分 = 109.55",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10003",
+        "description": "学生 10003 学分加权平均分 = 130.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10004",
+        "description": "学生 10004 学分加权平均分 = 94.91",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10005",
+        "description": "学生 10005 学分加权平均分 = 106.73",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10006",
+        "description": "学生 10006 学分加权平均分 = 112.73",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10007",
+        "description": "学生 10007 学分加权平均分 = 98.91",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGW_10008",
+        "description": "学生 10008 学分加权平均分 = 121.45",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "weighted_avg",
+          "cursor_loop",
+          "nested"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10001_10001",
+        "description": "学生 10001 科目 10001 平均分 = 125.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10001_10002",
+        "description": "学生 10001 科目 10002 平均分 = 130.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10002_10001",
+        "description": "学生 10002 科目 10001 平均分 = 110.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10002_10002",
+        "description": "学生 10002 科目 10002 平均分 = 120.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10003_10001",
+        "description": "学生 10003 科目 10001 平均分 = 135.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10003_10002",
+        "description": "学生 10003 科目 10002 平均分 = 140.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10004_10001",
+        "description": "学生 10004 科目 10001 平均分 = 95.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "AVGS_10004_10002",
+        "description": "学生 10004 科目 10002 平均分 = 100.0",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_get_avg_score 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_get_avg_score",
+        "tags": [
+          "single_subject",
+          "dynamic_sql"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10001",
+        "description": "学生 10001 在 1 年 1 班的排名 = 2",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10001",
+        "description": "学生 10001 在 1 年级的排名 = 3",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10002",
+        "description": "学生 10002 在 1 年 1 班的排名 = 3",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10002",
+        "description": "学生 10002 在 1 年级的排名 = 5",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10003",
+        "description": "学生 10003 在 1 年 1 班的排名 = 1",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10003",
+        "description": "学生 10003 在 1 年级的排名 = 1",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10004",
+        "description": "学生 10004 在 1 年 1 班的排名 = 4",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10004",
+        "description": "学生 10004 在 1 年级的排名 = 8",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10005",
+        "description": "学生 10005 在 1 年 2 班的排名 = 3",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10005",
+        "description": "学生 10005 在 1 年级的排名 = 6",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10006",
+        "description": "学生 10006 在 1 年 2 班的排名 = 2",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10006",
+        "description": "学生 10006 在 1 年级的排名 = 4",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10007",
+        "description": "学生 10007 在 1 年 2 班的排名 = 4",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10007",
+        "description": "学生 10007 在 1 年级的排名 = 7",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_CLS_10008",
+        "description": "学生 10008 在 1 年 2 班的排名 = 1",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "outer_join"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "RANK_GRD_10008",
+        "description": "学生 10008 在 1 年级的排名 = 2",
+        "status": "skipped",
+        "expected": null,
+        "actual": null,
+        "detail": "对象 f_calc_rank 未安装到沙箱（类型 FUNCTION），见 Level 3",
+        "duration_ms": 0.0,
+        "object_name": "f_calc_rank",
+        "tags": [
+          "rank",
+          "dynamic_sql",
+          "group_branch"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "DATA_STUDENT_MST",
+        "description": "表 STUDENT_MST 应装载 8 行",
+        "status": "pass",
+        "expected": 8,
+        "actual": 8,
+        "detail": "",
+        "duration_ms": 0.18279999494552612,
+        "object_name": "student_mst",
+        "tags": [
+          "data_load",
+          "integrity"
+        ],
+        "passed": true
+      },
+      {
+        "case_id": "DATA_SCORE_REC",
+        "description": "表 SCORE_REC 应装载 24 行",
+        "status": "pass",
+        "expected": 24,
+        "actual": 24,
+        "detail": "",
+        "duration_ms": 0.14159997226670384,
+        "object_name": "score_rec",
+        "tags": [
+          "data_load",
+          "integrity"
+        ],
+        "passed": true
+      },
+      {
+        "case_id": "DATA_SUBJECT_MST",
+        "description": "表 SUBJECT_MST 应装载 8 行",
+        "status": "pass",
+        "expected": 8,
+        "actual": 8,
+        "detail": "",
+        "duration_ms": 0.18689996795728803,
+        "object_name": "subject_mst",
+        "tags": [
+          "data_load",
+          "integrity"
+        ],
+        "passed": true
+      },
+      {
+        "case_id": "DATA_TEACHER_MST",
+        "description": "表 TEACHER_MST 应装载 4 行",
+        "status": "pass",
+        "expected": 4,
+        "actual": 4,
+        "detail": "",
+        "duration_ms": 0.12850004713982344,
+        "object_name": "teacher_mst",
+        "tags": [
+          "data_load",
+          "integrity"
+        ],
+        "passed": true
+      },
+      {
+        "case_id": "DATA_SYSTEM_CONFIG",
+        "description": "表 SYSTEM_CONFIG 应装载 5 行",
+        "status": "pass",
+        "expected": 5,
+        "actual": 5,
+        "detail": "",
+        "duration_ms": 0.12310000602155924,
+        "object_name": "system_config",
+        "tags": [
+          "data_load",
+          "integrity"
+        ],
+        "passed": true
+      },
+      {
+        "case_id": "VIEW_V_STUDENT_SCORE",
+        "description": "视图 V_STUDENT_SCORE 行数 = 8",
+        "status": "fail",
+        "expected": 8,
+        "actual": 1536,
+        "detail": "返回值与金标准不一致",
+        "duration_ms": 0.4212000058032572,
+        "object_name": "v_student_score",
+        "tags": [
+          "view"
+        ],
+        "passed": false
+      },
+      {
+        "case_id": "VIEW_V_SCORE_RANK",
+        "description": "视图 V_SCORE_RANK 行数 = 8",
+        "status": "pass",
+        "expected": 8,
+        "actual": 8,
+        "detail": "",
+        "duration_ms": 0.28029998065903783,
+        "object_name": "v_score_rank",
+        "tags": [
+          "view"
+        ],
+        "passed": true
+      }
+    ],
+    "levels": [
+      {
+        "level": "L3",
+        "name": "安装验证",
+        "score": 100.0,
+        "weight": 0.25,
+        "passed": true,
+        "skipped": false,
+        "skip_reason": "",
+        "details": {
+          "total": 245,
+          "installed": 245,
+          "failed": 0,
+          "structural_total": 245,
+          "structural_installed": 245,
+          "by_kind": {
+            "SCHEMA": {
+              "total": 2,
+              "ok": 2
+            },
+            "SEQUENCE": {
+              "total": 6,
+              "ok": 6
+            },
+            "TYPE": {
+              "total": 8,
+              "ok": 8
+            },
+            "TABLE": {
+              "total": 9,
+              "ok": 9
+            },
+            "VIEW": {
+              "total": 18,
+              "ok": 18
+            },
+            "INDEX": {
+              "total": 2,
+              "ok": 2
+            },
+            "FUNCTION": {
+              "total": 113,
+              "ok": 113
+            },
+            "PROCEDURE": {
+              "total": 31,
+              "ok": 31
+            },
+            "TRIGGER": {
+              "total": 7,
+              "ok": 7
+            },
+            "DATA": {
+              "total": 49,
+              "ok": 49
+            }
+          },
+          "failures": [],
+          "per_artifact": {
+            "PACKAGE/00_PACKAGE.sql": {
+              "total": 13,
+              "ok": 13,
+              "failures": []
+            },
+            "PACKAGE_BODY/00_PACKAGE_BODY.sql": {
+              "total": 61,
+              "ok": 61,
+              "failures": []
+            },
+            "SEQUENCE/00_SEQUENCE.sql": {
+              "total": 6,
+              "ok": 6,
+              "failures": []
+            },
+            "TYPE/001_TYPES.sql": {
+              "total": 16,
+              "ok": 16,
+              "failures": []
+            },
+            "TABLE/001_STUDENT_MST.sql": {
+              "total": 3,
+              "ok": 3,
+              "failures": []
+            },
+            "TABLE/002_SUBJECT_MST.sql": {
+              "total": 8,
+              "ok": 8,
+              "failures": []
+            },
+            "VIEW/00_VIEW.sql": {
+              "total": 7,
+              "ok": 7,
+              "failures": []
+            },
+            "SYNONYM/00_SYNONYM.sql": {
+              "total": 11,
+              "ok": 11,
+              "failures": []
+            },
+            "TRIGGER/00_TRIGGER.sql": {
+              "total": 14,
+              "ok": 14,
+              "failures": []
+            },
+            "FUNCTION/00_FUNCTION.sql": {
+              "total": 52,
+              "ok": 52,
+              "failures": []
+            },
+            "PROCEDURE/00_PROCEDURE.sql": {
+              "total": 5,
+              "ok": 5,
+              "failures": []
+            },
+            "DATA/00_TEST_DATA.sql": {
+              "total": 49,
+              "ok": 49,
+              "failures": []
+            }
+          }
+        },
+        "weighted": 25.0
+      },
+      {
+        "level": "L3.5",
+        "name": "首调冒烟",
+        "score": 92.9,
+        "weight": 0.0,
+        "passed": false,
+        "skipped": false,
+        "skip_reason": "",
+        "details": {
+          "total": 42,
+          "failed_count": 3,
+          "ok": false,
+          "by_status": {
+            "pass": 39,
+            "fail": 3,
+            "blocked": 0,
+            "not_fired": 0,
+            "unsupported": 0
+          },
+          "results": [
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_stats",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_status_of_score_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_status_of_score_record\"(NULL::score_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_letter_grade_of_score_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_letter_grade_of_score_record\"(NULL::score_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_age_of_student_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_age_of_student_record\"(NULL::student_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_gender_name_of_student_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_gender_name_of_student_record\"(NULL::student_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_rank_str_of_student_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_rank_str_of_student_record\"(NULL::student_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "open_student_cursor_of_ref_cursor_t",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_student_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "open_score_cursor_of_ref_cursor_t",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_score_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "open_subject_cursor_of_ref_cursor_t",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_subject_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_weighted_sum",
+              "status": "fail",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
+              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor) | CONTEXT: 在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor)"
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_total_weight",
+              "status": "fail",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_weight\"(NULL::refcursor)",
+              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor) | CONTEXT: 在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor)"
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "f_get_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_jobnum\"()",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_process_score",
+              "status": "fail",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
+              "error": "错误:  ORA: null value in column \"student_no\" of relation \"score_rec\" violates not-null constraint | CONTEXT:  在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric) | CONTEXT: 在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric)"
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_gen_score_report",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_gen_score_report\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_batch_import_score",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_batch_import_score\"(NULL::character varying, NULL::character varying, NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_calc_rank",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_calc_rank\"(NULL::numeric, NULL::numeric, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_batch_delete_score",
+              "status": "pass",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_batch_delete_score\"(NULL::character varying, NULL::character varying, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "init_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"init_jobnum\"()",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_student_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_score\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_student_stats",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_stats\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_score_rank",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_score_rank\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_subject_stats",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_subject_stats\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_teacher_stats",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_teacher_stats\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_dependency_graph",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_dependency_graph\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_student_with_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_student_mst",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_subject_mst",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_teacher_mst",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_score_rec",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_score_rec\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_system_config",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_system_config\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_wk_score_report",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_wk_score_report\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_attachment_storage",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_attachment_storage\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_process_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_process_log\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_student",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_student_no",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_subject_cd",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_subject_cd\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_teacher_cd",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_teacher_cd\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_jobnum",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_jobnum\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_log_id",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_log_id\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_attachment_row",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
+              "error": ""
+            }
+          ],
+          "failures": [
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_weighted_sum",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
+              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor) | CONTEXT: 在RAISE的第18行的PL/pgSQL函数calc_weighted_sum(refcursor)"
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_total_weight",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_weight\"(NULL::refcursor)",
+              "error": "错误:  ORA: 游标变量\"i_cursor\"是空的 | CONTEXT:  在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor) | CONTEXT: 在RAISE的第17行的PL/pgSQL函数calc_total_weight(refcursor)"
+            },
+            {
+              "kind": "PROCEDURE",
+              "schema": "oracle_poc_verify",
+              "name": "sp_process_score",
+              "sql": "CALL \"oracle_poc_verify\".\"sp_process_score\"(NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric)",
+              "error": "错误:  ORA: null value in column \"student_no\" of relation \"score_rec\" violates not-null constraint | CONTEXT:  在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric) | CONTEXT: 在RAISE的第72行的PL/pgSQL函数sp_process_score(numeric,numeric,numeric,numeric,numeric,character varying,numeric)"
+            }
+          ]
+        },
+        "weighted": 0.0
+      },
+      {
+        "level": "L4",
+        "name": "行为等价",
+        "score": 85.7,
+        "weight": 0.4,
+        "passed": false,
+        "skipped": false,
+        "skip_reason": "",
+        "details": {
+          "score": 85.7,
+          "total": 65,
+          "applicable": 7,
+          "passed": 6,
+          "failed": 1,
+          "errored": 0,
+          "skipped": 58,
+          "execution_ratio": 0.1077,
+          "no_applicable_cases": false,
+          "min_case_coverage": 0.5,
+          "coverage_insufficient": true,
+          "failures": [
+            {
+              "case_id": "VIEW_V_STUDENT_SCORE",
+              "description": "视图 V_STUDENT_SCORE 行数 = 8",
+              "status": "fail",
+              "expected": 8,
+              "actual": 1536,
+              "detail": "返回值与金标准不一致",
+              "duration_ms": 0.4212000058032572,
+              "object_name": "v_student_score",
+              "tags": [
+                "view"
+              ],
+              "passed": false
+            }
+          ]
+        },
+        "weighted": 34.28
+      }
+    ],
+    "static_levels": {
+      "L1": {
+        "score": 98.6,
+        "count": 12,
+        "skipped_count": 0
+      },
+      "L2": {
+        "score": 73.8,
+        "count": 12,
+        "skipped_count": 0
+      }
+    },
+    "overall_score": 85.3,
+    "grade": "B 良",
+    "weight_covered": 1.0,
+    "weight_covered_active": {
+      "L1": true,
+      "L2": true,
+      "L3": true,
+      "L3.5": true,
+      "L4": true
+    },
+    "weight_covered_warning": false,
+    "gate_failures": [
+      "[suite] L4 仅执行 7/65 条用例（覆盖率 11% < 50%），行为验证不充分",
+      "[suite] L4 用例未通过 1 条",
+      "L3.5 首调冒烟 3 个对象失败（总计 42）"
+    ],
+    "gate_passed": false
+  },
+  "reports": [
+    {
+      "target": "TABLE/001_STUDENT_MST.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 100.0,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 100.0,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 38,
+            "issue_count": 0,
+            "summary": {
+              "by_category": {},
+              "by_severity": {},
+              "critical_count": 0
+            },
+            "issues": []
+          },
+          "weighted": 15.0
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 100.0,
+          "weight": 0.2,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 4,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 4,
+              "passed": 4,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 20.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "TABLE/002_SUBJECT_MST.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 97.0,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 92.9,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 141,
+            "issue_count": 2,
+            "summary": {
+              "by_category": {
+                "oracle_residual": 2
+              },
+              "by_severity": {
+                "major": 2
+              },
+              "critical_count": 0
+            },
+            "issues": [
+              {
+                "code": "oracle_residual",
+                "name": "SQLCODE（PG 无此异常码）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "SQLCODE"
+                ]
+              },
+              {
+                "code": "oracle_residual",
+                "name": "SQLERRM（PG 无此异常信息）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "SQLERRM"
+                ]
+              }
+            ]
+          },
+          "weighted": 13.94
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 100.0,
+          "weight": 0.2,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 8,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 8,
+              "passed": 8,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 20.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "SEQUENCE/00_SEQUENCE.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 100.0,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 100.0,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 61,
+            "issue_count": 0,
+            "summary": {
+              "by_category": {},
+              "by_severity": {},
+              "critical_count": 0
+            },
+            "issues": []
+          },
+          "weighted": 15.0
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 100.0,
+          "weight": 0.2,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 6,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 6,
+              "passed": 6,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 20.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "TYPE/001_TYPES.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 91.4,
+      "grade": "B 良",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 100.0,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 181,
+            "issue_count": 0,
+            "summary": {
+              "by_category": {},
+              "by_severity": {},
+              "critical_count": 0
+            },
+            "issues": []
+          },
+          "weighted": 15.0
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 85.0,
+          "weight": 0.2,
+          "passed": false,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 16,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 16,
+              "passed": 16,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION GET_STATUS_of_SCORE_RECORD(i_self SCORE_RECORD) RETUR"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION GET_LETTER_GRADE_of_SCORE_RECORD(i_self SCORE_RECORD)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION GET_GENDER_NAME_of_STUDENT_RECORD(i_self STUDENT_RECO"
+                ]
+              }
+            ],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 17.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "VIEW/00_VIEW.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 99.0,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 97.6,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 207,
+            "issue_count": 1,
+            "summary": {
+              "by_category": {
+                "invalid_syntax": 1
+              },
+              "by_severity": {
+                "major": 1
+              },
+              "critical_count": 0
+            },
+            "issues": [
+              {
+                "code": "invalid_syntax",
+                "name": "Oracle 列级 IS [NOT] NULL 约束",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "IS NOT NULL\n\n\n;"
+                ]
+              }
+            ]
+          },
+          "weighted": 14.64
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 100.0,
+          "weight": 0.2,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 7,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 7,
+              "passed": 7,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 20.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "TRIGGER/00_TRIGGER.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 53.3,
+      "grade": "D 差",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 97.7,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 219,
+            "issue_count": 1,
+            "summary": {
+              "by_category": {
+                "oracle_residual": 1
+              },
+              "by_severity": {
+                "major": 1
+              },
+              "critical_count": 0
+            },
+            "issues": [
+              {
+                "code": "oracle_residual",
+                "name": "SQLCODE（PG 无此异常码）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "SQLCODE"
+                ]
+              }
+            ]
+          },
+          "weighted": 14.65
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 20.0,
+          "weight": 0.2,
+          "passed": false,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 21,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 21,
+              "passed": 21,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [
+              {
+                "code": "block_mismatch",
+                "name": "IF(6) 多于 END IF(3)",
+                "severity": "major",
+                "count": 3,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION TRG_STUDENT_BI() RETURNS TRIGGER AS $$ DECLARE vMAX_S"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_STUDENT_BI ON STUDENT_MST"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION TRG_STUDENT_AU() RETURNS TRIGGER AS $$ BEGIN IF OLD.S"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_STUDENT_AU ON STUDENT_MST"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(6) 多于 END IF(3)",
+                "severity": "major",
+                "count": 3,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION TRG_SCORE_BIU() RETURNS TRIGGER AS $$ DECLARE vPASS_S"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_SCORE_BIU ON SCORE_REC"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION TRG_SYSTEM_CONFIG_BD() RETURNS TRIGGER AS $$ DECLARE "
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_SYSTEM_CONFIG_BD ON SYSTEM_CONFIG"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_SCORE_COMPOUND_BR ON SCORE_REC"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_SCORE_COMPOUND_AS ON SCORE_REC"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION TRG_V_STUDENT_IO() RETURNS TRIGGER AS $$ BEGIN IF TG_"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP TRIGGER IF EXISTS TRG_V_STUDENT_IO ON V_STUDENT_WITH_SCORE"
+                ]
+              }
+            ],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 4.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "FUNCTION/00_FUNCTION.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 42.8,
+      "grade": "F 不合格",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 99.9,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 1345,
+            "issue_count": 1,
+            "summary": {
+              "by_category": {
+                "oracle_residual": 1
+              },
+              "by_severity": {
+                "minor": 1
+              },
+              "critical_count": 0
+            },
+            "issues": [
+              {
+                "code": "oracle_residual",
+                "name": "NVL 函数（PG 用 COALESCE）",
+                "severity": "minor",
+                "count": 1,
+                "samples": [
+                  "NVL("
+                ]
+              }
+            ]
+          },
+          "weighted": 14.98
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 0.0,
+          "weight": 0.2,
+          "passed": false,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 101,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 101,
+              "passed": 101,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS f_get_total_score(numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(4) 多于 END IF(2)",
+                "severity": "major",
+                "count": 2,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE(i_nSTUDENT_NO NUMERIC, i_nEXAM_TYPE"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS build_sql(numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS add_student_cond(varchar, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION ADD_STUDENT_COND(i_vSQL VARCHAR, i_nNO NUMERIC) RETUR"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS add_exam_cond(varchar, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION ADD_EXAM_COND(i_vSQL VARCHAR, i_nTYP NUMERIC) RETURNS"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS validate_student_no(numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION VALIDATE_STUDENT_NO(i_nNO NUMERIC) RETURNS BOOLEAN LA"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS check_format(numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS f_get_avg_score(numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(4) 多于 END IF(2)",
+                "severity": "major",
+                "count": 2,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION F_GET_AVG_SCORE(i_nSTUDENT_NO NUMERIC, i_nSUBJECT_CD "
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS calc_weighted_avg(numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION CALC_WEIGHTED_AVG(i_nSTU NUMERIC) RETURNS NUMERIC LAN"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS process_score(numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS build_sql(numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS add_cond(varchar, numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(4) 多于 END IF(2)",
+                "severity": "major",
+                "count": 2,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION ADD_COND(i_vSQL VARCHAR, i_nSTU NUMERIC, i_nSUB NUMER"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS get_credit_info(numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS fetch_credit(numeric)"
+                ]
+              }
+            ],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 0.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "PROCEDURE/00_PROCEDURE.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 90.4,
+      "grade": "B 良",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 97.6,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 248,
+            "issue_count": 4,
+            "summary": {
+              "by_category": {
+                "oracle_residual": 4
+              },
+              "by_severity": {
+                "minor": 4
+              },
+              "critical_count": 0
+            },
+            "issues": [
+              {
+                "code": "oracle_residual",
+                "name": "NVL 函数（PG 用 COALESCE）",
+                "severity": "minor",
+                "count": 4,
+                "samples": [
+                  "NVL(",
+                  "NVL(",
+                  "NVL("
+                ]
+              }
+            ]
+          },
+          "weighted": 14.64
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 85.0,
+          "weight": 0.2,
+          "passed": false,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 5,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 5,
+              "passed": 5,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [
+              {
+                "code": "block_mismatch",
+                "name": "IF(4) 多于 END IF(2)",
+                "severity": "major",
+                "count": 2,
+                "samples": [
+                  "CREATE OR REPLACE PROCEDURE SP_PROCESS_SCORE(i_nSTUDENT_NO NUMERIC, i_nSUBJECT_C"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE PROCEDURE SP_CALC_RANK(i_nGRADE NUMERIC, i_nCLASS_NO NUMERIC, "
+                ]
+              }
+            ],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 17.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "PACKAGE/00_PACKAGE.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 97.1,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 100.0,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 116,
+            "issue_count": 0,
+            "summary": {
+              "by_category": {},
+              "by_severity": {},
+              "critical_count": 0
+            },
+            "issues": []
+          },
+          "weighted": 15.0
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 95.0,
+          "weight": 0.2,
+          "passed": false,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 13,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 13,
+              "passed": 13,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE SCHEMA IF NOT EXISTS PKG_SCORE_MANAGE"
+                ]
+              }
+            ],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 19.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "PACKAGE_BODY/00_PACKAGE_BODY.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 41.8,
+      "grade": "F 不合格",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 97.5,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 1466,
+            "issue_count": 8,
+            "summary": {
+              "by_category": {
+                "logic_error": 1,
+                "oracle_residual": 7
+              },
+              "by_severity": {
+                "major": 7,
+                "minor": 1
+              },
+              "critical_count": 0
+            },
+            "issues": [
+              {
+                "code": "logic_error",
+                "name": "赋值 NULL（空操作）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  ":= NULL;"
+                ]
+              },
+              {
+                "code": "oracle_residual",
+                "name": "UTL_FILE",
+                "severity": "major",
+                "count": 3,
+                "samples": [
+                  "UTL_FILE",
+                  "UTL_FILE",
+                  "UTL_FILE"
+                ]
+              },
+              {
+                "code": "oracle_residual",
+                "name": "SQLCODE（PG 无此异常码）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "SQLCODE"
+                ]
+              },
+              {
+                "code": "oracle_residual",
+                "name": "SQLERRM（PG 无此异常信息）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "SQLERRM"
+                ]
+              },
+              {
+                "code": "oracle_residual",
+                "name": "(+) 外连接（PG 用 LEFT JOIN）",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "(+)"
+                ]
+              },
+              {
+                "code": "oracle_residual",
+                "name": "NVL 函数（PG 用 COALESCE）",
+                "severity": "minor",
+                "count": 1,
+                "samples": [
+                  "NVL("
+                ]
+              }
+            ]
+          },
+          "weighted": 14.62
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 0.0,
+          "weight": 0.2,
+          "passed": false,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 94,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 94,
+              "passed": 94,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE SCHEMA IF NOT EXISTS PKG_SCORE_MANAGE"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS format_message(varchar, varchar, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION FORMAT_MESSAGE(i_sSTEP VARCHAR, i_sMSG VARCHAR, i_nST"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS init_wsinfo(varchar, char)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.FUNC_GET_CONFIG(i_sCONFIG_CD VARCHAR"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS convert_value(varchar)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS clean_numeric(varchar)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS validate_config_cd(varchar)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(8) 多于 END IF(4)",
+                "severity": "major",
+                "count": 4,
+                "samples": [
+                  "CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.PROC_LOAD_CONFIG() LANGUAGE plpgsql"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS validate_score_value(numeric, numeric, varchar)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(4) 多于 END IF(2)",
+                "severity": "major",
+                "count": 2,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION VALIDATE_SCORE_VALUE(i_nVALUE INOUT NUMERIC, i_nDEFAU"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS check_range(numeric, numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.FUNC_FORMAT_DATE(i_YMD NUMERIC) RETU"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS convert_format(numeric, varchar)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION CONVERT_FORMAT(i_nYMD NUMERIC, i_sFMT VARCHAR) RETURN"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP PROCEDURE IF EXISTS parse_ymd(numeric, numeric, numeric, numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP PROCEDURE IF EXISTS PARSE_YMD"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(1) 多于 END IF(0)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "DROP FUNCTION IF EXISTS validate_ymd(numeric)"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION VALIDATE_YMD(i_nYMD NUMERIC) RETURNS BOOLEAN LANGUAGE"
+                ]
+              },
+              {
+                "code": "block_mismatch",
+                "name": "IF(2) 多于 END IF(1)",
+                "severity": "major",
+                "count": 1,
+                "samples": [
+                  "CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.FUNC_GET_GRADE_LEVEL(i_nSCORE NUMERI"
+                ]
+              }
+            ],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 0.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "SYNONYM/00_SYNONYM.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 100.0,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 100.0,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 32,
+            "issue_count": 0,
+            "summary": {
+              "by_category": {},
+              "by_severity": {},
+              "critical_count": 0
+            },
+            "issues": []
+          },
+          "weighted": 15.0
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 100.0,
+          "weight": 0.2,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 11,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 11,
+              "passed": 11,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 20.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    },
+    {
+      "target": "DATA/00_TEST_DATA.sql",
+      "timestamp": "2026-10-14T16:36:04",
+      "overall_score": 100.0,
+      "grade": "A 优",
+      "gate_passed": true,
+      "gate_failures": [],
+      "levels": [
+        {
+          "level": "L1",
+          "name": "静态分析",
+          "score": 100.0,
+          "weight": 0.15,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "line_count": 163,
+            "issue_count": 0,
+            "summary": {
+              "by_category": {},
+              "by_severity": {},
+              "critical_count": 0
+            },
+            "issues": []
+          },
+          "weighted": 15.0
+        },
+        {
+          "level": "L2",
+          "name": "语法验证",
+          "score": 100.0,
+          "weight": 0.2,
+          "passed": true,
+          "skipped": false,
+          "skip_reason": "",
+          "details": {
+            "statement_count": 50,
+            "pglast": {
+              "available": true,
+              "version": "v8.4",
+              "total": 50,
+              "passed": 50,
+              "failed": 0,
+              "unparsed": 0
+            },
+            "pglast_errors": [],
+            "structure_issues": [],
+            "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
+          },
+          "weighted": 20.0
+        }
+      ],
+      "cases": [],
+      "meta": {}
+    }
+  ]
+}

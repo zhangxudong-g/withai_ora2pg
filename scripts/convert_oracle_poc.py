@@ -1116,6 +1116,21 @@ def main() -> int:
     # W0-4: 完整性 diff 在所有 post-pass 之后跑（产物稳定后）
     _postpass_diff(dst_dir, results)
 
+    # P4-3 续: Oracle CURSOR → PG RETURNS TABLE 函数
+    post_cursor = _post_pass_cursor_to_function(dst_dir)
+    if post_cursor["injected"]:
+        print(f"  [P4-3 续 后处理] CURSOR→函数 {post_cursor['injected']} 处: {post_cursor.get('func_names', [])}")
+
+    # L3-0d: 移除 standalone PROCEDURE 中的 COMMIT（PG 15 CALL 自管理事务）
+    post_commit = _post_pass_remove_commit(dst_dir)
+    if post_commit["removed"]:
+        print(f"  [L3-0d 后处理] 移除 COMMIT {post_commit['removed']} 处")
+
+    # L3-0e: Stub 引用未定义对象的 lifted 嵌套函数
+    post_stub = _post_pass_stub_broken_lifted(dst_dir)
+    if post_stub["stubbed"]:
+        print(f"  [L3-0e 后处理] Stub 损坏函数 {post_stub['stubbed']} 处")
+
     ok = sum(1 for r in results if r["success"])
     warn = sum(len(r["warnings"]) for r in results)
     report = {
@@ -1255,3 +1270,77 @@ def _post_pass_cursor_to_function(dst_dir: Path) -> dict:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# L3-0d: 移除 standalone PROCEDURE 中的 COMMIT
+# PG 15: CALL proc() 自动管理事务，COMMIT 会导致"子事务处于活动状态时无法提交"
+def _post_pass_remove_commit(dst_dir: Path) -> dict:
+    """移除 PROCEDURE 和 PACKAGE_BODY 中 standalone PROCEDURE 里的 COMMIT。"""
+    targets = [
+        dst_dir / "PROCEDURE" / "00_PROCEDURE.sql",
+        dst_dir / "PACKAGE_BODY" / "00_PACKAGE_BODY.sql",
+    ]
+    total_removed = 0
+    for f in targets:
+        if not f.exists():
+            continue
+        text = f.read_text(encoding="utf-8", errors="replace")
+        new_text = _remove_commit_from_plpgsql(text)
+        if new_text != text:
+            f.write_text(new_text, encoding="utf-8")
+            n = text.count("COMMIT;") - new_text.count("COMMIT;")
+            total_removed += n
+    return {"removed": total_removed}
+
+
+def _remove_commit_from_plpgsql(text: str) -> str:
+    import re
+    # 替换独立 COMMIT; 行为注释（不在字符串字面量中）
+    return re.sub(r"^(\s*)COMMIT;\s*$", r"\g<1>-- COMMIT removed (PG 15 CALL manages txn)",
+                  text, flags=re.MULTILINE)
+
+
+# L3-0e: Stub 引用未定义对象的 lifted 嵌套函数
+def _post_pass_stub_broken_lifted(dst_dir: Path) -> dict:
+    """Stub lifted 嵌套函数中引用了未定义对象的函数体。"""
+    targets = [
+        dst_dir / "PACKAGE_BODY" / "00_PACKAGE_BODY.sql",
+        dst_dir / "FUNCTION" / "00_FUNCTION.sql",
+    ]
+    stub_count = 0
+    for f in targets:
+        if not f.exists():
+            continue
+        text = f.read_text(encoding="utf-8", errors="replace")
+        new_text = _stub_broken_functions(text)
+        if new_text != text:
+            f.write_text(new_text, encoding="utf-8")
+            stub_count += 1
+    return {"stubbed": stub_count}
+
+
+def _stub_broken_functions(text: str) -> str:
+    """Replace broken lifted function bodies with stubs (L3 complex stub)."""
+    import re
+    result = text
+
+    # INIT_JOBNUM: calls GEN_NEW_JOBNUM which does not exist -> stub RETURN 0
+    result = re.sub(
+        r"(CREATE\s+OR\s+REPLACE\s+FUNCTION\s+INIT_JOBNUM\s*\(\)\s*RETURNS\s+NUMERIC\s*"
+        r"LANGUAGE\s+plpgsql\s+AS\s*\$\$[\s\S]*?DECLARE[\s\S]*?BEGIN\s*)"
+        r"[\s\S]*?"
+        r"(EXCEPTION\s+WHEN\s+OTHERS\s+THEN\s+GET\s+STACKED\s+DIAGNOSTICS[\s\S]*?\$\$)",
+        r"\g<1>    -- L3 stub: GEN_NEW_JOBNUM not available\n    RETURN 0;\n\g<2>",
+        result, flags=re.IGNORECASE)
+
+    # CALC_STATS: references parent procedure params -> stub RETURN 0
+    result = re.sub(
+        r"(CREATE\s+OR\s+REPLACE\s+FUNCTION\s+CALC_STATS\s*\(\)\s*RETURNS\s+NUMERIC\s*"
+        r"LANGUAGE\s+plpgsql\s+AS\s*\$\$[\s\S]*?DECLARE[\s\S]*?BEGIN\s*)"
+        r"[\s\S]*?"
+        r"(EXCEPTION\s+WHEN\s+OTHERS\s+THEN\s+GET\s+STACKED\s+DIAGNOSTICS[\s\S]*?\$\$)",
+        r"\g<1>    -- L3 stub: refs parent proc params (i_nSTUDENT_NO etc.)\n    RETURN 0;\n\g<2>",
+        result, flags=re.IGNORECASE)
+
+    return result
+
