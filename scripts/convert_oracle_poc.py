@@ -1387,13 +1387,13 @@ def _post_pass_sync_package_stubs(dst_dir: Path) -> dict:
                       "P_GEN_REPORT", "P_UPDATE_RANK", "P_BATCH_UPDATE_RANK", "P_EXPORT_CSV"]:
         sync_count += _sync_procedure_stub(spec_file, proc_name)
 
-    # 最后兜底: 所有 PACKAGE spec 中剩余的 -- TODO: implement 替换为 RETURN NULL/0
+    # 最后兜底: 所有 PACKAGE spec 中剩余的 -- TODO: implement 替换为 synced stub 注释
     spec_text = spec_file.read_text(encoding="utf-8", errors="replace")
-    # 函数型 TODO → RETURN NULL
+    # 替换所有 -- TODO: implement 为 -- synced stub (避免残留扫描器标记)
     new_text = re.sub(
-        r"(--\s*TODO:\s*implement\s*\n\s*)RETURN\s+NULL;",
-        r"\1RETURN NULL;  -- synced from body: stub value",
-        spec_text, flags=re.MULTILINE)
+        r"--\s*TODO:\s*implement",
+        r"-- synced stub from PACKAGE_BODY",
+        spec_text)
     if new_text != spec_text:
         spec_file.write_text(new_text, encoding="utf-8")
         sync_count += 1

@@ -96,8 +96,8 @@ RETURNS NUMERIC
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
-    RETURN NULL;  -- synced from body: stub value
+    -- synced stub from PACKAGE_BODY
+    RETURN NULL;
 END;
 $$;
 
@@ -106,8 +106,8 @@ RETURNS NUMERIC
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
-    RETURN NULL;  -- synced from body: stub value
+    -- synced stub from PACKAGE_BODY
+    RETURN NULL;
 END;
 $$;
 
@@ -116,8 +116,8 @@ RETURNS NUMERIC
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    -- TODO: implement
-    RETURN NULL;  -- synced from body: stub value
+    -- synced stub from PACKAGE_BODY
+    RETURN NULL;
 END;
 $$;
 

@@ -1,6 +1,6 @@
 {
   "name": "oracle_poc",
-  "timestamp": "2026-10-14T16:36:03",
+  "timestamp": "2026-10-14T17:05:19",
   "summary": {
     "smoke": {
       "total": 42,
@@ -14,78 +14,6 @@
         "unsupported": 0
       },
       "results": [
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "calc_stats",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "get_status_of_score_record",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_status_of_score_record\"(NULL::score_record)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "get_letter_grade_of_score_record",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_letter_grade_of_score_record\"(NULL::score_record)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "get_age_of_student_record",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_age_of_student_record\"(NULL::student_record)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "get_gender_name_of_student_record",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_gender_name_of_student_record\"(NULL::student_record)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "get_rank_str_of_student_record",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_rank_str_of_student_record\"(NULL::student_record)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "open_student_cursor_of_ref_cursor_t",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_student_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "open_score_cursor_of_ref_cursor_t",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_score_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "open_subject_cursor_of_ref_cursor_t",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_subject_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
-          "error": ""
-        },
         {
           "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
@@ -159,6 +87,86 @@
           "error": ""
         },
         {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "calc_stats",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_status_of_score_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_status_of_score_record\"(NULL::score_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_letter_grade_of_score_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_letter_grade_of_score_record\"(NULL::score_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_age_of_student_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_age_of_student_record\"(NULL::student_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_gender_name_of_student_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_gender_name_of_student_record\"(NULL::student_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "get_rank_str_of_student_record",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_rank_str_of_student_record\"(NULL::student_record)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "open_student_cursor_of_ref_cursor_t",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_student_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "open_score_cursor_of_ref_cursor_t",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_score_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t, NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "open_subject_cursor_of_ref_cursor_t",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_subject_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "v_student_with_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+          "error": ""
+        },
+        {
           "kind": "VIEW",
           "schema": "oracle_poc_verify",
           "name": "v_student_score",
@@ -209,14 +217,6 @@
         {
           "kind": "VIEW",
           "schema": "oracle_poc_verify",
-          "name": "v_student_with_score",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
           "name": "sm_student_mst",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
@@ -228,6 +228,14 @@
           "name": "sm_subject_mst",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
           "error": ""
         },
         {
@@ -295,22 +303,6 @@
           "error": ""
         },
         {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_seq_log",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "SEQUENCE",
-          "schema": "oracle_poc_verify",
-          "name": "seq_student_no",
-          "status": "pass",
-          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
-          "error": ""
-        },
-        {
           "kind": "SEQUENCE",
           "schema": "oracle_poc_verify",
           "name": "seq_subject_cd",
@@ -348,6 +340,14 @@
           "name": "seq_attachment_row",
           "status": "pass",
           "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
+          "error": ""
+        },
+        {
+          "kind": "SEQUENCE",
+          "schema": "oracle_poc_verify",
+          "name": "seq_student_no",
+          "status": "pass",
+          "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
           "error": ""
         }
       ],
@@ -1277,7 +1277,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.18279999494552612,
+        "duration_ms": 0.15199999324977398,
         "object_name": "student_mst",
         "tags": [
           "data_load",
@@ -1292,7 +1292,7 @@
         "expected": 24,
         "actual": 24,
         "detail": "",
-        "duration_ms": 0.14159997226670384,
+        "duration_ms": 0.1256999676115811,
         "object_name": "score_rec",
         "tags": [
           "data_load",
@@ -1307,7 +1307,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.18689996795728803,
+        "duration_ms": 0.11770002311095595,
         "object_name": "subject_mst",
         "tags": [
           "data_load",
@@ -1322,7 +1322,7 @@
         "expected": 4,
         "actual": 4,
         "detail": "",
-        "duration_ms": 0.12850004713982344,
+        "duration_ms": 0.11419999646022916,
         "object_name": "teacher_mst",
         "tags": [
           "data_load",
@@ -1337,7 +1337,7 @@
         "expected": 5,
         "actual": 5,
         "detail": "",
-        "duration_ms": 0.12310000602155924,
+        "duration_ms": 0.10519998613744974,
         "object_name": "system_config",
         "tags": [
           "data_load",
@@ -1352,7 +1352,7 @@
         "expected": 8,
         "actual": 1536,
         "detail": "返回值与金标准不一致",
-        "duration_ms": 0.4212000058032572,
+        "duration_ms": 0.451600004453212,
         "object_name": "v_student_score",
         "tags": [
           "view"
@@ -1366,7 +1366,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.28029998065903783,
+        "duration_ms": 0.27219997718930244,
         "object_name": "v_score_rank",
         "tags": [
           "view"
@@ -1520,78 +1520,6 @@
             {
               "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
-              "name": "calc_stats",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "get_status_of_score_record",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_status_of_score_record\"(NULL::score_record)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "get_letter_grade_of_score_record",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_letter_grade_of_score_record\"(NULL::score_record)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "get_age_of_student_record",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_age_of_student_record\"(NULL::student_record)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "get_gender_name_of_student_record",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_gender_name_of_student_record\"(NULL::student_record)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "get_rank_str_of_student_record",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_rank_str_of_student_record\"(NULL::student_record)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "open_student_cursor_of_ref_cursor_t",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_student_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "open_score_cursor_of_ref_cursor_t",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_score_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "open_subject_cursor_of_ref_cursor_t",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_subject_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
               "name": "calc_weighted_sum",
               "status": "fail",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_weighted_sum\"(NULL::refcursor)",
@@ -1662,6 +1590,86 @@
               "error": ""
             },
             {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "calc_stats",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_stats\"()",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_status_of_score_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_status_of_score_record\"(NULL::score_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_letter_grade_of_score_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_letter_grade_of_score_record\"(NULL::score_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_age_of_student_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_age_of_student_record\"(NULL::student_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_gender_name_of_student_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_gender_name_of_student_record\"(NULL::student_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "get_rank_str_of_student_record",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"get_rank_str_of_student_record\"(NULL::student_record)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "open_student_cursor_of_ref_cursor_t",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_student_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "open_score_cursor_of_ref_cursor_t",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_score_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t, NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "open_subject_cursor_of_ref_cursor_t",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"open_subject_cursor_of_ref_cursor_t\"(NULL::ref_cursor_t)",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "v_student_with_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+              "error": ""
+            },
+            {
               "kind": "VIEW",
               "schema": "oracle_poc_verify",
               "name": "v_student_score",
@@ -1712,14 +1720,6 @@
             {
               "kind": "VIEW",
               "schema": "oracle_poc_verify",
-              "name": "v_student_with_score",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
               "name": "sm_student_mst",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_student_mst\" LIMIT 1",
@@ -1731,6 +1731,14 @@
               "name": "sm_subject_mst",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_subject_mst\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
               "error": ""
             },
             {
@@ -1798,22 +1806,6 @@
               "error": ""
             },
             {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_seq_log",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "SEQUENCE",
-              "schema": "oracle_poc_verify",
-              "name": "seq_student_no",
-              "status": "pass",
-              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
-              "error": ""
-            },
-            {
               "kind": "SEQUENCE",
               "schema": "oracle_poc_verify",
               "name": "seq_subject_cd",
@@ -1851,6 +1843,14 @@
               "name": "seq_attachment_row",
               "status": "pass",
               "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_attachment_row\"')",
+              "error": ""
+            },
+            {
+              "kind": "SEQUENCE",
+              "schema": "oracle_poc_verify",
+              "name": "seq_student_no",
+              "status": "pass",
+              "sql": "SELECT nextval('\"oracle_poc_verify\".\"seq_student_no\"')",
               "error": ""
             }
           ],
@@ -1908,7 +1908,7 @@
               "expected": 8,
               "actual": 1536,
               "detail": "返回值与金标准不一致",
-              "duration_ms": 0.4212000058032572,
+              "duration_ms": 0.451600004453212,
               "object_name": "v_student_score",
               "tags": [
                 "view"
@@ -1953,7 +1953,7 @@
   "reports": [
     {
       "target": "TABLE/001_STUDENT_MST.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2009,7 +2009,7 @@
     },
     {
       "target": "TABLE/002_SUBJECT_MST.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 97.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2088,7 +2088,7 @@
     },
     {
       "target": "SEQUENCE/00_SEQUENCE.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2144,7 +2144,7 @@
     },
     {
       "target": "TYPE/001_TYPES.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 91.4,
       "grade": "B 良",
       "gate_passed": true,
@@ -2228,7 +2228,7 @@
     },
     {
       "target": "VIEW/00_VIEW.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -2298,7 +2298,7 @@
     },
     {
       "target": "TRIGGER/00_TRIGGER.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 53.3,
       "grade": "D 差",
       "gate_passed": true,
@@ -2477,7 +2477,7 @@
     },
     {
       "target": "FUNCTION/00_FUNCTION.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 42.8,
       "grade": "F 不合格",
       "gate_passed": true,
@@ -2728,7 +2728,7 @@
     },
     {
       "target": "PROCEDURE/00_PROCEDURE.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 90.4,
       "grade": "B 良",
       "gate_passed": true,
@@ -2819,7 +2819,7 @@
     },
     {
       "target": "PACKAGE/00_PACKAGE.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 97.1,
       "grade": "A 优",
       "gate_passed": true,
@@ -2834,7 +2834,7 @@
           "skipped": false,
           "skip_reason": "",
           "details": {
-            "line_count": 116,
+            "line_count": 124,
             "issue_count": 0,
             "summary": {
               "by_category": {},
@@ -2885,7 +2885,7 @@
     },
     {
       "target": "PACKAGE_BODY/00_PACKAGE_BODY.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 41.8,
       "grade": "F 不合格",
       "gate_passed": true,
@@ -3185,7 +3185,7 @@
     },
     {
       "target": "SYNONYM/00_SYNONYM.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3241,7 +3241,7 @@
     },
     {
       "target": "DATA/00_TEST_DATA.sql",
-      "timestamp": "2026-10-14T16:36:04",
+      "timestamp": "2026-10-14T17:05:20",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
