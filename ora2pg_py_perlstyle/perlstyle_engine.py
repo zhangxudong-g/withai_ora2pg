@@ -2555,8 +2555,11 @@ def _convert_out_params(declare: str, code: str, state: ConversionState) -> Tupl
         # Strip comments for pattern matching
         p_check = re.sub(r'--[^\n]*', '', p_strip)
         p_check = re.sub(r'%ORA2PG_COMMENT\d+%', '', p_check)
-        if re.search(r'\bOUT\b', p_check, re.IGNORECASE):
-            m = re.search(r'\b(\w+)\s+OUT\b\s+(\w+(?:\.\w+)?)', p_check, re.IGNORECASE)
+        if re.search(r'\b(OUT|INOUT|IN\s+OUT)\b', p_check, re.IGNORECASE):
+            # 兼容多种写法：<name> OUT/INOUT/IN OUT <type>  或  OUT/INOUT/IN OUT <name> <type>
+            m = re.search(r'\b(\w+)\s+(?:IN\s+OUT|INOUT|OUT)\s+(\w+(?:\.\w+)?)', p_check, re.IGNORECASE)
+            if not m:
+                m = re.search(r'\b(?:IN\s+OUT|INOUT|OUT)\s+(\w+)\s+(\w+(?:\.\w+)?)', p_check, re.IGNORECASE)
             if m:
                 out_params.append((m.group(1), m.group(2)))
                 # 不在参数列表中添加 OUT 参数（PG 不允许 RETURNS TABLE 中有 OUT）
@@ -4041,17 +4044,12 @@ def _convert_single_function(
     # 从 pg_args 中移除 OUT/INOUT 参数 (因为它们会被 RETURNS TABLE 返回)
     # PROCEDURE 不能用 RETURNS TABLE, OUT 参数必须保留为 INOUT 参数。
     is_func = (func.type.upper() == 'FUNCTION')
+    # 嵌套函数 lift 出来的 FUNCTION 都带有 RETURN 语句（非 TABLE 返回）。
+    # 在 PG 中正确形式：全部 OUT 变 INOUT 保留为参数，RETURNS RECORD（多 OUT）或原 RETURNS 类型（单 OUT）。
+    # 由 post-pass p44c_inout 统一修。这里千万不能删 OUT 参数，否则函数体引用 OUT 变量变成未知变量。
     if out_params_info and is_func:
-        for name, _ in out_params_info:
-            # 移除 OUT/INOUT 参数项 - 使用直接替换
-            # 匹配 'INOUT name TYPE' 或 'OUT name TYPE' 或 'name INOUT TYPE' 等
-            pg_args = re.sub(rf'\b(?:INOUT|OUT)\s+{re.escape(name)}\s+\w+', '', pg_args, flags=re.IGNORECASE)
-            pg_args = re.sub(rf'\b{re.escape(name)}\s+(?:INOUT|OUT)\s+\w+', '', pg_args, flags=re.IGNORECASE)
-            # 也删除可能的尾随逗号
-            pg_args = re.sub(rf',\s*{re.escape(name)}\s+\w+', '', pg_args, flags=re.IGNORECASE)
-        # 清理剩余逗号
-        pg_args = re.sub(r'\s*,\s*,\s*', ',', pg_args)
-        pg_args = pg_args.strip().strip(',').strip()
+        # 不删 OUT 参数；FUNCTION 的 OUT 参数由 post-pass 统一处理为 INOUT
+        pass
     elif out_params_info and not is_func:
         # PG 8.4 disallows IN param DEFAULT before INOUT param in a PROCEDURE.
         # Drop DEFAULT from any IN param that precedes an INOUT param so the
@@ -4068,6 +4066,10 @@ def _convert_single_function(
                 parts[i] = p
         pg_args = ', '.join(parts)
     if not returns_table:
+        returns_table = f"RETURNS {_map_return_type(func.return_type)}"
+    # FUNCTION 带 OUT 参数不走 RETURNS TABLE（会与 INOUT 参数冲突）。
+    # 还原为原 RETURN 类型，让 post-pass p44c_inout 改成 RETURNS RECORD。
+    if is_func and out_params_info:
         returns_table = f"RETURNS {_map_return_type(func.return_type)}"
 
     # 6. Apply type mapping to variable declarations (process declare FIRST

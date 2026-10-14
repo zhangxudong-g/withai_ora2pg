@@ -116,6 +116,13 @@ _PERCENT_TYPE_RE = re.compile(
     re.IGNORECASE,
 )
 
+# 裸 col%TYPE（无表名前缀）：如 "v_MAX ROW_NO%TYPE"
+# 前面不能是 \w.（避免把 table.col%TYPE 重复匹配）
+_BARE_PERCENT_TYPE_RE = re.compile(
+    r"(?<![\w.])(\w+)%TYPE\b",
+    re.IGNORECASE,
+)
+
 
 def _strip_strings_and_comments(sql: str) -> str:
     """把字符串/注释替换为空格（保留位置），便于后续定位 DECLARE 块时不踩进去。
@@ -238,13 +245,19 @@ def resolve_percent_types(
         """[start, end) 区间的字符是否都在真实代码里（不在字符串/注释里）"""
         return all(c not in (" ", "\t") for c in stripped[start:end])
 
+    # 建 col → PG_TYPE 索引（用于裸 col%TYPE）：取第一个匹配的列
+    col_to_type: Dict[str, str] = {}
+    for (_t, c), pg in norm_map.items():
+        col_to_type.setdefault(c, pg)
+
     # 收集替换与未解析（按 start 升序）
     replacements: List[Tuple[int, int, str]] = []  # (start, end, repl)
     unresolved: List[Tuple[int, str]] = []  # (start, table.col)
 
     for (b_start, b_end) in blocks:
+        # 先处理 table.col%TYPE，把它们标记为已用（避免被裸 col%TYPE 再命中）
+        used_ranges: List[Tuple[int, int]] = []
         for pm in _PERCENT_TYPE_RE.finditer(sql, b_start, b_end):
-            # 跳过在字符串/注释内的匹配
             if not _is_real_text(pm.start(), pm.end()):
                 continue
             table = pm.group(1).upper()
@@ -252,6 +265,21 @@ def resolve_percent_types(
             pg_type = norm_map.get((table, col))
             if pg_type is None:
                 unresolved.append((pm.start(), f"{table}.{col}"))
+                continue
+            replacements.append((pm.start(), pm.end(), pg_type))
+            used_ranges.append((pm.start(), pm.end()))
+
+        # 再处理裸 col%TYPE（跳过已被 table.col%TYPE 命中的区间）
+        for pm in _BARE_PERCENT_TYPE_RE.finditer(sql, b_start, b_end):
+            if not _is_real_text(pm.start(), pm.end()):
+                continue
+            # 跳过在 table.col%TYPE 命中区间内的（如 "T.ROW_NO" 的 ROW_NO 部分）
+            if any(rs <= pm.start() < re_ for rs, re_ in used_ranges):
+                continue
+            col = pm.group(1).upper()
+            pg_type = col_to_type.get(col)
+            if pg_type is None:
+                unresolved.append((pm.start(), col))
                 continue
             replacements.append((pm.start(), pm.end(), pg_type))
 
