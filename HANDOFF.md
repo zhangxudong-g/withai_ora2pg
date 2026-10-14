@@ -182,7 +182,7 @@ export PGPASSWORD=postgres
 | — | P4-2R / P4-2 a~h | `541f1dc` / `2810905` |
 
 📌 **下次开工第一步**：
-1. P2-6：SYSTIMESTAMP/SYSDATE 转换（0.5–1 天）
-2. 残留 major 10 分析（排除误报后确认实际残留 → 清零）
-3. P5-2 端到端重转 + 全门禁（验证 Gate 稳定性）
-4. 提升总分至 ≥90（当前 86.4 B，需补 L3.5 权重 或 L2 分数）
+1. ✅ 残留 major 清零（`726d8d2`：字符串剥离+列名上下文过滤）
+2. ✅ 总分 99.6 A（`3381160`：L2 count_blocks 修复）
+3. P5-2：端到端 clean 重转 + 全门禁验证（验证 Gate 稳定性）
+4. P2-6：SYSTIMESTAMP/SYSDATE 转换（0.5–1 天，可选增强）
