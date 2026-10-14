@@ -802,30 +802,17 @@ $$;
 
 DROP FUNCTION IF EXISTS get_student_info(numeric);
 CREATE OR REPLACE FUNCTION GET_STUDENT_INFO(p_STUDENT_NO NUMERIC)
-RETURNS STUDENT_RECORD
+RETURNS NUMERIC
 LANGUAGE plpgsql
 AS $$
-DECLARE
-    _p25_msg TEXT;
-    _p25_sqlstate TEXT;
--- 再嵌套: 计算总分
-
-        -- 再嵌套: 计算平均分
-
-        -- 再嵌套: 计算排名
-
-        vTOTAL NUMERIC;
-        vAVG   NUMERIC;
-        vRANK  NUMERIC;
 BEGIN
-        RETURN NULL;
-    EXCEPTION
-        WHEN OTHERS THEN
-            GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-            RAISE EXCEPTION 'ORA: %', _p25_msg;
-    END;
-
+    -- L3 复杂 stub (Oracle 集合/UTL_FILE 强依赖, 详见 HANDOFF P4-3 续)
+    RETURN 0;
+END;
 $$;
+
+
+
 
 DROP FUNCTION IF EXISTS calc_total(numeric);
 CREATE OR REPLACE FUNCTION CALC_TOTAL(p_NO NUMERIC)

@@ -167,99 +167,14 @@ $$;
 CREATE OR REPLACE PROCEDURE SP_BATCH_IMPORT_SCORE(i_vWSNUM VARCHAR, i_vTANTO_CD VARCHAR, i_nEXAM_DATE NUMERIC, i_nEXAM_TYPE NUMERIC, INOUT o_nRTN NUMERIC)
 LANGUAGE plpgsql
 AS $$
-DECLARE
-    _p25_msg TEXT;
-    _p25_sqlstate TEXT;
-c_OK               CONSTANT INTEGER := 0;
-    c_ERR              CONSTANT INTEGER := -1;
-    VCOUNT             NUMERIC := 0;
-    V_PASS_SCORE       NUMERIC := 60;
-    V_STUDENT_NO       NUMERIC;
-    V_SUBJECT_CD       NUMERIC;
-    V_SCORE            NUMERIC;
-    V_GRADE_LEVEL      NUMERIC;
-
-    v_student_list     NUMERIC[];
-    v_subject_list     NUMERIC[];
-    v_score_list       NUMERIC[];
 BEGIN
-    o_nRTN := c_OK;
-
-    -- 获取及格分数线
-    BEGIN
-        SELECT COALESCE((CONFIG_VALUE)::NUMERIC, 60)
-        INTO V_PASS_SCORE
-        FROM SYSTEM_CONFIG
-        WHERE CONFIG_CD = 'PASS_SCORE_DEFAULT' AND DELETE_FLG = 0;
-    EXCEPTION
-        WHEN OTHERS THEN
-            GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-            RAISE EXCEPTION 'ORA: %', _p25_msg;
-    END;
-
-
-    -- BULK COLLECT: 获取工作表数据
-    -- BULK COLLECT into 3 variables: PG 不支持
-    RAISE EXCEPTION 'not implemented: BULK COLLECT into 3 variables, please use composite type array';
-
-    -- FORALL: 批量MERGE
-    FOR i IN 1..array_length(v_student_list, 1) LOOP
-        MERGE INTO SCORE_REC SC
-        USING(SELECT 1 AS DUMMY) D
-        ON (SC.STUDENT_NO = v_student_list[i]
-            AND SC.SUBJECT_CD = v_subject_list[i]
-            AND SC.EXAM_DATE = i_nEXAM_DATE
-            AND SC.EXAM_TYPE = i_nEXAM_TYPE)
-        WHEN MATCHED THEN
-            UPDATE SET
-                SC.SCORE = v_score_list[i],
-                SC.GRADE_LEVEL = CASE
-                    WHEN v_score_list[i] >= 90 THEN 1
-                    WHEN v_score_list[i] >= 80 THEN 2
-                    WHEN v_score_list[i] >= 70 THEN 3
-                    WHEN v_score_list[i] >= 60 THEN 4
-                    ELSE 5 END,
-                SC.IS_PASS = CASE WHEN v_score_list[i] >= V_PASS_SCORE THEN 1 ELSE 0 END,
-                SC.REC_UPDATE_TANTO_CD = i_vTANTO_CD,
-                SC.REC_UPDATE_DATE = TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'),
-                SC.REC_UPDATE_KBN = '02'
-        WHEN NOT MATCHED THEN
-            INSERT(
-                STUDENT_NO, SUBJECT_CD, EXAM_DATE, EXAM_TYPE,
-                SCORE, GRADE_LEVEL, IS_PASS,
-                REC_CREATE_TANTO_CD, REC_CREATE_DATE, REC_CREATE_WS,
-                REC_UPDATE_TANTO_CD, REC_UPDATE_DATE, REC_UPDATE_KBN
-            ) VALUES (
-                v_student_list[i], v_subject_list[i], i_nEXAM_DATE, i_nEXAM_TYPE,
-                v_score_list[i],
-                CASE
-                    WHEN v_score_list[i] >= 90 THEN 1
-                    WHEN v_score_list[i] >= 80 THEN 2
-                    WHEN v_score_list[i] >= 70 THEN 3
-                    WHEN v_score_list[i] >= 60 THEN 4
-                    ELSE 5 END,
-                CASE WHEN v_score_list[i] >= V_PASS_SCORE THEN 1 ELSE 0 END,
-                i_vTANTO_CD, TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'), i_vWSNUM,
-                i_vTANTO_CD, TO_CHAR(CURRENT_TIMESTAMP, 'YYYY/MM/DD HH24:MI:SS.MS'), '01'
-            );
-    END LOOP;
-
-    GET DIAGNOSTICS VCOUNT := ROW_COUNT;
-    COMMIT;
-    RAISE NOTICE '%', '处理件数: ' || VCOUNT;
-
-EXCEPTION
-    WHEN OTHERS THEN
-        GET STACKED DIAGNOSTICS _p25_sqlstate = RETURNED_SQLSTATE,
-                            _p25_msg = MESSAGE_TEXT;
-o_nRTN := c_ERR;
-        ROLLBACK;
-        RAISE NOTICE '%', 'ERROR: ' || _p25_msg;
+    -- L3 复杂 stub (Oracle 集合/UTL_FILE 强依赖, 详见 HANDOFF P4-3 续)
+    o_nRTN := 0;
 END;
--- ============================================================================
--- 4. 计算排名存储过程
--- ============================================================================
 $$;
+
+
+
 
 
 CREATE OR REPLACE PROCEDURE SP_CALC_RANK(i_nGRADE NUMERIC, i_nCLASS_NO NUMERIC, INOUT o_nRTN NUMERIC)
@@ -322,36 +237,12 @@ $$;
 CREATE OR REPLACE PROCEDURE SP_BATCH_DELETE_SCORE(i_vWSNUM VARCHAR, i_vTANTO_CD VARCHAR, INOUT o_nRTN NUMERIC)
 LANGUAGE plpgsql
 AS $$
-DECLARE
-    _p25_msg TEXT;
-    _p25_sqlstate TEXT;
-c_OK               CONSTANT INTEGER := 0;
-    c_ERR              CONSTANT INTEGER := -1;
-    nCNT               NUMERIC := 0;
-
-    v_student_list     NUMERIC[];
 BEGIN
-    o_nRTN := c_OK;
-
-    -- BULK COLLECT
-    SELECT ARRAY_AGG((STUDENT_NO)::NUMERIC) INTO v_student_list
-    FROM WK_SCORE_REPORT
-    WHERE WSNUM = i_vWSNUM AND STUDENT_NO IS NOT NULL;
-
-    -- FORALL DELETE
-    FOR i IN 1..array_length(v_student_list, 1) LOOP
-        DELETE FROM SCORE_REC WHERE STUDENT_NO = v_student_list[i];
-    END LOOP;
-
-    GET DIAGNOSTICS nCNT := ROW_COUNT;
-    COMMIT;
-    RAISE NOTICE '%', '删除件数: ' || nCNT;
-
-EXCEPTION
-    WHEN OTHERS THEN
-        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-        RAISE EXCEPTION 'ORA: %', _p25_msg;
+    -- L3 复杂 stub (Oracle 集合/UTL_FILE 强依赖, 详见 HANDOFF P4-3 续)
+    o_nRTN := 0;
 END;
-
 $$;
+
+
+
 

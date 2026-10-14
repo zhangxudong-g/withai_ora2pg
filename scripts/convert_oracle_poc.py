@@ -58,6 +58,7 @@ from rules.p44c_create import apply_p44c_create  # noqa: E402  P4-4c 阶段4 CRE
 from rules.p44c_inout import (  # noqa: E402  P4-4c 阶段5 INOUT+RETURNS
     apply_p44c_inout,
     scan_inout_fixes,
+    _fix_bare_procedure_calls,
 )
 from rules.p44c_cursor import (  # noqa: E402  P4-4c 阶段6 动态游标 OPEN FOR
     apply_p44c_cursor,
@@ -67,6 +68,7 @@ from rules.p44c_cursor_decl import (  # noqa: E402  P4-4c 阶段7 游标声明
     apply_p44c_cursor_decl,
     scan_cursor_decls,
 )
+from rules.l3_stub_complex import apply_l3_stub_complex  # noqa: E402  P4-3 续 L3 复杂函数 stub
 from rules.nested_inline import apply_nested_inline  # noqa: E402  P4-4c 嵌套函数内联
 
 POC_DIR = REPO_ROOT / "oracle_poc"
@@ -154,6 +156,36 @@ def render_with_warnings(converted: str, warnings) -> str:
 #   PACKAGE/PACKAGE_BODY/TRIGGER 的 DECLARE 块。查不到保留原文 + warning（不抛错）。
 # ---------------------------------------------------------------------------
 _POST_PASS_DIRS = ("FUNCTION", "PROCEDURE", "PACKAGE", "PACKAGE_BODY", "TRIGGER")
+
+
+def post_pass_l3_stub(dst_dir: Path) -> dict:
+    """P4-3 续: 检测含 Oracle 集合/UTL_FILE/BULK 强依赖的函数体，整段 stub。"""
+    all_warnings: List[str] = []
+    files_touched: List[str] = []
+    total_stub = 0
+    all_names: List[str] = []
+    for sub in _POST_PASS_DIRS:
+        sub_dir = dst_dir / sub
+        if not sub_dir.exists():
+            continue
+        for f in sorted(sub_dir.glob("*.sql")):
+            try:
+                text = f.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            new_text = apply_l3_stub_complex(text)
+            if new_text != text:
+                try:
+                    f.write_text(new_text, encoding="utf-8")
+                    files_touched.append(f.name)
+                    # Re-parse to count stubs
+                    from rules.l3_stub_complex import stub_complex_bodies
+                    _, stats = stub_complex_bodies(new_text)
+                    total_stub += stats["stubs"]
+                    all_names.extend(stats["names"])
+                except OSError:
+                    pass
+    return {"stubs": total_stub, "warnings": all_warnings, "files_touched": files_touched, "names": all_names}
 
 
 def post_pass_percent_type(dst_dir: Path) -> dict:
@@ -678,6 +710,9 @@ def post_pass_p44c_inout(dst_dir: Path) -> dict:
             try:
                 stats = scan_inout_fixes(text)
                 new = apply_p44c_inout(text)
+                # PACKAGE_BODY: 追加大写 procedure 调用加 PERFORM
+                if sub == "PACKAGE_BODY":
+                    new = _fix_bare_procedure_calls(new)
             except Exception as exc:  # noqa: BLE001
                 warnings.append(f"{f.name}: P4-4c 阶段5 失败 {type(exc).__name__}: {exc}")
                 continue
@@ -1039,6 +1074,12 @@ def main() -> int:
     post_p44c3 = post_pass_p44c_pipe(dst_dir)
     if post_p44c3["substituted"] or post_p44c3.get("warnings"):
         print(f"  [P4-4c 阶段3] PIPE ROW 改写 {post_p44c3['substituted']} 处")
+
+    # P4-3 续: L3 复杂函数/过程整段 stub（必须在 p44c_pipe 之后跑，避免干掉 RETURN NEXT）
+    post_l3 = post_pass_l3_stub(dst_dir)
+    if post_l3["stubs"]:
+        print(f"  [P4-3 续 后处理] L3 复杂 stub {post_l3['stubs']} 处, 改动 {len(post_l3['files_touched'])} 文件")
+        print(f"    [debug] stub names: {post_l3.get('names', [])}")
 
     # P4-4c 阶段 4: CREATE OR REPLACE → DROP IF EXISTS + CREATE
     post_p44c4 = post_pass_p44c_create(dst_dir)

@@ -91,8 +91,121 @@ def apply_p44c_fixes(sql: str) -> str:
     """P4-4c 第一阶段：set_config + FOR rec record + PERFORM set_config。"""
     sql = fix_begin_set_config(sql)
     sql = fix_for_rec_select(sql)
+    sql = _stub_oracle_nested_functions(sql)
     sql = _fix_perform_set_config(sql)
     return sql
+
+
+# ---------------------------------------------------------------------------
+# Oracle 风格嵌套函数 stub
+# ---------------------------------------------------------------------------
+def _stub_oracle_nested_functions(sql: str) -> str:
+    """删除 DECLARE 段中 Oracle 风格的嵌套函数定义。
+
+    特征:
+      1. `FUNCTION name(IN/OUT param) ...`（可能跨多行）→ 删整个块
+      2. `IS` 单独一行 → 删 IS + BEGIN...END block
+
+    删嵌套函数后若 DECLARE 后无 BEGIN 则补 BEGIN...END。
+    """
+    lines = sql.split("\n")
+    out: list = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i]
+        stripped = line.strip()
+
+        # 类型1: 行首 FUNCTION（可能跨多行），检测 Oracle 嵌套函数特征
+        if re.match(r"FUNCTION\s+[A-Za-z_][\w.]*\s*\(", stripped, re.IGNORECASE):
+            fn_lines = [stripped]
+            j = i + 1
+            paren_depth = stripped.count("(") - stripped.count(")")
+            while j < n and paren_depth > 0:
+                next_line = lines[j].strip()
+                fn_lines.append(next_line)
+                paren_depth += next_line.count("(") - next_line.count(")")
+                j += 1
+            full_sig = " ".join(fn_lines)
+            if (re.search(r"\bIN\s+\w|\bOUT\s+\w|\bINOUT\s+\w", full_sig, re.IGNORECASE)
+                    or re.search(r"\bRETURN\s+\w|\bIS\b", full_sig, re.IGNORECASE)):
+                # 跳过整个嵌套函数块: 从当前行到 END
+                depth = 0
+                while j < n:
+                    cur = lines[j].strip()
+                    if re.match(r"\bBEGIN\b", cur, re.IGNORECASE):
+                        depth += 1
+                        j += 1
+                    elif re.match(r"\bEND\s+\S+\s*;|^\s*END\s*;\s*$", cur, re.IGNORECASE):
+                        depth -= 1
+                        j += 1
+                        if depth <= 0:
+                            break
+                        j += 1
+                    else:
+                        j += 1
+                i = j
+                continue
+
+        # 类型2: `IS` 单独一行
+        if re.match(r"^\s*IS\s*$", stripped, re.IGNORECASE):
+            j = i + 1
+            # 跳过声明行（到 BEGIN 之前）
+            while j < n:
+                nxt = lines[j].strip()
+                if re.match(r"^\s*BEGIN\b", nxt, re.IGNORECASE):
+                    break
+                j += 1
+            j += 1  # skip BEGIN
+            depth = 1
+            while j < n:
+                cur = lines[j].strip()
+                if re.match(r"\bBEGIN\b", cur, re.IGNORECASE):
+                    depth += 1
+                    j += 1
+                elif re.match(r"\bEND\s+\S+\s*;|^\s*END\s*;\s*$", cur, re.IGNORECASE):
+                    depth -= 1
+                    j += 1
+                    if depth <= 0:
+                        break
+                else:
+                    j += 1
+            i = j
+            continue
+
+        out.append(line)
+        i += 1
+
+    # 后处理: 修复缺少 BEGIN 的 DECLARE 块
+    sql = "\n".join(out)
+    out = []
+    lines = sql.split("\n")
+    i = 0
+    n = len(lines)
+    while i < n:
+        stripped = lines[i].strip()
+        if re.match(r"^DECLARE\s*$", stripped, re.IGNORECASE):
+            out.append(lines[i])
+            i += 1
+            while i < n:
+                cur = lines[i].strip()
+                if cur.startswith("$$;"):
+                    out.append("BEGIN")
+                    out.append("END;")
+                    out.append(lines[i])
+                    i += 1
+                    break
+                elif re.match(r"\bBEGIN\b", cur, re.IGNORECASE):
+                    out.append(lines[i])
+                    i += 1
+                    break
+                else:
+                    out.append(lines[i])
+                    i += 1
+        else:
+            out.append(lines[i])
+            i += 1
+    return "\n".join(out)
 
 
 def _fix_perform_set_config(sql: str) -> str:

@@ -10,8 +10,8 @@ PG 15.19 实测规则（见 commit 修复说明，勿凭记忆改动）：
    （``INOUT``/``OUT`` 写在参数名前后两种写法都要识别）
 
 2. 类型对齐之后，带输出参数的函数**只能裸 RETURN**：
-   `ERROR: 在带有输出参数的函数中RETURN不能有参数`
-   即 ``RETURN TRUE;`` / ``RETURN o_x;`` 都要改成 ``RETURN;``
+  `ERROR: 在带有输出参数的函数中RETURN不能有参数`
+  即 ``RETURN TRUE;`` / ``RETURN o_x;`` 都要改成 ``RETURN;``
 
 因此正确的修法是「改 RETURNS 类型 + 把函数体内 RETURN 表达式改成裸 RETURN」。
 
@@ -158,4 +158,232 @@ def fix_inout_returns(sql: str) -> str:
 
 
 def apply_p44c_inout(sql: str) -> str:
-    return fix_inout_returns(sql)
+    sql = fix_inout_returns(sql)
+    sql = _convert_multi_out_to_procedure(sql)
+    # 注意: _fix_bare_procedure_calls 只能在 PACKAGE_BODY 上跑（它会给
+    # 大写开头的裸调用加 PERFORM，误伤返回值的函数如 FORMAT_CONTENT）。
+    # 在 post_pass 中按文件名调用，这里只做 core 修复。
+    return sql
+
+
+# -------------------------------------------------------------------------
+# 追加: 大写开头的 procedure/function 调用 → PERFORM
+# -------------------------------------------------------------------------
+def _fix_bare_procedure_calls(sql: str) -> str:
+    """为所有大写开头的裸函数/过程调用添加 PERFORM 前缀（表达式上下文除外）。
+
+    Oracle 转换后的 PostgreSQL 代码中，procedure 调用如 `PROC_INSERT_WORK(...)`
+    需要 `PERFORM` 或 `CALL` 前缀。
+    排除: SELECT 列、括号内表达式、行首关键字（IF/WHEN/THEN 等）。
+    """
+    stripped, restore = _strip_strings_and_comments(sql)
+    # 先修复 PERFORM <字面量> -- stub 的错误 stub
+    stripped = re.sub(
+        r"^\s*PERFORM\s+\d+\s*",
+        "-- stub: ",
+        stripped,
+        flags=re.MULTILINE,
+    )
+    # 修复 DECLARE 后缩进错位的裸变量声明 (如 "bRTN    BOOLEAN;")
+    stripped = re.sub(
+        r"^(\w+)\s+(\w+);$",
+        r"    \1 \2;",
+        stripped,
+        flags=re.MULTILINE,
+    )
+    # 修复 CALL proc(...) 作为语句 → PERFORM proc(...)
+    # PG 15: CALL 不能在 plpgsql 块内作为普通语句
+    stripped = re.sub(
+        r"^\s*CALL\s+",
+        "PERFORM ",
+        stripped,
+        flags=re.MULTILINE,
+    )
+    # 修复 PERFORM 被误加到表达式行 (PERFORM expr || ',' || ...)
+    # 去掉大写开头函数的 PERFORM 前缀（PERFORM FOO(...) → FOO(...)）
+    stripped = re.sub(
+        r"^\s*PERFORM\s+([A-Z_][A-Z0-9_]*)\(",
+        r"\1(",
+        stripped,
+        flags=re.MULTILINE,
+    )
+    lines = stripped.split("\n")
+    out = []
+    _PG_KEYWORDS = frozenset({
+        "SELECT", "INSERT", "UPDATE", "DELETE", "WITH", "COPY", "EXPLAIN",
+        "TABLE", "VALUES", "SET", "SHOW", "VACUUM", "ANALYZE", "GRANT",
+        "REVOKE", "CREATE", "ALTER", "DROP", "TRUNCATE", "LOCK", "NOTIFY",
+        "LISTEN", "LOAD", "DEALLOCATE", "DISCARD", "FETCH", "MOVE", "CLOSE",
+        "PREPARE", "EXECUTE", "CALL", "DO", "COMMENT", "REFRESH", "IMPORT",
+        "AND", "OR", "NOT", "CASE", "WHEN", "THEN", "ELSE", "IF", "LOOP",
+        "RETURN", "RAISE", "EXECUTE", "PERFORM",
+    })
+        # 大写开头的裸调用: 行首 + 标识符 + (
+    _PROC_CALL_RE = re.compile(r"^\s*([A-Z_][A-Z0-9_]*)\s*\(", re.MULTILINE)
+    # 排除行首关键字上下文
+    _LEADING_KW_RE = re.compile(
+        r"^\s*(?:SELECT|INSERT|UPDATE|DELETE|WITH|VALUES|FROM|WHERE|AND|OR|"
+        r"WHEN|IF|THEN|ELSE|ELSIF|RETURN|CASE|END|LOOP|WHILE|FOR|EXIT|UNTIL|RAISE|EXECUTE|PERFORM|INTO)",
+        re.IGNORECASE,
+    )
+    # 跟踪是否在 SELECT 列中间（SELECT 之后到 INTO/FROM 之前）
+    in_select_columns = False
+    # 跟踪是否在 VALUES (...) 列表中
+    in_values = False
+    for line in lines:
+        stripped_line = line.strip()
+        # 检测 SELECT 开头
+        if re.match(r"^\s*SELECT\b", line, re.IGNORECASE):
+            in_select_columns = True
+        # 检测 INTO / FROM 结束 SELECT 列
+        if in_select_columns and re.match(r"^\s*(INTO|FROM)\b", stripped_line, re.IGNORECASE):
+            in_select_columns = False
+        # 检测 VALUES 开头 (可能在本行或前一行)
+        if re.match(r"^\s*VALUES\s*\(", stripped_line, re.IGNORECASE):
+            in_values = True
+        # 也检测前一行是否以 VALUES ( 结尾
+        if not in_values and out and re.search(r"VALUES\s*\(\s*$", out[-1], re.IGNORECASE):
+            in_values = True
+        # 检测 VALUES 列表结束 (行尾为 )
+        if in_values and stripped_line.endswith(");"):
+            in_values = False
+        # 在 SELECT 列中间不加 PERFORM
+        if in_select_columns:
+            out.append(line)
+            continue
+        # 在 VALUES 列表中不加 PERFORM
+        if in_values:
+            out.append(line)
+            continue
+        # 跳过 PERFORM <字面量>（错误 stub）
+        if re.match(r"^\s*PERFORM\s+\d", line):
+            out.append(line)
+            continue
+        # 跳过表达式续行（以 || 开头或前一行以 || 结尾）
+        if stripped_line.startswith("||"):
+            out.append(line)
+            continue
+        # 检查前一行是否以 || 结尾（本行是续行）
+        if out and out[-1].strip().endswith("||"):
+            out.append(line)
+            continue
+        m = _PROC_CALL_RE.match(line)
+        if (m and not line.lstrip().startswith("PERFORM")
+                and not _LEADING_KW_RE.match(line)):
+            name = m.group(1)
+            if name.upper() not in _PG_KEYWORDS:
+                rest = line[m.end()-1:]
+                out.append(f"PERFORM {name}{rest}")
+                continue
+        out.append(line)
+    return _restore_placeholders("\n".join(out), restore)
+
+
+# ---------------------------------------------------------------------------
+# 多 OUT 参数函数 → PROCEDURE（PG 15: 函数调用不能做独立语句）
+# ---------------------------------------------------------------------------
+def _convert_multi_out_to_procedure(sql: str) -> str:
+    """带 ≥2 个 OUT/INOUT 参数的 FUNCTION → PROCEDURE。
+
+    PG 15 实测：带多 OUT 参数的函数调用 `func(a, OUT b, OUT c)` 作为独立语句
+    会报 `syntax error near func_name`。改为 PROCEDURE（无 RETURNS 子句）。
+    同时将函数体内的调用改为 PERFORM。
+
+    同时修复 preceding `DROP FUNCTION IF EXISTS` → `DROP PROCEDURE IF EXISTS`
+    （因为函数被转为 PROCEDURE 后，旧的 DROP FUNCTION 会报"is not a function"）。
+    """
+    stripped, restore = _strip_strings_and_comments(sql)
+
+    # 第一遍: 找出所有多 OUT 函数名
+    _DEF_RE = re.compile(
+        r"CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+([\w.]+)"
+        r"\s*\(([^)]*)\)",
+        re.IGNORECASE,
+    )
+    multi_out_names = set()
+    for m in _DEF_RE.finditer(stripped):
+        params = m.group(2)
+        out_count = len(re.findall(r"\b(?:INOUT|OUT)\s+\w+", params, re.IGNORECASE))
+        if out_count >= 2:
+            multi_out_names.add(m.group(1))
+
+    if not multi_out_names:
+        return _restore_placeholders(stripped, restore)
+
+    # 第二遍: 改 FUNCTION → PROCEDURE，删 RETURNS，补 DROP PROCEDURE
+    lines = stripped.split("\n")
+    out: list = []
+    i = 0
+    n = len(lines)
+    while i < n:
+        line = lines[i]
+
+        # 检测 FUNCTION 定义（不包括 PROCEDURE）
+        fn_m = re.match(
+            r"CREATE\s+OR\s+REPLACE\s+FUNCTION\s+([\w.]+)\s*\(",
+            line, re.IGNORECASE,
+        )
+        if fn_m:
+            fn_name = fn_m.group(1)
+            if fn_name in multi_out_names:
+                # 向前找 DROP FUNCTION IF EXISTS 行，改为 DROP PROCEDURE IF EXISTS
+                if out and re.match(r"DROP\s+FUNCTION\s+IF\s+EXISTS", out[-1], re.IGNORECASE):
+                    out[-1] = re.sub(
+                        r"DROP\s+FUNCTION\s+IF\s+EXISTS",
+                        "DROP PROCEDURE IF EXISTS",
+                        out[-1], 0, re.IGNORECASE,
+                    )
+                # 追加 DROP PROCEDURE IF EXISTS（兜底）
+                out.append(f"DROP PROCEDURE IF EXISTS {fn_name};")
+                # 改 FUNCTION → PROCEDURE
+                out.append(re.sub(
+                    r"CREATE\s+OR\s+REPLACE\s+FUNCTION\s+",
+                    "CREATE OR REPLACE PROCEDURE ",
+                    line, 0, re.IGNORECASE,
+                ))
+                i += 1
+                # 跳过 RETURNS 行
+                while i < n and not lines[i].strip().upper().startswith("LANGUAGE"):
+                    i += 1
+                continue
+        out.append(line)
+        i += 1
+
+    result = "\n".join(out)
+
+    # 第三遍: 语句级调用改 PERFORM（不在多 OUT 定义内）
+    # PG: 函数/过程调用可写作 `PERFORM func(args)`
+    # 不改: IF/WHEN/THEN/ELSIF/RETURN 等表达式上下文
+    _DEF_RE2 = re.compile(
+        r"CREATE\s+OR\s+REPLACE\s+(?:FUNCTION|PROCEDURE)\s+([\w.]+)\s*\(",
+        re.IGNORECASE,
+    )
+    lines = result.split("\n")
+    out = []
+    in_multi_out_def = False
+    for line in lines:
+        fn_m = _DEF_RE2.match(line)
+        if fn_m and fn_m.group(1) in multi_out_names:
+            in_multi_out_def = True
+            out.append(line)
+        elif in_multi_out_def and re.match(r"\s*\$\$", line.strip()):
+            in_multi_out_def = False
+            out.append(line)
+        elif not in_multi_out_def:
+            new_line = line
+            # 跳过表达式上下文（行首关键字）
+            if not re.match(
+                    r"^\s*(?:IF|WHEN|ELSIF|RETURN|CASE\b|SELECT\b|VALUES\b"
+                    r"|THEN\b|ELSE\b|AND\b|OR\b|NOT\b)",
+                    new_line, re.IGNORECASE):
+                for fn in multi_out_names:
+                    new_line = re.sub(
+                        rf"\b({re.escape(fn)})\s*\(",
+                        rf"PERFORM \1(",
+                        new_line,
+                    )
+            out.append(new_line)
+        else:
+            out.append(line)
+
+    return _restore_placeholders("\n".join(out), restore)

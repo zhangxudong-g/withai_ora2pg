@@ -49,7 +49,7 @@ DECLARE
     _p25_sqlstate TEXT;
 -- Unsupported: AUTONOMOUS_TRANSACTION not natively supported in PostgreSQL
 -- Use dblink or pg_background extension for autonomous transaction behavior
-v_LOG_ID NUMERIC;
+    v_LOG_ID NUMERIC;
 
         -- 嵌套函数: 格式化日志消息
 BEGIN
@@ -147,12 +147,12 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-v_MAX_JOBNUM NUMERIC;
+    v_MAX_JOBNUM NUMERIC;
             v_NEW_JOBNUM NUMERIC;
 BEGIN
             SELECT COALESCE(MAX(JOBNUM), 0) INTO v_MAX_JOBNUM FROM WK_SCORE_REPORT;
             -- 嵌套函数: 生成新批次号
-            v_NEW_JOBNUM := v_MAX_JOBNUM + 1;
+            v_NEW_JOBNUM := GEN_NEW_JOBNUM(v_MAX_JOBNUM);
             RETURN v_NEW_JOBNUM;
         EXCEPTION
             WHEN OTHERS THEN
@@ -244,7 +244,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-v_CNT NUMERIC;
+    v_CNT NUMERIC;
 BEGIN
             SELECT COUNT(*) INTO v_CNT FROM SYSTEM_CONFIG
             WHERE CONFIG_CD = i_sCD;
@@ -384,9 +384,9 @@ BEGIN
 
 $$;
 
-DROP FUNCTION IF EXISTS parse_ymd(numeric, numeric);
-CREATE OR REPLACE FUNCTION PARSE_YMD(i_nYMD NUMERIC, INOUT o_nY NUMERIC, INOUT o_nM NUMERIC, INOUT o_nD NUMERIC)
-RETURNS RECORD
+DROP PROCEDURE IF EXISTS parse_ymd(numeric, numeric, numeric, numeric);
+DROP PROCEDURE IF EXISTS PARSE_YMD;
+CREATE OR REPLACE PROCEDURE PARSE_YMD(i_nYMD NUMERIC, INOUT o_nY NUMERIC, INOUT o_nM NUMERIC, INOUT o_nD NUMERIC)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -540,7 +540,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-v_VALUE NUMERIC;
+    v_VALUE NUMERIC;
 BEGIN
                 SELECT COALESCE((CONFIG_VALUE)::NUMERIC, 0)
                 INTO v_VALUE
@@ -620,7 +620,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-v_CNT NUMERIC;
+    v_CNT NUMERIC;
 BEGIN
             SELECT COUNT(*) INTO v_CNT FROM STUDENT_MST
             WHERE STUDENT_NO = i_nNO AND DELETE_FLG = 0;
@@ -706,9 +706,9 @@ BEGIN
 
 $$;
 
-DROP FUNCTION IF EXISTS get_subject_info(numeric, varchar);
-CREATE OR REPLACE FUNCTION GET_SUBJECT_INFO(i_nCD NUMERIC, INOUT o_sNAME VARCHAR, INOUT o_nCREDIT NUMERIC)
-RETURNS RECORD
+DROP PROCEDURE IF EXISTS get_subject_info(numeric, varchar, numeric);
+DROP PROCEDURE IF EXISTS GET_SUBJECT_INFO;
+CREATE OR REPLACE PROCEDURE GET_SUBJECT_INFO(i_nCD NUMERIC, INOUT o_sNAME VARCHAR, INOUT o_nCREDIT NUMERIC)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -905,7 +905,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-v_MAX BIGINT;
+    v_MAX BIGINT;
 BEGIN
             SELECT COALESCE(MAX(ROW_NO), 0) + 1 INTO v_MAX
             FROM WK_SCORE_REPORT WHERE WSNUM = i_sWS;
@@ -948,28 +948,37 @@ BEGIN
     END;
 $$;
 
-CREATE OR REPLACE FUNCTION CALC_STATS(i_nSTUDENT_NO NUMERIC, i_sWSNUM VARCHAR, i_vSTUDENT_NAME VARCHAR, i_nTOTAL_SCORE NUMERIC, i_nAVG_SCORE NUMERIC)
+CREATE OR REPLACE FUNCTION CALC_STATS()
 RETURNS NUMERIC
 LANGUAGE plpgsql
 AS $$
 DECLARE
     _p25_msg TEXT;
-    nTOTAL NUMERIC;
-    nAVG   NUMERIC;
-    nPASS  NUMERIC;
-    nFAIL  NUMERIC;
+    _p25_sqlstate TEXT;
+-- 再嵌套: 计算总分
+
+            -- 再嵌套: 计算平均分
+
+            -- 再嵌套: 计算及格/不及格数
+
+            nTOTAL NUMERIC;
+            nAVG   NUMERIC;
+            nPASS  NUMERIC;
+            nFAIL  NUMERIC;
 BEGIN
-    nTOTAL := CALC_TOTAL_SCORE(i_nSTUDENT_NO);
-    nAVG := CALC_AVG_SCORE(i_nSTUDENT_NO);
-    PERFORM CALC_PASS_FAIL(i_nSTUDENT_NO, nPASS, nFAIL);
-    PERFORM PROC_INSERT_WORK(i_sWSNUM, i_nSTUDENT_NO, i_vSTUDENT_NAME,
+            nTOTAL := CALC_TOTAL_SCORE(i_nSTUDENT_NO);
+            nAVG := CALC_AVG_SCORE(i_nSTUDENT_NO);
+PERFORM CALC_PASS_FAIL(i_nSTUDENT_NO, nPASS, nFAIL);
+
+PERFORM PROC_INSERT_WORK(i_sWSNUM, i_nSTUDENT_NO, i_vSTUDENT_NAME,
                            nTOTAL, nAVG, nPASS, nFAIL);
-    RETURN 0;
-    EXCEPTION
-        WHEN OTHERS THEN
-            GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-            RAISE EXCEPTION 'ORA: %', _p25_msg;
-    END;
+            RETURN 0;
+        EXCEPTION
+            WHEN OTHERS THEN
+                GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
+                RAISE EXCEPTION 'ORA: %', _p25_msg;
+        END;
+
 $$;
 
 DROP FUNCTION IF EXISTS calc_total_score(numeric);
@@ -1010,9 +1019,9 @@ BEGIN
 
 $$;
 
-DROP FUNCTION IF EXISTS calc_pass_fail(numeric, numeric);
-CREATE OR REPLACE FUNCTION CALC_PASS_FAIL(i_nSTU NUMERIC, INOUT o_nPASS NUMERIC, INOUT o_nFAIL NUMERIC)
-RETURNS RECORD
+DROP PROCEDURE IF EXISTS calc_pass_fail(numeric, numeric, numeric);
+DROP PROCEDURE IF EXISTS CALC_PASS_FAIL;
+CREATE OR REPLACE PROCEDURE CALC_PASS_FAIL(i_nSTU NUMERIC, INOUT o_nPASS NUMERIC, INOUT o_nFAIL NUMERIC)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -1040,32 +1049,29 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
     _p25_msg TEXT;
-BEGIN
-    o_nRTN := 0;
-    RAISE NOTICE 'PROC_BATCH_SCORE_PROCESS: not fully converted (nested functions), see P4-4';
-EXCEPTION
-    WHEN OTHERS THEN
-        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-        RAISE EXCEPTION 'ORA: %', _p25_msg;
-END;
+    _p25_sqlstate TEXT;
+v_scores         TEXT[];
+        v_exists         NUMERIC;
+        v_grade_level    NUMERIC;
+        v_cnt            NUMERIC := 0;
+
+        -- 嵌套函数: 批量获取数据
+
+    BEGIN END;
 $$;
 
 
 CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.PROC_BATCH_RANK_UPDATE(i_nGRADE NUMERIC, INOUT o_nRTN NUMERIC)
 LANGUAGE plpgsql
 AS $$
-DECLARE
-    _p25_msg TEXT;
 BEGIN
+    -- L3 复杂 stub (Oracle 集合/UTL_FILE 强依赖, 详见 HANDOFF P4-3 续)
     o_nRTN := 0;
-    RAISE NOTICE 'PROC_BATCH_RANK_UPDATE: not fully converted (dynamic BULK COLLECT), see P4-3';
-    PERFORM FUNC_SETLOG('PROC_BATCH_RANK_UPDATE', 0, 0, '', '', '排名更新: stub');
-EXCEPTION
-    WHEN OTHERS THEN
-        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-        RAISE EXCEPTION 'ORA: %', _p25_msg;
 END;
 $$;
+
+
+
 
 DROP FUNCTION IF EXISTS build_rank_query(numeric);
 CREATE OR REPLACE FUNCTION BUILD_RANK_QUERY(i_nGRD NUMERIC)
@@ -1098,15 +1104,42 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
     _p25_msg TEXT;
+    _p25_sqlstate TEXT;
+    v_FILE RECORD;
+        v_LINE     VARCHAR(4000);
+        v_CNT      NUMERIC := 0;
+
+        -- 嵌套函数: 格式化CSV行
+
+        -- 嵌套函数: 写入文件头
+
+        CUR_DATA CURSOR FOR
+            SELECT ROW_NO, STUDENT_NO, STUDENT_NAME, TOTAL_SCORE, AVERAGE_SCORE
+            FROM WK_SCORE_REPORT
+            WHERE WSNUM = i_vWSNUM
+            ORDER BY ROW_NO;
 BEGIN
-    o_nRTN := 0;
-    o_vFILE_PATH := 'DATA_DIR/' || i_vFILENAME;
-    RAISE NOTICE 'PROC_EXPORT_CSV: UTL_FILE not available in PG, file export stubbed (P4-3)';
-EXCEPTION
-    WHEN OTHERS THEN
-        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-        RAISE EXCEPTION 'ORA: %', _p25_msg;
-END;
+        RAISE NOTICE 'UTL_FILE.FOPEN stub (PG 不支持文件写入)';
+        v_FILE := NULL;
+PERFORM WRITE_HEADER(v_FILE);
+
+        FOR rec IN CUR_DATA LOOP
+            v_LINE := FORMAT_CSV_LINE(rec.ROW_NO, rec.STUDENT_NO, rec.STUDENT_NAME,
+                                      rec.TOTAL_SCORE, rec.AVERAGE_SCORE);
+            RAISE LOG 'UTL_FILE.PUT_LINE stub: %', v_LINE;
+            v_CNT := v_CNT + 1;
+        END LOOP;
+-- stub: -- UTL_FILE.FCLOSE stub;
+        o_nRTN := c_OK;
+        o_vFILE_PATH := 'DATA_DIR/' || i_vFILENAME;
+PERFORM FUNC_SETLOG('PROC_EXPORT_CSV', 0, 0, '', '', '导出: ' || v_CNT || '件');
+
+    EXCEPTION
+        WHEN OTHERS THEN
+            GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
+            RAISE EXCEPTION 'ORA: %', _p25_msg;
+    END;
+
 $$;
 
 DROP FUNCTION IF EXISTS write_header(record);
@@ -1158,11 +1191,11 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-bRTN    BOOLEAN;
+    bRTN BOOLEAN;
 BEGIN
         bRTN := FUNC_INIT(i_sWSNUM, i_sTANTO_CD);
-        CALL PROC_LOAD_CONFIG();
-        CALL PROC_CLEAR_WORKTABLE(current_setting('PKG_SCORE_MANAGE.g_sWSNUM'));
+PERFORM PROC_LOAD_CONFIG();
+PERFORM PROC_CLEAR_WORKTABLE(current_setting('PKG_SCORE_MANAGE.g_sWSNUM'));
 
         o_nRESULT := c_OK;
         o_sMESSAGE := '处理完成,批次号:' || current_setting('PKG_SCORE_MANAGE.g_nJOBNUM');
@@ -1183,7 +1216,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-bRTN        BOOLEAN;
+    bRTN BOOLEAN;
         nRTN        NUMERIC;
         nROWNO      NUMERIC := 0;
         vUSER       VARCHAR(100);
@@ -1193,9 +1226,8 @@ BEGIN
     PERFORM set_config('PKG_SCORE_MANAGE.g_nJOBNUM', i_nJOBNUM, false);
         PERFORM set_config('PKG_SCORE_MANAGE.g_sWSNUM', i_sWSNUM, false);
         PERFORM set_config('PKG_SCORE_MANAGE.g_sTANTO_CD', i_sTANTO_CD, false);
-
-        CALL PROC_LOAD_CONFIG();
-        CALL PROC_CLEAR_WORKTABLE(current_setting('PKG_SCORE_MANAGE.g_sWSNUM'));
+PERFORM PROC_LOAD_CONFIG();
+PERFORM PROC_CLEAR_WORKTABLE(current_setting('PKG_SCORE_MANAGE.g_sWSNUM'));
 
         v_cursor := F_GET_STUDENT_CURSOR(i_nGRADE, i_nCLASS_NO);
 
@@ -1203,7 +1235,7 @@ BEGIN
             FETCH v_cursor INTO v_student;
             EXIT WHEN NOT FOUND;
             nROWNO := nROWNO + 1;
-            CALL PROC_PROCESS_STUDENT(v_student.STUDENT_NO, v_student.STUDENT_NAME,
+PERFORM PROC_PROCESS_STUDENT(v_student.STUDENT_NO, v_student.STUDENT_NAME,
                                 v_student.GRADE, v_student.CLASS_NO, current_setting('PKG_SCORE_MANAGE.g_sWSNUM'), nRTN);
         END LOOP;
 
@@ -1229,7 +1261,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-nEXISTS    NUMERIC;
+    nEXISTS NUMERIC;
         nGRADE     NUMERIC;
 BEGIN
         o_nRTN := c_OK;
@@ -1278,23 +1310,10 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_BATCH_PROCESS_SCORE(i_vWSNUM VARC
 LANGUAGE plpgsql
 AS $$
 BEGIN
-        CALL PROC_BATCH_SCORE_PROCESS(i_vWSNUM, i_vTANTO_CD, i_nEXAM_DATE, i_nEXAM_TYPE, o_nRTN);
+PERFORM PROC_BATCH_SCORE_PROCESS(i_vWSNUM, i_vTANTO_CD, i_nEXAM_DATE, i_nEXAM_TYPE, o_nRTN);
     END;
 $$;
 
-
-CREATE OR REPLACE FUNCTION CUR_ALL_STUDENT(i_nGRADE NUMERIC, i_nCLASS_NO NUMERIC)
-RETURNS TABLE(STUDENT_NO NUMERIC, STUDENT_NAME VARCHAR, GRADE NUMERIC, CLASS_NO NUMERIC)
-LANGUAGE sql
-STABLE
-AS $$
-    SELECT STUDENT_NO::NUMERIC, STUDENT_NAME, GRADE::NUMERIC, CLASS_NO::NUMERIC
-    FROM STUDENT_MST
-    WHERE DELETE_FLG = 0 AND STATUS = 0
-      AND GRADE = i_nGRADE
-      AND (i_nCLASS_NO IS NULL OR CLASS_NO = i_nCLASS_NO)
-    ORDER BY STUDENT_NO;
-$$;
 
 CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_GEN_REPORT(i_nNENDO NUMERIC, i_nGRADE NUMERIC, i_nCLASS_NO NUMERIC, i_vWSNUM VARCHAR, INOUT o_nRTN NUMERIC)
 LANGUAGE plpgsql
@@ -1302,21 +1321,18 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-    v_student     RECORD;
-bRTN        BOOLEAN;
+    bRTN BOOLEAN;
         nRTN        NUMERIC;
         nROWNO      NUMERIC := 0;
         vUSER       VARCHAR(100);
 BEGIN
     PERFORM set_config('PKG_SCORE_MANAGE.g_sWSNUM', i_vWSNUM, false);
-    SELECT COALESCE(MAX(JOBNUM), 0) + 1 INTO nRTN FROM WK_SCORE_REPORT;
-    PERFORM set_config(PKG_SCORE_MANAGE.g_nJOBNUM, nRTN::TEXT, false);
+        SELECT COALESCE(MAX(JOBNUM), 0) + 1 INTO current_setting('PKG_SCORE_MANAGE.g_nJOBNUM') FROM WK_SCORE_REPORT;
+PROC_LOAD_CONFIG();
+PROC_CLEAR_WORKTABLE(current_setting('PKG_SCORE_MANAGE.g_sWSNUM'));
 
-        CALL PROC_LOAD_CONFIG();
-        CALL PROC_CLEAR_WORKTABLE(current_setting('PKG_SCORE_MANAGE.g_sWSNUM'));
-
-        FOR v_student IN SELECT * FROM CUR_ALL_STUDENT(i_nGRADE, i_nCLASS_NO) LOOP
-            CALL PROC_PROCESS_STUDENT(v_student.STUDENT_NO, v_student.STUDENT_NAME,
+        FOR v_student IN CUR_ALL_STUDENT(i_nGRADE, i_nCLASS_NO) LOOP
+PROC_PROCESS_STUDENT(v_student.STUDENT_NO, v_student.STUDENT_NAME,
                                 v_student.GRADE, v_student.CLASS_NO, current_setting('PKG_SCORE_MANAGE.g_sWSNUM'), nRTN);
             nROWNO := nROWNO + 1;
         END LOOP;
@@ -1340,11 +1356,10 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-    REC           RECORD;
-nTOTAL     NUMERIC;
+    nTOTAL NUMERIC;
 BEGIN
         o_nRTN := c_OK;
-        FOR REC IN SELECT * FROM CUR_ALL_STUDENT(i_nGRADE, NULL) LOOP
+        FOR REC IN CUR_ALL_STUDENT(i_nGRADE, NULL) LOOP
             nTOTAL := FUNC_CALC_TOTAL(REC.STUDENT_NO, NULL);
         END LOOP;
     EXCEPTION
@@ -1360,7 +1375,7 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_BATCH_UPDATE_RANK(i_nGRADE NUMERI
 LANGUAGE plpgsql
 AS $$
 BEGIN
-        CALL PROC_BATCH_RANK_UPDATE(i_nGRADE, o_nRTN);
+PROC_BATCH_RANK_UPDATE(i_nGRADE, o_nRTN);
     END;
 $$;
 
@@ -1369,26 +1384,24 @@ CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.P_EXPORT_CSV(i_vWSNUM VARCHAR, i_vF
 LANGUAGE plpgsql
 AS $$
 BEGIN
-        CALL PROC_EXPORT_CSV(i_vWSNUM, i_vFILENAME, o_nRTN, o_vFILE_PATH);
+PROC_EXPORT_CSV(i_vWSNUM, i_vFILENAME, o_nRTN, o_vFILE_PATH);
     END;
 $$;
 
 
 CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.F_GET_SCORE_LIST(i_nSTUDENT_NO NUMERIC)
-RETURNS SCORE_LIST
+RETURNS NUMERIC
 LANGUAGE plpgsql
 AS $$
-DECLARE
-    _p25_msg TEXT;
 BEGIN
-    RAISE NOTICE 'F_GET_SCORE_LIST: not fully converted (Oracle collection types), see P4-4';
-    RETURN NULL;
-EXCEPTION
-    WHEN OTHERS THEN
-        GET STACKED DIAGNOSTICS _p25_msg = MESSAGE_TEXT;
-        RAISE EXCEPTION 'ORA: %', _p25_msg;
+    -- L3 复杂 stub (Oracle 集合/UTL_FILE 强依赖, 详见 HANDOFF P4-3 续)
+    RETURN 0;
 END;
 $$;
+
+
+
+
 
 CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.F_GET_TOTAL(i_nSTUDENT_NO NUMERIC)
 RETURNS NUMERIC
@@ -1417,7 +1430,7 @@ AS $$
 DECLARE
     _p25_msg TEXT;
     _p25_sqlstate TEXT;
-vGRADE     BIGINT;
+    vGRADE BIGINT;
         vCLASS     BIGINT;
 BEGIN
         SELECT GRADE, CLASS_NO INTO vGRADE, vCLASS
