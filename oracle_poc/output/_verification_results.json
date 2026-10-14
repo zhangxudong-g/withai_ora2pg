@@ -1,6 +1,6 @@
 {
   "name": "oracle_poc",
-  "timestamp": "2026-10-14T21:58:05",
+  "timestamp": "2026-10-14T22:18:25",
   "summary": {
     "smoke": {
       "total": 121,
@@ -89,17 +89,17 @@
         {
           "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
-          "name": "f_get_total_score_add_student_cond",
+          "name": "f_get_total_score_build_sql",
           "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_student_cond\"(NULL::character varying, NULL::numeric)",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_build_sql\"(NULL::numeric, NULL::numeric)",
           "error": ""
         },
         {
           "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
-          "name": "f_get_total_score_build_sql",
+          "name": "f_get_total_score_add_student_cond",
           "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_build_sql\"(NULL::numeric, NULL::numeric)",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_student_cond\"(NULL::character varying, NULL::numeric)",
           "error": ""
         },
         {
@@ -281,6 +281,14 @@
         {
           "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
+          "name": "f_get_student_list_pipeline_get_student_info",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_get_student_info\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
           "name": "f_get_student_list_pipeline",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline\"(NULL::numeric, NULL::numeric)",
@@ -316,14 +324,6 @@
           "name": "f_get_student_list_pipeline_add_class_cond",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_add_class_cond\"(NULL::character varying, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "f_get_student_list_pipeline_get_student_info",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_get_student_info\"(NULL::numeric)",
           "error": ""
         },
         {
@@ -737,22 +737,6 @@
         {
           "kind": "FUNCTION",
           "schema": "oracle_poc_verify",
-          "name": "write_header",
-          "status": "unsupported",
-          "sql": "<pseudo-type args>",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
-          "name": "format_csv_line",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_csv_line\"(NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric, NULL::numeric)",
-          "error": ""
-        },
-        {
-          "kind": "FUNCTION",
-          "schema": "oracle_poc_verify",
           "name": "calc_total_score",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_score\"(NULL::numeric)",
@@ -780,6 +764,22 @@
           "name": "build_rank_query",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_rank_query\"(NULL::numeric)",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "write_header",
+          "status": "unsupported",
+          "sql": "<pseudo-type args>",
+          "error": ""
+        },
+        {
+          "kind": "FUNCTION",
+          "schema": "oracle_poc_verify",
+          "name": "format_csv_line",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_csv_line\"(NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric, NULL::numeric)",
           "error": ""
         },
         {
@@ -857,6 +857,30 @@
         {
           "kind": "VIEW",
           "schema": "oracle_poc_verify",
+          "name": "v_student_with_score",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_jobnum",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
+          "name": "sm_seq_log",
+          "status": "pass",
+          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+          "error": ""
+        },
+        {
+          "kind": "VIEW",
+          "schema": "oracle_poc_verify",
           "name": "sm_teacher_mst",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
@@ -908,30 +932,6 @@
           "name": "sm_seq_student",
           "status": "pass",
           "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_seq_jobnum",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "sm_seq_log",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-          "error": ""
-        },
-        {
-          "kind": "VIEW",
-          "schema": "oracle_poc_verify",
-          "name": "v_student_with_score",
-          "status": "pass",
-          "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
           "error": ""
         },
         {
@@ -995,7 +995,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.3831000067293644,
+        "duration_ms": 0.37070002872496843,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1011,7 +1011,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.24240004131570458,
+        "duration_ms": 0.3024999750778079,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1027,7 +1027,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.2432999899610877,
+        "duration_ms": 0.2783999661915004,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1043,7 +1043,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.2243000199086964,
+        "duration_ms": 0.2278000465594232,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1059,7 +1059,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.2462999545969069,
+        "duration_ms": 0.22260000696405768,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1075,7 +1075,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.23280002642422915,
+        "duration_ms": 0.22190000163391232,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1091,7 +1091,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.22200000239536166,
+        "duration_ms": 0.21700002253055573,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1107,7 +1107,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.23140001576393843,
+        "duration_ms": 0.21619995823130012,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1123,7 +1123,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.2272999845445156,
+        "duration_ms": 0.26599998818710446,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1139,7 +1139,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.21999998716637492,
+        "duration_ms": 0.23300002794712782,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1155,7 +1155,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.2196000423282385,
+        "duration_ms": 0.22749998606741428,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1171,7 +1171,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.2253999700769782,
+        "duration_ms": 0.22220000391826034,
         "object_name": "f_get_grade_level",
         "tags": [
           "pure_function",
@@ -1187,7 +1187,7 @@
         "expected": 360,
         "actual": "360.00",
         "detail": "",
-        "duration_ms": 0.20110001787543297,
+        "duration_ms": 0.20780001068487763,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1203,7 +1203,7 @@
         "expected": 325,
         "actual": "325.00",
         "detail": "",
-        "duration_ms": 0.18630002159625292,
+        "duration_ms": 0.32510003075003624,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1219,7 +1219,7 @@
         "expected": 385,
         "actual": "385.00",
         "detail": "",
-        "duration_ms": 0.2577000414021313,
+        "duration_ms": 0.18889998318627477,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1235,7 +1235,7 @@
         "expected": 283,
         "actual": "283.00",
         "detail": "",
-        "duration_ms": 0.1894999877549708,
+        "duration_ms": 0.1700000138953328,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1251,7 +1251,7 @@
         "expected": 318,
         "actual": "318.00",
         "detail": "",
-        "duration_ms": 0.2069000038318336,
+        "duration_ms": 0.21569995442405343,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1267,7 +1267,7 @@
         "expected": 335,
         "actual": "335.00",
         "detail": "",
-        "duration_ms": 0.20080001559108496,
+        "duration_ms": 0.17549999756738544,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1283,7 +1283,7 @@
         "expected": 295,
         "actual": "295.00",
         "detail": "",
-        "duration_ms": 0.1841000048443675,
+        "duration_ms": 0.172999978531152,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1299,7 +1299,7 @@
         "expected": 361,
         "actual": "361.00",
         "detail": "",
-        "duration_ms": 0.2093999646604061,
+        "duration_ms": 0.22520002676174045,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1315,7 +1315,7 @@
         "expected": 360,
         "actual": "360.00",
         "detail": "",
-        "duration_ms": 0.24860003031790257,
+        "duration_ms": 0.2177999704144895,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1330,7 +1330,7 @@
         "expected": 325,
         "actual": "325.00",
         "detail": "",
-        "duration_ms": 0.18620002083480358,
+        "duration_ms": 0.18149998504668474,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1345,7 +1345,7 @@
         "expected": 385,
         "actual": "385.00",
         "detail": "",
-        "duration_ms": 0.18350000027567148,
+        "duration_ms": 0.17699995078146458,
         "object_name": "f_get_total_score",
         "tags": [
           "dynamic_sql",
@@ -1360,7 +1360,7 @@
         "expected": 0,
         "actual": "0",
         "detail": "",
-        "duration_ms": 0.10830000974237919,
+        "duration_ms": 0.10639999527484179,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
@@ -1375,7 +1375,7 @@
         "expected": 0,
         "actual": "0",
         "detail": "",
-        "duration_ms": 0.08600001456215978,
+        "duration_ms": 0.08620001608505845,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
@@ -1390,7 +1390,7 @@
         "expected": 0,
         "actual": "0",
         "detail": "",
-        "duration_ms": 0.0868999632075429,
+        "duration_ms": 0.08680002065375447,
         "object_name": "f_get_total_score",
         "tags": [
           "edge_case",
@@ -1405,7 +1405,7 @@
         "expected": 121.36,
         "actual": "121.36",
         "detail": "",
-        "duration_ms": 0.1433999859727919,
+        "duration_ms": 0.14050002209842205,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1421,7 +1421,7 @@
         "expected": 109.55,
         "actual": "109.55",
         "detail": "",
-        "duration_ms": 0.12179999612271786,
+        "duration_ms": 0.12049998622387648,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1437,7 +1437,7 @@
         "expected": 130.0,
         "actual": "130.00",
         "detail": "",
-        "duration_ms": 0.12010004138574004,
+        "duration_ms": 0.11999998241662979,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1453,7 +1453,7 @@
         "expected": 94.91,
         "actual": "94.91",
         "detail": "",
-        "duration_ms": 0.1218999968841672,
+        "duration_ms": 0.12579996837303042,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1469,7 +1469,7 @@
         "expected": 106.73,
         "actual": "106.73",
         "detail": "",
-        "duration_ms": 0.23180001880973577,
+        "duration_ms": 0.12010004138574004,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1485,7 +1485,7 @@
         "expected": 112.73,
         "actual": "112.73",
         "detail": "",
-        "duration_ms": 0.1753999968059361,
+        "duration_ms": 0.1194999786093831,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1501,7 +1501,7 @@
         "expected": 98.91,
         "actual": "98.91",
         "detail": "",
-        "duration_ms": 0.1604999997653067,
+        "duration_ms": 0.2080000122077763,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1517,7 +1517,7 @@
         "expected": 121.45,
         "actual": "121.45",
         "detail": "",
-        "duration_ms": 0.13449997641146183,
+        "duration_ms": 0.20429998403415084,
         "object_name": "f_get_avg_score",
         "tags": [
           "weighted_avg",
@@ -1533,7 +1533,7 @@
         "expected": 125.0,
         "actual": "125.00",
         "detail": "",
-        "duration_ms": 0.2919000107795,
+        "duration_ms": 0.30499999411404133,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1548,7 +1548,7 @@
         "expected": 130.0,
         "actual": "130.00",
         "detail": "",
-        "duration_ms": 0.2080000122077763,
+        "duration_ms": 0.21999998716637492,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1563,7 +1563,7 @@
         "expected": 110.0,
         "actual": "110.00",
         "detail": "",
-        "duration_ms": 0.16730005154386163,
+        "duration_ms": 0.17550005577504635,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1578,7 +1578,7 @@
         "expected": 120.0,
         "actual": "120.00",
         "detail": "",
-        "duration_ms": 0.16579998191446066,
+        "duration_ms": 0.19700004486367106,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1593,7 +1593,7 @@
         "expected": 135.0,
         "actual": "135.00",
         "detail": "",
-        "duration_ms": 0.16469997353851795,
+        "duration_ms": 0.1689000055193901,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1608,7 +1608,7 @@
         "expected": 140.0,
         "actual": "140.00",
         "detail": "",
-        "duration_ms": 0.16389996744692326,
+        "duration_ms": 0.1857000170275569,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1623,7 +1623,7 @@
         "expected": 95.0,
         "actual": "95.00",
         "detail": "",
-        "duration_ms": 0.15620002523064613,
+        "duration_ms": 0.16629998572170734,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1638,7 +1638,7 @@
         "expected": 100.0,
         "actual": "100.00",
         "detail": "",
-        "duration_ms": 0.15899998834356666,
+        "duration_ms": 0.1498999772593379,
         "object_name": "f_get_avg_score",
         "tags": [
           "single_subject",
@@ -1653,7 +1653,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.3986000083386898,
+        "duration_ms": 0.4107999848201871,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1669,7 +1669,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.34010002855211496,
+        "duration_ms": 0.3340000403113663,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1685,7 +1685,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.34579995553940535,
+        "duration_ms": 0.36149995867162943,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1701,7 +1701,7 @@
         "expected": 5,
         "actual": "5",
         "detail": "",
-        "duration_ms": 0.3621999640017748,
+        "duration_ms": 0.3512999974191189,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1717,7 +1717,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.3529000096023083,
+        "duration_ms": 0.33870001789182425,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1733,7 +1733,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.355200027115643,
+        "duration_ms": 0.35280000884085894,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1749,7 +1749,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.35369995748624206,
+        "duration_ms": 0.44350000098347664,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1765,7 +1765,7 @@
         "expected": 8,
         "actual": "8",
         "detail": "",
-        "duration_ms": 0.3373000072315335,
+        "duration_ms": 0.42480003321543336,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1781,7 +1781,7 @@
         "expected": 3,
         "actual": "3",
         "detail": "",
-        "duration_ms": 0.34059997415170074,
+        "duration_ms": 0.3667999990284443,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1797,7 +1797,7 @@
         "expected": 6,
         "actual": "6",
         "detail": "",
-        "duration_ms": 0.3328999737277627,
+        "duration_ms": 0.3608999541029334,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1813,7 +1813,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.3423999878577888,
+        "duration_ms": 0.3519000019878149,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1829,7 +1829,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.33930002246052027,
+        "duration_ms": 0.3421999863348901,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1845,7 +1845,7 @@
         "expected": 4,
         "actual": "4",
         "detail": "",
-        "duration_ms": 0.3426999901421368,
+        "duration_ms": 0.34850003430619836,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1861,7 +1861,7 @@
         "expected": 7,
         "actual": "7",
         "detail": "",
-        "duration_ms": 0.34220004454255104,
+        "duration_ms": 0.3488999791443348,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1877,7 +1877,7 @@
         "expected": 1,
         "actual": "1",
         "detail": "",
-        "duration_ms": 0.3369999467395246,
+        "duration_ms": 0.3332000342197716,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1893,7 +1893,7 @@
         "expected": 2,
         "actual": "2",
         "detail": "",
-        "duration_ms": 0.40549994446337223,
+        "duration_ms": 0.34279999090358615,
         "object_name": "f_calc_rank",
         "tags": [
           "rank",
@@ -1909,7 +1909,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.11670001549646258,
+        "duration_ms": 0.11600001016631722,
         "object_name": "student_mst",
         "tags": [
           "data_load",
@@ -1924,7 +1924,7 @@
         "expected": 24,
         "actual": 24,
         "detail": "",
-        "duration_ms": 0.1020999625325203,
+        "duration_ms": 0.09650003630667925,
         "object_name": "score_rec",
         "tags": [
           "data_load",
@@ -1939,7 +1939,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.1047999830916524,
+        "duration_ms": 0.10779994772747159,
         "object_name": "subject_mst",
         "tags": [
           "data_load",
@@ -1954,7 +1954,7 @@
         "expected": 4,
         "actual": 4,
         "detail": "",
-        "duration_ms": 0.0999000039882958,
+        "duration_ms": 0.10419997852295637,
         "object_name": "teacher_mst",
         "tags": [
           "data_load",
@@ -1969,7 +1969,7 @@
         "expected": 5,
         "actual": 5,
         "detail": "",
-        "duration_ms": 0.10199996177107096,
+        "duration_ms": 0.10109995491802692,
         "object_name": "system_config",
         "tags": [
           "data_load",
@@ -1984,7 +1984,7 @@
         "expected": 64,
         "actual": 64,
         "detail": "",
-        "duration_ms": 0.5585000035353005,
+        "duration_ms": 0.5085999728180468,
         "object_name": "v_student_score",
         "tags": [
           "view"
@@ -1998,7 +1998,7 @@
         "expected": 8,
         "actual": 8,
         "detail": "",
-        "duration_ms": 0.25340000865980983,
+        "duration_ms": 0.24550000671297312,
         "object_name": "v_score_rank",
         "tags": [
           "view"
@@ -2224,17 +2224,17 @@
             {
               "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
-              "name": "f_get_total_score_add_student_cond",
+              "name": "f_get_total_score_build_sql",
               "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_student_cond\"(NULL::character varying, NULL::numeric)",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_build_sql\"(NULL::numeric, NULL::numeric)",
               "error": ""
             },
             {
               "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
-              "name": "f_get_total_score_build_sql",
+              "name": "f_get_total_score_add_student_cond",
               "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_build_sql\"(NULL::numeric, NULL::numeric)",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_total_score_add_student_cond\"(NULL::character varying, NULL::numeric)",
               "error": ""
             },
             {
@@ -2416,6 +2416,14 @@
             {
               "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
+              "name": "f_get_student_list_pipeline_get_student_info",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_get_student_info\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
               "name": "f_get_student_list_pipeline",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline\"(NULL::numeric, NULL::numeric)",
@@ -2451,14 +2459,6 @@
               "name": "f_get_student_list_pipeline_add_class_cond",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_add_class_cond\"(NULL::character varying, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "f_get_student_list_pipeline_get_student_info",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"f_get_student_list_pipeline_get_student_info\"(NULL::numeric)",
               "error": ""
             },
             {
@@ -2872,22 +2872,6 @@
             {
               "kind": "FUNCTION",
               "schema": "oracle_poc_verify",
-              "name": "write_header",
-              "status": "unsupported",
-              "sql": "<pseudo-type args>",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
-              "name": "format_csv_line",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_csv_line\"(NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric, NULL::numeric)",
-              "error": ""
-            },
-            {
-              "kind": "FUNCTION",
-              "schema": "oracle_poc_verify",
               "name": "calc_total_score",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"calc_total_score\"(NULL::numeric)",
@@ -2915,6 +2899,22 @@
               "name": "build_rank_query",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"build_rank_query\"(NULL::numeric)",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "write_header",
+              "status": "unsupported",
+              "sql": "<pseudo-type args>",
+              "error": ""
+            },
+            {
+              "kind": "FUNCTION",
+              "schema": "oracle_poc_verify",
+              "name": "format_csv_line",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"format_csv_line\"(NULL::numeric, NULL::numeric, NULL::character varying, NULL::numeric, NULL::numeric)",
               "error": ""
             },
             {
@@ -2992,6 +2992,30 @@
             {
               "kind": "VIEW",
               "schema": "oracle_poc_verify",
+              "name": "v_student_with_score",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_jobnum",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
+              "name": "sm_seq_log",
+              "status": "pass",
+              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
+              "error": ""
+            },
+            {
+              "kind": "VIEW",
+              "schema": "oracle_poc_verify",
               "name": "sm_teacher_mst",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_teacher_mst\" LIMIT 1",
@@ -3043,30 +3067,6 @@
               "name": "sm_seq_student",
               "status": "pass",
               "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_student\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_seq_jobnum",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_jobnum\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "sm_seq_log",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"sm_seq_log\" LIMIT 1",
-              "error": ""
-            },
-            {
-              "kind": "VIEW",
-              "schema": "oracle_poc_verify",
-              "name": "v_student_with_score",
-              "status": "pass",
-              "sql": "SELECT * FROM \"oracle_poc_verify\".\"v_student_with_score\" LIMIT 1",
               "error": ""
             },
             {
@@ -3154,13 +3154,13 @@
         "skipped_count": 0
       },
       "L2": {
-        "score": 73.3,
+        "score": 100.0,
         "count": 12,
         "skipped_count": 0
       }
     },
-    "overall_score": 86.4,
-    "grade": "B 良",
+    "overall_score": 99.6,
+    "grade": "A 优",
     "weight_covered": 1.0,
     "weight_covered_active": {
       "L1": true,
@@ -3176,7 +3176,7 @@
   "reports": [
     {
       "target": "TABLE/001_STUDENT_MST.sql",
-      "timestamp": "2026-10-14T21:58:05",
+      "timestamp": "2026-10-14T22:18:25",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3232,7 +3232,7 @@
     },
     {
       "target": "TABLE/002_SUBJECT_MST.sql",
-      "timestamp": "2026-10-14T21:58:05",
+      "timestamp": "2026-10-14T22:18:25",
       "overall_score": 97.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3311,7 +3311,7 @@
     },
     {
       "target": "SEQUENCE/00_SEQUENCE.sql",
-      "timestamp": "2026-10-14T21:58:05",
+      "timestamp": "2026-10-14T22:18:25",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3367,9 +3367,9 @@
     },
     {
       "target": "TYPE/001_TYPES.sql",
-      "timestamp": "2026-10-14T21:58:05",
-      "overall_score": 91.4,
-      "grade": "B 良",
+      "timestamp": "2026-10-14T22:18:25",
+      "overall_score": 100.0,
+      "grade": "A 优",
       "gate_passed": true,
       "gate_failures": [],
       "levels": [
@@ -3396,9 +3396,9 @@
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 85.0,
+          "score": 100.0,
           "weight": 0.2,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
@@ -3412,38 +3412,10 @@
               "unparsed": 0
             },
             "pglast_errors": [],
-            "structure_issues": [
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION GET_STATUS_of_SCORE_RECORD(i_self SCORE_RECORD) RETUR"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION GET_LETTER_GRADE_of_SCORE_RECORD(i_self SCORE_RECORD)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION GET_GENDER_NAME_of_STUDENT_RECORD(i_self STUDENT_RECO"
-                ]
-              }
-            ],
+            "structure_issues": [],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 17.0
+          "weighted": 20.0
         }
       ],
       "cases": [],
@@ -3451,7 +3423,7 @@
     },
     {
       "target": "VIEW/00_VIEW.sql",
-      "timestamp": "2026-10-14T21:58:05",
+      "timestamp": "2026-10-14T22:18:25",
       "overall_score": 99.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -3521,9 +3493,9 @@
     },
     {
       "target": "TRIGGER/00_TRIGGER.sql",
-      "timestamp": "2026-10-14T21:58:05",
-      "overall_score": 53.3,
-      "grade": "D 差",
+      "timestamp": "2026-10-14T22:18:25",
+      "overall_score": 99.0,
+      "grade": "A 优",
       "gate_passed": true,
       "gate_failures": [],
       "levels": [
@@ -3564,9 +3536,9 @@
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 20.0,
+          "score": 100.0,
           "weight": 0.2,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
@@ -3580,119 +3552,10 @@
               "unparsed": 0
             },
             "pglast_errors": [],
-            "structure_issues": [
-              {
-                "code": "block_mismatch",
-                "name": "IF(6) 多于 END IF(3)",
-                "severity": "major",
-                "count": 3,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION TRG_STUDENT_BI() RETURNS TRIGGER AS $$ DECLARE vMAX_S"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_STUDENT_BI ON STUDENT_MST"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION TRG_STUDENT_AU() RETURNS TRIGGER AS $$ BEGIN IF OLD.S"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_STUDENT_AU ON STUDENT_MST"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(6) 多于 END IF(3)",
-                "severity": "major",
-                "count": 3,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION TRG_SCORE_BIU() RETURNS TRIGGER AS $$ DECLARE vPASS_S"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_SCORE_BIU ON SCORE_REC"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION TRG_SYSTEM_CONFIG_BD() RETURNS TRIGGER AS $$ DECLARE "
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_SYSTEM_CONFIG_BD ON SYSTEM_CONFIG"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_SCORE_COMPOUND_BR ON SCORE_REC"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_SCORE_COMPOUND_AS ON SCORE_REC"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION TRG_V_STUDENT_IO() RETURNS TRIGGER AS $$ BEGIN IF TG_"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP TRIGGER IF EXISTS TRG_V_STUDENT_IO ON V_STUDENT_WITH_SCORE"
-                ]
-              }
-            ],
+            "structure_issues": [],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 4.0
+          "weighted": 20.0
         }
       ],
       "cases": [],
@@ -3700,9 +3563,9 @@
     },
     {
       "target": "FUNCTION/00_FUNCTION.sql",
-      "timestamp": "2026-10-14T21:58:05",
-      "overall_score": 42.9,
-      "grade": "F 不合格",
+      "timestamp": "2026-10-14T22:18:25",
+      "overall_score": 100.0,
+      "grade": "A 优",
       "gate_passed": true,
       "gate_failures": [],
       "levels": [
@@ -3729,9 +3592,9 @@
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 0.0,
+          "score": 100.0,
           "weight": 0.2,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
@@ -3745,191 +3608,10 @@
               "unparsed": 0
             },
             "pglast_errors": [],
-            "structure_issues": [
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_total_score(numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(4) 多于 END IF(2)",
-                "severity": "major",
-                "count": 2,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE(i_nSTUDENT_NO NUMERIC, i_nEXAM_TYPE"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_total_score_build_sql(numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_total_score_add_student_cond(varchar, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE_ADD_STUDENT_COND(i_vSQL VARCHAR, i_"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_total_score_add_exam_cond(varchar, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE_ADD_EXAM_COND(i_vSQL VARCHAR, i_nTY"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_total_score_validate_student_no(numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_TOTAL_SCORE_VALIDATE_STUDENT_NO(i_nNO NUMERIC) "
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_total_score_check_format(numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score(numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(4) 多于 END IF(2)",
-                "severity": "major",
-                "count": 2,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_AVG_SCORE(i_nSTUDENT_NO NUMERIC, i_nSUBJECT_CD "
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score_calc_weighted_avg(numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_AVG_SCORE_CALC_WEIGHTED_AVG(i_nSTU NUMERIC) RET"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score_process_score(numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score_build_sql(numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score_add_cond(varchar, numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(4) 多于 END IF(2)",
-                "severity": "major",
-                "count": 2,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION F_GET_AVG_SCORE_ADD_COND(i_vSQL VARCHAR, i_nSTU NUMER"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score_get_credit_info(numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS f_get_avg_score_fetch_credit(numeric)"
-                ]
-              }
-            ],
+            "structure_issues": [],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 0.0
+          "weighted": 20.0
         }
       ],
       "cases": [],
@@ -3937,9 +3619,9 @@
     },
     {
       "target": "PROCEDURE/00_PROCEDURE.sql",
-      "timestamp": "2026-10-14T21:58:05",
-      "overall_score": 88.6,
-      "grade": "B 良",
+      "timestamp": "2026-10-14T22:18:26",
+      "overall_score": 100.0,
+      "grade": "A 优",
       "gate_passed": true,
       "gate_failures": [],
       "levels": [
@@ -3966,9 +3648,9 @@
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 80.0,
+          "score": 100.0,
           "weight": 0.2,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
@@ -3982,29 +3664,10 @@
               "unparsed": 0
             },
             "pglast_errors": [],
-            "structure_issues": [
-              {
-                "code": "block_mismatch",
-                "name": "IF(6) 多于 END IF(3)",
-                "severity": "major",
-                "count": 3,
-                "samples": [
-                  "CREATE OR REPLACE PROCEDURE SP_PROCESS_SCORE(i_nSTUDENT_NO NUMERIC, i_nSUBJECT_C"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE PROCEDURE SP_CALC_RANK(i_nGRADE NUMERIC, i_nCLASS_NO NUMERIC, "
-                ]
-              }
-            ],
+            "structure_issues": [],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 16.0
+          "weighted": 20.0
         }
       ],
       "cases": [],
@@ -4012,8 +3675,8 @@
     },
     {
       "target": "PACKAGE/00_PACKAGE.sql",
-      "timestamp": "2026-10-14T21:58:05",
-      "overall_score": 97.1,
+      "timestamp": "2026-10-14T22:18:26",
+      "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
       "gate_failures": [],
@@ -4041,9 +3704,9 @@
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 95.0,
+          "score": 100.0,
           "weight": 0.2,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
@@ -4057,20 +3720,10 @@
               "unparsed": 0
             },
             "pglast_errors": [],
-            "structure_issues": [
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE SCHEMA IF NOT EXISTS PKG_SCORE_MANAGE"
-                ]
-              }
-            ],
+            "structure_issues": [],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 19.0
+          "weighted": 20.0
         }
       ],
       "cases": [],
@@ -4078,9 +3731,9 @@
     },
     {
       "target": "PACKAGE_BODY/00_PACKAGE_BODY.sql",
-      "timestamp": "2026-10-14T21:58:05",
-      "overall_score": 41.8,
-      "grade": "F 不合格",
+      "timestamp": "2026-10-14T22:18:26",
+      "overall_score": 99.0,
+      "grade": "A 优",
       "gate_passed": true,
       "gate_failures": [],
       "levels": [
@@ -4160,9 +3813,9 @@
         {
           "level": "L2",
           "name": "语法验证",
-          "score": 0.0,
+          "score": 100.0,
           "weight": 0.2,
-          "passed": false,
+          "passed": true,
           "skipped": false,
           "skip_reason": "",
           "details": {
@@ -4176,191 +3829,10 @@
               "unparsed": 0
             },
             "pglast_errors": [],
-            "structure_issues": [
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE SCHEMA IF NOT EXISTS PKG_SCORE_MANAGE"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS format_message(varchar, varchar, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION FORMAT_MESSAGE(i_sSTEP VARCHAR, i_sMSG VARCHAR, i_nST"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS init_wsinfo(varchar, char)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.FUNC_GET_CONFIG(i_sCONFIG_CD VARCHAR"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS convert_value(varchar)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS clean_numeric(varchar)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS validate_config_cd(varchar)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(8) 多于 END IF(4)",
-                "severity": "major",
-                "count": 4,
-                "samples": [
-                  "CREATE OR REPLACE PROCEDURE PKG_SCORE_MANAGE.PROC_LOAD_CONFIG() LANGUAGE plpgsql"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS validate_score_value(numeric, numeric, varchar)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(4) 多于 END IF(2)",
-                "severity": "major",
-                "count": 2,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION VALIDATE_SCORE_VALUE(i_nVALUE INOUT NUMERIC, i_nDEFAU"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS check_range(numeric, numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.FUNC_FORMAT_DATE(i_YMD NUMERIC) RETU"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS convert_format(numeric, varchar)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION CONVERT_FORMAT(i_nYMD NUMERIC, i_sFMT VARCHAR) RETURN"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP PROCEDURE IF EXISTS parse_ymd(numeric, numeric, numeric, numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP PROCEDURE IF EXISTS PARSE_YMD"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(1) 多于 END IF(0)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "DROP FUNCTION IF EXISTS validate_ymd(numeric)"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION VALIDATE_YMD(i_nYMD NUMERIC) RETURNS BOOLEAN LANGUAGE"
-                ]
-              },
-              {
-                "code": "block_mismatch",
-                "name": "IF(2) 多于 END IF(1)",
-                "severity": "major",
-                "count": 1,
-                "samples": [
-                  "CREATE OR REPLACE FUNCTION PKG_SCORE_MANAGE.FUNC_GET_GRADE_LEVEL(i_nSCORE NUMERI"
-                ]
-              }
-            ],
+            "structure_issues": [],
             "note": "pglast 只解析 SQL 外层语法，plpgsql 函数体内的错误需由 L3 判定"
           },
-          "weighted": 0.0
+          "weighted": 20.0
         }
       ],
       "cases": [],
@@ -4368,7 +3840,7 @@
     },
     {
       "target": "SYNONYM/00_SYNONYM.sql",
-      "timestamp": "2026-10-14T21:58:05",
+      "timestamp": "2026-10-14T22:18:26",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,
@@ -4424,7 +3896,7 @@
     },
     {
       "target": "DATA/00_TEST_DATA.sql",
-      "timestamp": "2026-10-14T21:58:05",
+      "timestamp": "2026-10-14T22:18:26",
       "overall_score": 100.0,
       "grade": "A 优",
       "gate_passed": true,

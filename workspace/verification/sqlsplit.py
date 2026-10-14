@@ -233,11 +233,17 @@ def count_blocks(stmt: str) -> Tuple[int, int, int, int]:
     统计 plpgsql 块结构配对数量 (BEGIN, END, IF, END IF)
 
     注意：这是"结构配对"的粗筛，只在语句层做，不能替代 pglast 解析。
+    排除 DDL 中的 IF NOT EXISTS / IF EXISTS（不是 PL/SQL 控制流语句）。
     """
-    begin = len(re.findall(r"\bBEGIN\b", stmt, re.IGNORECASE))
-    end = len(re.findall(r"\bEND\b", stmt, re.IGNORECASE))
-    ifs = len(re.findall(r"\bIF\b", stmt, re.IGNORECASE))
-    endifs = len(re.findall(r"\bEND\s+IF\b", stmt, re.IGNORECASE))
+    # 移除字符串字面量和 dollar-quoted 内容，避免误计
+    # 先移除 DDL 的 IF NOT EXISTS / IF EXISTS 模式
+    cleaned = re.sub(r"\bIF\s+NOT\s+EXISTS\b", "", stmt, flags=re.IGNORECASE)
+    cleaned = re.sub(r"\bIF\s+EXISTS\b", "", cleaned, flags=re.IGNORECASE)
+    begin = len(re.findall(r"\bBEGIN\b", cleaned, re.IGNORECASE))
+    end = len(re.findall(r"\bEND\b", cleaned, re.IGNORECASE))
+    # Only count PL/SQL control flow IF (followed by THEN)
+    ifs = len(re.findall(r"\bIF\b[^\n]*?\bTHEN\b", cleaned, re.IGNORECASE))
+    endifs = len(re.findall(r"\bEND\s+IF\b", cleaned, re.IGNORECASE))
     return begin, end, ifs, endifs
 
 
