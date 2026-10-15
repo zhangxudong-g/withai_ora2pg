@@ -49,7 +49,7 @@ def get_config() -> AgentConfig:
     """从环境变量构建 AgentConfig；所有字段都有默认值。"""
     return AgentConfig(
         # 远程 ollama 实例（与 pipeline/ config.yaml 一致）
-        base_url=_env_or("OLLAMA_BASE_URL", "http://swiftechie.aa0.netvolante.jp:51434"),
+        base_url=_env_or("OLLAMA_BASE_URL", "http://localhost:11434"),
         # 与 pipeline/ config.yaml 默认一致
         model=_env_or("OLLAMA_MODEL", "qwen3.8:27b"),
         # 远程 ollama 用 "ollama" 占位 token（pipeline 默认）

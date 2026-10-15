@@ -323,7 +323,7 @@ def test_get_config_defaults(monkeypatch):
     from workspace.agent.config import get_config
     c = get_config()
     assert c.model == "qwen3.8:27b"
-    assert c.base_url == "http://swiftechie.aa0.netvolante.jp:51434"
+    assert c.base_url == "http://localhost:11434"
     assert c.api_key == "ollama"
     assert c.temperature == 0.0
     assert c.think is False
