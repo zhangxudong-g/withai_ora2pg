@@ -28,7 +28,7 @@ withai_ora2pg/
 │   ├── agent/                # AI Agent 工具链（validate_pg/quota/orchestrator...）
 │   ├── parsers/              # ANTLR 语法解析（结构体检，不做翻译）
 │   ├── verification/         # 验证框架（L1-L4 + 残留扫描）
-│   └── tests/                # 单测（386个用例）
+│   └── tests/                # 单测（386个用例，385 passed + 1 skipped）
 │
 ├── scripts/                  # 入口脚本
 │   ├── convert_oracle_poc.py # 转换 Oracle → PG 产物
