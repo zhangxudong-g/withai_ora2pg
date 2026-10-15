@@ -11,7 +11,7 @@
 -- Defect-1 (D0): schema 隔离（默认 oracle_poc_verify，可用 -v schema=xxx 覆盖）
 \set schema oracle_poc_verify
 CREATE SCHEMA IF NOT EXISTS :schema;
-\set search_path :schema
+SET search_path TO :schema;
 
 -- --------------------------------------------------------------------------
 -- 1. 创建表
